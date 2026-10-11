@@ -1,10 +1,8 @@
 ﻿#EXTM3U
-#EXTINF:0 aspect-ratio=16:9, 11 окт | 14:00 | Ахмат — Балтика
-https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/ce055605004a06c9dfa15b1f071d4291/4947372902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=9f2157ef569ed953455ef4aff9ff9b11
 #EXTINF:0 aspect-ratio=16:9, 11 окт | 16:30 | ЦСКА — Родина [4K]
-https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/aae98f17ccec05670d2e0ac2e5bd3cec/4947372902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=9f2157ef569ed953455ef4aff9ff9b11
+https://bl.video.matchtv.ru/media/playlist/free_478b692552ace3b3e98db36e831663ed/17_1034807/2160/15ae9abcdb971619122221034e64b355/4947398102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=27a4a3fc82e05995047fcebe319efba2
 #EXTINF:0 aspect-ratio=16:9, 11 окт | 19:30 | Рубин — Динамо Москва
-https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/0a2806735a5042672bce72573ca6b940/4947372902.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=9f2157ef569ed953455ef4aff9ff9b11
+https://bl.video.matchtv.ru/media/playlist/free_eb8da242637bc58845c527d1b85823a3/17_1035305/1080p50fps/0eefda2ff35beb9f88424ffd1cca72ac/4947398102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=27a4a3fc82e05995047fcebe319efba2
 #EXTINF:0 aspect-ratio=16:9, 09 окт | 19:30 | Ростов — Акрон
 https://bl.video.matchtv.ru/media/playlist/free_de4bed091a1aaeb6497db8bfb2774245/17_1035193/1080p50fps/142d558792bedceb340d88653887fb73/4947218102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=0f793f996a2a1bec9dcef473e34883e1
 #EXTINF:0 aspect-ratio=16:9, 10 окт | 13:00 | Оренбург — Динамо Махачкала
@@ -15,3 +13,5 @@ https://bl.video.matchtv.ru/media/playlist/free_6160bd0b5454d4c3e7fe07ee248b9705
 https://bl.video.matchtv.ru/media/playlist/free_67f0adc02b4e714da9711ebdda88271b/17_1035243/1080p50fps/358e0f41d7cb3f6ad9a159722acf8ec7/4947309002.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=35c01ee74d9510f62d2702093aed7e97
 #EXTINF:0 aspect-ratio=16:9, 10 окт | 19:30 | Краснодар — Зенит
 https://bl.video.matchtv.ru/media/playlist/free_4e3a35a1322e12d38c9f9033b342edba/17_1035247/1080p50fps/9dfe88d4467962695738e6a275bd3304/4947309002.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=35c01ee74d9510f62d2702093aed7e97
+#EXTINF:0 aspect-ratio=16:9, 11 окт | 14:00 | Ахмат — Балтика
+https://bl.video.matchtv.ru/media/playlist/free_520f33bfb43fc68b3cce4a453be20a73/17_1035281/1080p50fps/f8c08a0a6124955bbc0d258c98f69bc0/4947309002.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=35c01ee74d9510f62d2702093aed7e97
