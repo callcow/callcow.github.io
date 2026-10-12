@@ -51,7 +51,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">12.10.2026 11:35 МСК</span><br>
+      Обновлено <span class="neon">12.10.2026 14:58 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -59,24 +59,6 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
     </button>
   <script>
-
-    (function() {
-      const toggle = document.getElementById('themeToggle');
-      if (!toggle) return;
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'light') {
-        document.body.classList.add('light');
-        toggle.textContent = '☀️';
-      } else {
-        toggle.textContent = '🌙';
-      }
-      toggle.addEventListener('click', function() {
-        document.body.classList.toggle('light');
-        const isLight = document.body.classList.contains('light');
-        toggle.textContent = isLight ? '☀️' : '🌙';
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      });
-    })();
 
     (function() {
       const searchBox = document.getElementById('searchBox');
@@ -132,7 +114,7 @@
       const searchBox = document.getElementById('searchBox');
       const searchBoxLogo = document.getElementById('searchBoxLogo');
       const suggestBox = document.getElementById('searchSuggestions');
-      const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}, {"name": "ЦСКА", "logo": "logo/cska.svg"}];
+      const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо-Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "ПФК ЦСКА", "logo": "logo/cska.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак-Москва", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}];
 
       function setSearchLogo(teamName) {
         if (!searchBox || !searchBoxLogo) return;
@@ -445,8 +427,6 @@
 
         hideSuggestions();
 
-        // Своя анимация скролла на rAF — её не может отменить браузер
-        // при изменении высоты документа (в отличие от scrollTo smooth).
         const startY = window.scrollY;
         if (startY > 0) {
           const startTime = performance.now();
@@ -460,8 +440,6 @@
           requestAnimationFrame(step);
         }
 
-        // Параллельно применяем фильтр — он раздувает страницу, но наша
-        // анимация это игнорирует, потому что мы каждый кадр ставим scrollY сами.
         const inputEl = document.getElementById('searchInput');
         if (inputEl) {
           inputEl.value = team;
@@ -470,8 +448,6 @@
           window.__suppressSuggestions = false;
         }
 
-        // Скрываем выпадашку ПОСЛЕ обработки input — иначе input-хендлер
-        // снова её откроет (он вызывает showSuggestions).
         hideSuggestions();
 
         try { window.history.pushState(null, '', cleanUrl); } catch (err) { /* ignore */ }
