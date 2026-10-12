@@ -44,7 +44,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">12.10.2026 11:29 МСК</span><br>
+      Обновлено <span class="neon">12.10.2026 11:35 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -644,68 +644,18 @@
     (function() {
       const btn = document.getElementById('scrollTop');
       if (!btn) return;
-
-      const SHOW_AT = 400;
-      const HIDE_AT = 250;
-      let animating = false;
-
+      let ticking = false;
       function toggleBtn() {
-        if (animating) return;
-        const y = window.scrollY || window.pageYOffset || 0;
-        if (y > SHOW_AT) {
-          btn.classList.add('visible');
-        } else if (y < HIDE_AT) {
-          btn.classList.remove('visible');
-        }
+        btn.classList.toggle('visible', window.scrollY > 300);
+        ticking = false;
       }
-
-      window.addEventListener('scroll', toggleBtn, { passive: true });
-      document.addEventListener('scroll', toggleBtn, { passive: true });
+      function onScroll() {
+        if (!ticking) { window.requestAnimationFrame(toggleBtn); ticking = true; }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      document.addEventListener('scroll', onScroll, { passive: true });
       toggleBtn();
-
-      function scrollToTop() {
-        if (animating) return;
-        animating = true;
-
-        const startY = window.scrollY || window.pageYOffset || 0;
-        const startTime = performance.now();
-        const DURATION = 500;
-
-        function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
-
-        function step(now) {
-          const t = Math.min(1, (now - startTime) / DURATION);
-          window.scrollTo(0, startY * (1 - easeOutCubic(t)));
-          if (t < 1) {
-            requestAnimationFrame(step);
-          } else {
-            animating = false;
-            btn.classList.remove('visible');
-          }
-        }
-        requestAnimationFrame(step);
-      }
-
-    // Клик + touch: на мобилке click иногда не срабатывает после CSS :active,
-      // поэтому ловим pointerdown (без задержки) + держим подсветку пока палец на кнопке.
-      btn.addEventListener('pointerdown', function(e) {
-        e.preventDefault();
-        btn.classList.add('pressed');
-        scrollToTop();
-      });
-      btn.addEventListener('pointerup', function() {
-        btn.classList.remove('pressed');
-      });
-      btn.addEventListener('pointercancel', function() {
-        btn.classList.remove('pressed');
-      });
-      btn.addEventListener('pointerleave', function() {
-        btn.classList.remove('pressed');
-      });
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (!animating) scrollToTop();
-      });
+      btn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
     })();
 
     (function() {
@@ -744,122 +694,6 @@
         }
       }
       setTimeout(type, 1500);
-    })();
-
-    // ===== LIVE-статус для идущих матчей =====
-    (function() {
-      const MATCH_DURATION_MS = 125 * 60 * 1000;   // 2 часа + перерыв ~5 мин
-      const LIVE_DELAY_MS = 3 * 60 * 1000;         // LIVE появляется через 3 мин после старта
-      const FIRST_HALF_MS = 45 * 60 * 1000;
-      const BREAK_MS = 15 * 60 * 1000;             // перерыв
-      const SECOND_HALF_START_MS = FIRST_HALF_MS + BREAK_MS;
-      
-      function pad(n) { return n < 10 ? '0' + n : '' + n; }
-
-      function getMatchMinute(elapsedMs) {
-        if (elapsedMs < 0) return null;
-        if (elapsedMs <= FIRST_HALF_MS) {
-          const m = Math.floor(elapsedMs / 60000);
-          return m < 1 ? '1' : String(m);
-        }
-        if (elapsedMs < SECOND_HALF_START_MS) {
-          return 'перерыв';
-        }
-        const inSecond = elapsedMs - SECOND_HALF_START_MS;
-        if (inSecond <= 45 * 60 * 1000) {
-          const m = 45 + Math.floor(inSecond / 60000);
-          return String(m);
-        }
-        // добавленное время
-        const addedMs = inSecond - 45 * 60 * 1000;
-        const addedMin = Math.floor(addedMs / 60000);
-        if (addedMin >= 1 && addedMin <= 10) return '90+';
-        return '90+';
-      }
-
-      const liveMatches = [];
-      document.querySelectorAll('.match').forEach(function(card) {
-        const timerEl = card.querySelector('.quality-timer[data-match-start]');
-        if (!timerEl) return;
-        const iso = timerEl.getAttribute('data-match-start');
-        if (!iso) return;
-        const startMs = Date.parse(iso);
-        if (isNaN(startMs)) return;
-        // Матч уже завершён (есть счёт и статус "Завершён") — пропускаем
-        if (card.querySelector('.match-status')) return;
-        liveMatches.push({ card: card, startMs: startMs });
-      });
-
-      if (liveMatches.length === 0) return;
-
-      // ===== Поднимаем live-матчи наверх списка =====
-      // Матчи текущего тура лежат в #matchesContainer — внутри него сортируем:
-      // сначала идущие (live), потом остальные, сохраняя исходный порядок.
-      (function reorderLiveMatches() {
-        const now = Date.now();
-        const container = document.getElementById('matchesContainer');
-        if (!container) return;
-
-        const cards = Array.from(container.querySelectorAll('.match'));
-        const liveSet = new Set();
-        cards.forEach(function(card) {
-          const timerEl = card.querySelector('.quality-timer[data-match-start]');
-          if (!timerEl) return;
-          const startMs = Date.parse(timerEl.getAttribute('data-match-start') || '');
-          if (isNaN(startMs)) return;
-          if (now >= startMs + LIVE_DELAY_MS && now < startMs + MATCH_DURATION_MS) {
-            liveSet.add(card);
-          }
-        });
-
-        if (liveSet.size === 0) return;
-
-        // Удаляем все карточки и вставляем заново: сначала live, потом остальные
-        const liveArr = cards.filter(function(c) { return liveSet.has(c); });
-        const restArr = cards.filter(function(c) { return !liveSet.has(c); });
-
-        // Сохраняем порядок: live идут в том же порядке, что были
-        // (или можно сортировать по startMs — сейчас сохраняем исходный)
-        container.innerHTML = '';
-        liveArr.concat(restArr).forEach(function(c) {
-          container.appendChild(c);
-        });
-      })();
-      
-      function updateLive() {
-        const now = Date.now();
-        liveMatches.forEach(function(item) {
-          const elapsed = now - item.startMs;
-          const endMs = MATCH_DURATION_MS;
-
-          // Убираем старый бейдж, если был
-          let badge = item.card.querySelector('.match-live-badge');
-
-          // LIVE появляется только через LIVE_DELAY_MS после старта
-          if (elapsed < LIVE_DELAY_MS || elapsed > endMs) {
-            if (badge) badge.remove();
-            return;
-          }
-
-          // Отсчёт минуты ведём от старта матча (не от момента показа бейджа)
-          const minute = getMatchMinute(elapsed);
-          if (!badge) {
-            badge = document.createElement('div');
-            badge.className = 'match-live-badge';
-            const scoreBlock = item.card.querySelector('.match-score-block');
-            if (scoreBlock) scoreBlock.appendChild(badge);
-            else item.card.querySelector('.match-top').appendChild(badge);
-          }
-          if (minute === 'перерыв') {
-            badge.innerHTML = '<span class="live-dot"></span>ПЕРЕРЫВ';
-          } else {
-            badge.innerHTML = '<span class="live-dot"></span>LIVE ' + minute + "'";
-          }
-        });
-      }
-
-      updateLive();
-      setInterval(updateLive, 30000);
     })();
 
   </script>
