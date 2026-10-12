@@ -43,18 +43,26 @@ body.light {
 
 body {
   font-family: 'RPL', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background:
-    radial-gradient(circle at 0% 0%, var(--body-grad-1), transparent 40%),
-    radial-gradient(circle at 100% 100%, var(--body-grad-2), transparent 40%),
-    var(--bg);
-  background-attachment: fixed;
   color: var(--text);
   letter-spacing: 0.3px;
   min-height: 100vh;
   padding: 20px 16px;
   line-height: 1.55;
   overflow-x: clip;
+  background: var(--bg);
   transition: background 0.3s, color 0.3s;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 0% 0%, var(--body-grad-1), transparent 40%),
+    radial-gradient(circle at 100% 100%, var(--body-grad-2), transparent 40%),
+    var(--bg);
 }
 
 /* ============================================================
@@ -386,11 +394,15 @@ body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb { backgro
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.3s;
 }
 .match:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); }
-.match.match-focused { border-color: var(--neon); box-shadow: 0 0 30px rgba(0, 255, 213, 0.5); animation: targetPulse 2s ease-in-out; }
+.match.match-focused {
+  border-color: var(--neon);
+  box-shadow: 0 0 30px rgba(0, 255, 213, 0.5);
+  animation: targetPulse 2s ease-in-out;
+}
 @keyframes targetPulse {
-  0%   { box-shadow: 0 0 0 rgba(0, 255, 213, 0); }
-  30%  { box-shadow: 0 0 40px rgba(0, 255, 213, 0.8); }
-  100% { box-shadow: 0 0 30px rgba(0, 255, 213, 0.5); }
+  0%   { outline: 0 solid rgba(0, 255, 213, 0); outline-offset: 0; }
+  30%  { outline: 5px solid rgba(0, 255, 213, 0.55); outline-offset: 0; }
+  100% { outline: 0 solid rgba(0, 255, 213, 0); outline-offset: 0; }
 }
 
 .match-top {
@@ -835,7 +847,27 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
 
 @media (max-width: 600px) {
   body { padding: 0 12px 14px; }
+  .container {
+    animation: none;
+  }
+     .table-pos-gold,
+  .table-pos-silver,
+  .table-pos-bronze,
+  .table-pos-playoff,
+  .table-pos-relegation,
+  .table-row-active .table-pos,
+  .table-row-match .table-pos {
+    box-shadow: none !important;
+  }
 
+  .match.match-focused {
+    box-shadow: 0 0 0 3px rgba(0, 255, 213, 0.4) !important;
+    animation: none !important;
+  }
+
+  .quality-timer.expiring {
+    box-shadow: none !important;
+  }
   .topbar {
     position: -webkit-sticky; position: sticky;
     top: 0;
@@ -843,7 +875,6 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     padding: 8px 10px;
     z-index: 1000; isolation: isolate;
     background: var(--topbar-bg);
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     border-radius: 0 0 10px 10px;
     margin-left: -12px; margin-right: -12px;
     padding-left: 22px; padding-right: 22px;
@@ -967,4 +998,39 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .disclaimer { padding: 12px 14px; margin-top: 24px; gap: 10px; }
   .disclaimer-icon { font-size: 16px; }
   .disclaimer-text { font-size: 10px; line-height: 1.5; }
+}
+/* ============================================================
+   ОТКЛЮЧЕНИЕ HOVER-ЭФФЕКТОВ НА ТАЧ-УСТРОЙСТВАХ
+   ============================================================ */
+@media (hover: none) and (pointer: coarse) {
+  .match,
+  .tour-card,
+  .team-card,
+  .cal-match,
+  .table-row,
+  .quality-btn,
+  .form-sq,
+  .cal-team-filter,
+  .search-suggestion {
+    transition: none !important;
+  }
+
+  .match:hover,
+  .tour-card:hover,
+  .team-card:hover,
+  .cal-match:hover,
+  .table-row:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: var(--border) !important;
+    background: var(--match-bg) !important;
+  }
+
+  .team-card:hover { background: var(--tour-bg) !important; }
+
+  .table-row:hover { background: transparent !important; }
+  .table-row:hover .table-club-name { color: inherit !important; }
+
+  .form-sq:hover { transform: none !important; opacity: 0.75 !important; }
+  .quality-btn:hover { background: rgba(0, 255, 213, 0.08) !important; color: var(--neon) !important; border-color: rgba(0, 255, 213, 0.25) !important; }
 }
