@@ -51,7 +51,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">12.10.2026 20:55 МСК</span><br>
+      Обновлено <span class="neon">12.10.2026 21:06 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -132,7 +132,7 @@
       const searchBox = document.getElementById('searchBox');
       const searchBoxLogo = document.getElementById('searchBoxLogo');
       const suggestBox = document.getElementById('searchSuggestions');
-      const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "ПФК ЦСКА", "logo": "logo/cska.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}];
+      const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}, {"name": "ЦСКА", "logo": "logo/cska.svg"}];
 
       function setSearchLogo(teamName) {
         if (!searchBox || !searchBoxLogo) return;
@@ -589,18 +589,20 @@
 
       function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
-      function formatRemain(ms) {
+            // Возвращает массив пар [число, единица]: [[16,'ч'], [41,'м'], [15,'с']]
+      // Ноль часов/дней не показываем.
+      function formatRemainParts(ms) {
         const total = Math.max(0, Math.floor(ms / 1000));
         const days = Math.floor(total / 86400);
         const h = Math.floor((total % 86400) / 3600);
         const m = Math.floor((total % 3600) / 60);
         const s = total % 60;
         const parts = [];
-        if (days > 0) parts.push(days + '<span class="timer-unit">д</span>');
-        if (days > 0 || h > 0) parts.push(pad(h) + '<span class="timer-unit">ч</span>');
-        parts.push(pad(m) + '<span class="timer-unit">м</span>');
-        parts.push(pad(s) + '<span class="timer-unit">с</span>');
-        return parts.join(' ');
+        if (days > 0) parts.push([String(days), 'д']);
+        if (days > 0 || h > 0) parts.push([pad(h), 'ч']);
+        parts.push([pad(m), 'м']);
+        parts.push([pad(s), 'с']);
+        return parts;
       }
 
       function updateTimer(el, startMs) {
@@ -614,6 +616,7 @@
         el.timer.style.display = '';
         el.row.style.display = 'none';
         const remainMs = diff - STREAM_OPEN_BEFORE_MS;
+
         if (remainMs <= 60 * 1000) {
           if (!el.timer._expiring) {
             el.timer.classList.add('expiring');
@@ -627,12 +630,35 @@
             el.timer._expiring = false;
             el.timer._countEl = null;
           }
+          // Строим структуру один раз: <span class="timer-icon">🔒</span><span class="timer-count">
+          //   <span class="timer-part"><span class="timer-num"></span><span class="timer-unit">ч</span></span>...
+          // </span>
           if (!el.timer._countEl) {
             el.timer.innerHTML = '<span class="timer-icon">🔒</span><span class="timer-count"></span>';
             el.timer._countEl = el.timer.querySelector('.timer-count');
+            el.timer._partNodes = null;
           }
-          if (el.timer._countEl) {
-            el.timer._countEl.textContent = formatRemain(remainMs);
+
+          const parts = formatRemainParts(remainMs);
+
+          // Если количество частей изменилось (например, был день, стал час) —
+          // пересобираем структуру. Иначе просто обновляем числа.
+          if (!el.timer._partNodes || el.timer._partNodes.length !== parts.length) {
+            el.timer._countEl.innerHTML = parts.map(function(p) {
+              return '<span class="timer-part">' +
+                '<span class="timer-num"></span>' +
+                '<span class="timer-unit">' + p[1] + '</span>' +
+              '</span>';
+            }).join(' ');
+            el.timer._partNodes = Array.from(el.timer._countEl.querySelectorAll('.timer-num'));
+          }
+
+          for (let i = 0; i < parts.length; i++) {
+            const numEl = el.timer._partNodes[i];
+            const newVal = parts[i][0];
+            if (numEl.textContent !== newVal) {
+              numEl.textContent = newVal;
+            }
           }
         }
         return false;
