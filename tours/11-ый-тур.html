@@ -580,7 +580,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">15.10.2026 18:02 МСК</span><br>
+      Обновлено <span class="neon">15.10.2026 18:08 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1269,16 +1269,38 @@
       timers.forEach(function(el) { updateTimer(el, el.startMs); });
       startTimers();
     })();
+    
     (function() {
+      function closeAllReplay() {
+        document.querySelectorAll('.replay-select.open').forEach(function(el) {
+          el.classList.remove('open');
+          const label = el.querySelector('[data-replay-label]');
+          if (label) label.textContent = 'Повтор матча';
+        });
+      }
+
       document.addEventListener('click', function(e) {
         const toggle = e.target.closest('[data-replay-toggle]');
-        if (!toggle) return;
-        e.preventDefault();
-        const carousel = toggle.parentElement.querySelector('[data-replay-carousel]');
-        if (!carousel) return;
-        const label = toggle.querySelector('[data-replay-label]');
-        const isOpen = carousel.classList.toggle('open');
-        if (label) label.textContent = isOpen ? 'Выбрать качество' : 'Повтор матча';
+        if (toggle) {
+          e.preventDefault();
+          e.stopPropagation();
+          const select = toggle.closest('.replay-select');
+          if (!select) return;
+          const label = select.querySelector('[data-replay-label]');
+          const wasOpen = select.classList.contains('open');
+          closeAllReplay();
+          if (!wasOpen) {
+            select.classList.add('open');
+            if (label) label.textContent = 'Выбрать качество';
+          }
+          return;
+        }
+        if (e.target.closest('.replay-list')) return;
+        closeAllReplay();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeAllReplay();
       });
     })();
 
