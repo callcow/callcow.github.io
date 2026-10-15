@@ -1058,37 +1058,22 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
 
 /* Разделитель между «Будущими» и «Прошедшими» матчами при фильтре */
 #sectionsDivider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 24px 4px 20px;
-  height: 16px;
-}
-#sectionsDivider::before {
-  content: '';
-  flex: 1;
+  display: block;
+  width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--neon) 50%, transparent 100%);
-  opacity: 0.5;
-}
-#sectionsDivider::after {
-  content: '· · ·';
-  color: var(--neon);
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 4px;
-  opacity: 0.7;
-  line-height: 1;
+  margin: 24px 0 20px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 255, 213, 0.35) 20%,
+    rgba(0, 255, 213, 0.6) 50%,
+    rgba(0, 255, 213, 0.35) 80%,
+    transparent 100%);
+  border-radius: 1px;
 }
 
 @media (max-width: 600px) {
   #sectionsDivider {
-    margin: 20px 2px 16px;
-    height: 14px;
-  }
-  #sectionsDivider::after {
-    font-size: 10px;
-    letter-spacing: 3px;
+    margin: 20px 0 16px;
   }
 }
 
