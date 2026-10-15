@@ -51,7 +51,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">15.10.2026 18:54 МСК</span><br>
+      Обновлено <span class="neon">15.10.2026 19:57 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -744,7 +744,9 @@
     
     (function() {
       function getDefaultLabel(select) {
-        return select.hasAttribute('data-watch') ? 'Смотреть' : 'Повтор матча';
+        if (select.hasAttribute('data-watch')) return 'Смотреть';
+        if (select.hasAttribute('data-review')) return 'Обзор матча';
+        return 'Повтор матча';
       }
 
       function getList(select) {
