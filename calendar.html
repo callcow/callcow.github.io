@@ -987,7 +987,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">15.10.2026 18:08 МСК</span><br>
+      Обновлено <span class="neon">15.10.2026 18:29 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1702,9 +1702,15 @@
           }
           return;
         }
-        if (e.target.closest('.replay-list')) return;
+        // Клик по элементу списка — не закрываем (даём ссылке сработать),
+        // но и не даём всплыть выше к обработчику .match
+        if (e.target.closest('.replay-list')) {
+          e.stopPropagation();
+          return;
+        }
+        // Клик по самой кнопке «Повтор матча»/«Выбрать качество» уже обработан выше
         closeAllReplay();
-      });
+      }, true);
 
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') closeAllReplay();
