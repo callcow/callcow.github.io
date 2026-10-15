@@ -561,17 +561,19 @@ body.light .match-status {
 .replay-select {
   position: relative;
   display: inline-block;
-  width: 180px;
+  width: auto;
   max-width: 100%;
+}
+.replay-select.open {
+  z-index: 100;
 }
 
 .replay-toggle {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%;
+  display: inline-flex; align-items: center; gap: 8px;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.25);
   color: var(--neon);
-  padding: 6px 10px; border-radius: 6px;
+  padding: 6px 12px; border-radius: 6px;
   font-size: 11px; font-weight: 800;
   text-transform: uppercase; letter-spacing: 0.5px;
   cursor: pointer; font-family: inherit;
@@ -584,7 +586,8 @@ body.light .match-status {
 
 .replay-list {
   position: absolute;
-  top: calc(100% + 4px); left: 0; right: 0;
+  top: calc(100% + 4px); left: 0;
+  min-width: 100%;
   display: none;
   flex-direction: column;
   background: var(--topbar-bg);
