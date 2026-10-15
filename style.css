@@ -969,11 +969,12 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     box-shadow: none !important;
   }
 
-   .match.match-focused {
+      .match.match-focused {
     box-shadow: none !important;
     outline: none !important;
     border-color: var(--neon) !important;
-    border-width: 2px !important;
+    border-width: 1px !important;
+    background: var(--match-bg) !important;
   }
 
   .quality-timer.expiring {
@@ -1126,7 +1127,7 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     transition: none !important;
   }
 
-  .match:hover,
+    .match:hover,
   .tour-card:hover,
   .team-card:hover,
   .cal-match:hover,
@@ -1136,7 +1137,9 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     border-color: var(--border) !important;
     background: var(--match-bg) !important;
   }
-
+  .match:hover.match-focused {
+    border-color: var(--neon) !important;
+  }
   .team-card:hover { background: var(--tour-bg) !important; }
 
   .table-row:hover { background: transparent !important; }
