@@ -627,6 +627,9 @@ body.light .match-status {
 /* Кнопка «Обзор матча» — тот же стиль, что у .replay-toggle */
 .review-toggle {
   text-decoration: none;
+  line-height: 1;
+  height: 26px;
+  padding: 0 12px;
 }
 
 @media (hover: hover) and (pointer: fine) {
