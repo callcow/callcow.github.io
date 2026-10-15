@@ -36,7 +36,7 @@
           <div class="section-head" id="currentHeaderDefault">
             <div class="section-head-title">Результаты матчей 10-ый тур</div>
           </div>
-          <div class="matches" id="matchesContainer"><div class="day-head"><span class="day-head-text">09 окт · пятница · 10-ый тур</span></div><div class="match" id="match-09-окт-ростов-акрон" data-teams="ростов акрон">
+          <div class="matches" id="matchesContainer"><div class="day-head"><span class="day-head-text">09 окт · пятница</span></div><div class="match" id="match-09-окт-ростов-акрон" data-teams="ростов акрон">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">09</span>
@@ -76,7 +76,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Ростов Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Ростов-на-Дону</span></div>
         </div>
       </div>
-<div class="day-head"><span class="day-head-text">10 окт · суббота · 10-ый тур</span></div><div class="match" id="match-10-окт-оренбург-динамо-махачкала" data-teams="оренбург динамо махачкала">
+<div class="day-head"><span class="day-head-text">10 окт · суббота</span></div><div class="match" id="match-10-окт-оренбург-динамо-махачкала" data-teams="оренбург динамо махачкала">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">10</span>
@@ -236,7 +236,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Ozon Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Краснодар</span></div>
         </div>
       </div>
-<div class="day-head"><span class="day-head-text">11 окт · воскресенье · 10-ый тур</span></div><div class="match" id="match-11-окт-ахмат-балтика" data-teams="ахмат балтика">
+<div class="day-head"><span class="day-head-text">11 окт · воскресенье</span></div><div class="match" id="match-11-окт-ахмат-балтика" data-teams="ахмат балтика">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">11</span>
@@ -580,7 +580,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">15.10.2026 17:23 МСК</span><br>
+      Обновлено <span class="neon">15.10.2026 17:33 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -726,9 +726,22 @@
           if (topOk && bottomOk) return;
         }
         const targetY = rect.top + window.pageYOffset - (vh / 2) + (rect.height / 2);
-        window.scrollTo({ top: Math.max(0, targetY), behavior: behavior || 'smooth' });
+        const finalY = Math.max(0, targetY);
+        if (behavior === 'smooth') {
+          const startY = window.scrollY;
+          const startTime = performance.now();
+          const DURATION = 400;
+          function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+          function step(now) {
+            const t = Math.min(1, (now - startTime) / DURATION);
+            window.scrollTo(0, startY + (finalY - startY) * easeOutCubic(t));
+            if (t < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        } else {
+          window.scrollTo(0, finalY);
+        }
       }
-
       function applyMatchFocus(cardId, scrollMode) {
         const inputEl = document.getElementById('searchInput');
         const isSearchActive = inputEl && inputEl.value.trim() !== '';
@@ -774,6 +787,7 @@
         applyMatchFocus(id, mode);
       }
 
+      let lastCardClickTs = 0;
       document.addEventListener('click', function(e) {
         const card = e.target.closest('.match');
         if (!card) {
@@ -792,20 +806,26 @@
         if (isSearchActive) return;
         const cardId = card.getAttribute('id') || '';
         if (!cardId) return;
+
+        const now = Date.now();
+        const isRepeat = (now - lastCardClickTs) < 600 && card.classList.contains('match-focused');
+        lastCardClickTs = now;
+
         highlightMatchCard(cardId);
         const dataTeams = card.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
-        scrollCardToCenter(cardId, true, 'smooth');
-        setTimeout(function() {
-          try {
-            const newHash = '#' + cardId;
-            if (window.location.hash !== newHash) {
-              window.history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
-            }
-          } catch (err) { /* ignore */ }
-        }, 500);
-      });
 
+        if (!isRepeat) {
+          scrollCardToCenter(cardId, true, 'smooth');
+        }
+
+        try {
+          const newHash = '#' + cardId;
+          if (window.location.hash !== newHash) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
+          }
+        } catch (err) { /* ignore */ }
+      });
       window.__highlightFromHash = highlightFromHash;
       window.__highlightMatchTeams = highlightMatchTeams;
 

@@ -36,7 +36,7 @@
           <div class="section-head" id="currentHeaderDefault">
             <div class="section-head-title">Результаты матчей 8-ой тур</div>
           </div>
-          <div class="matches" id="matchesContainer"><div class="day-head"><span class="day-head-text">11 сен · пятница · 8-ой тур</span></div><div class="match" id="match-11-сен-крылья-советов-родина" data-teams="крылья советов родина">
+          <div class="matches" id="matchesContainer"><div class="day-head"><span class="day-head-text">11 сен · пятница</span></div><div class="match" id="match-11-сен-крылья-советов-родина" data-teams="крылья советов родина">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">11</span>
@@ -76,7 +76,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Солидарность Самара Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Самара</span></div>
         </div>
       </div>
-<div class="day-head"><span class="day-head-text">12 сен · суббота · 8-ой тур</span></div><div class="match" id="match-12-сен-факел-балтика" data-teams="факел балтика">
+<div class="day-head"><span class="day-head-text">12 сен · суббота</span></div><div class="match" id="match-12-сен-факел-балтика" data-teams="факел балтика">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">12</span>
@@ -236,7 +236,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 ВЭБ Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Москва</span></div>
         </div>
       </div>
-<div class="day-head"><span class="day-head-text">13 сен · воскресенье · 8-ой тур</span></div><div class="match" id="match-13-сен-ахмат-динамо-махачкала" data-teams="ахмат динамо махачкала">
+<div class="day-head"><span class="day-head-text">13 сен · воскресенье</span></div><div class="match" id="match-13-сен-ахмат-динамо-махачкала" data-teams="ахмат динамо махачкала">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">13</span>
@@ -580,7 +580,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">15.10.2026 17:23 МСК</span><br>
+      Обновлено <span class="neon">15.10.2026 17:33 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -726,9 +726,22 @@
           if (topOk && bottomOk) return;
         }
         const targetY = rect.top + window.pageYOffset - (vh / 2) + (rect.height / 2);
-        window.scrollTo({ top: Math.max(0, targetY), behavior: behavior || 'smooth' });
+        const finalY = Math.max(0, targetY);
+        if (behavior === 'smooth') {
+          const startY = window.scrollY;
+          const startTime = performance.now();
+          const DURATION = 400;
+          function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+          function step(now) {
+            const t = Math.min(1, (now - startTime) / DURATION);
+            window.scrollTo(0, startY + (finalY - startY) * easeOutCubic(t));
+            if (t < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        } else {
+          window.scrollTo(0, finalY);
+        }
       }
-
       function applyMatchFocus(cardId, scrollMode) {
         const inputEl = document.getElementById('searchInput');
         const isSearchActive = inputEl && inputEl.value.trim() !== '';
@@ -774,6 +787,7 @@
         applyMatchFocus(id, mode);
       }
 
+      let lastCardClickTs = 0;
       document.addEventListener('click', function(e) {
         const card = e.target.closest('.match');
         if (!card) {
@@ -792,20 +806,26 @@
         if (isSearchActive) return;
         const cardId = card.getAttribute('id') || '';
         if (!cardId) return;
+
+        const now = Date.now();
+        const isRepeat = (now - lastCardClickTs) < 600 && card.classList.contains('match-focused');
+        lastCardClickTs = now;
+
         highlightMatchCard(cardId);
         const dataTeams = card.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
-        scrollCardToCenter(cardId, true, 'smooth');
-        setTimeout(function() {
-          try {
-            const newHash = '#' + cardId;
-            if (window.location.hash !== newHash) {
-              window.history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
-            }
-          } catch (err) { /* ignore */ }
-        }, 500);
-      });
 
+        if (!isRepeat) {
+          scrollCardToCenter(cardId, true, 'smooth');
+        }
+
+        try {
+          const newHash = '#' + cardId;
+          if (window.location.hash !== newHash) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
+          }
+        } catch (err) { /* ignore */ }
+      });
       window.__highlightFromHash = highlightFromHash;
       window.__highlightMatchTeams = highlightMatchTeams;
 
