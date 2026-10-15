@@ -628,17 +628,15 @@ body.light .match-status {
 .review-toggle {
   text-decoration: none;
 }
+
 @media (hover: hover) and (pointer: fine) {
-  .review-toggle:hover {
+  .replay-toggle:hover {
     background: rgba(0, 255, 213, 0.18);
     color: var(--neon);
     border-color: var(--neon);
     box-shadow: 0 0 12px rgba(0, 255, 213, 0.25);
   }
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .replay-toggle:hover {
+  .review-toggle:hover {
     background: rgba(0, 255, 213, 0.18);
     color: var(--neon);
     border-color: var(--neon);
