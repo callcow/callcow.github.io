@@ -600,8 +600,6 @@ body.light .match-status {
 }
 
 .quality-timer {
-
-.quality-timer {
   display: inline-flex; align-items: center; justify-content: center;
   gap: 6px; padding: 3px 10px; border-radius: 4px;
   background: rgba(0, 255, 213, 0.08);
