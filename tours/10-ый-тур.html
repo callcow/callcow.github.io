@@ -580,7 +580,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">15.10.2026 18:29 МСК</span><br>
+      Обновлено <span class="neon">15.10.2026 18:43 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1183,7 +1183,7 @@
         if (remainMs <= 60 * 1000) {
           if (!el.timer._expiring) {
             el.timer.classList.add('expiring');
-            el.timer.innerHTML = '<span class="timer-icon">🔓</span><span>Вот-вот начнётся</span>';
+            el.timer.innerHTML = '<span class="timer-icon">🔴</span><span>LIVE</span>';
             el.timer._expiring = true;
             el.timer._countEl = null;
           }
@@ -1270,16 +1270,20 @@
       startTimers();
     })();
     
-    (function() {
+        (function() {
+      function getDefaultLabel(select) {
+        return select.hasAttribute('data-watch') ? 'Смотреть' : 'Повтор матча';
+      }
+
       function closeAllReplay() {
         document.querySelectorAll('.replay-select.open').forEach(function(el) {
           el.classList.remove('open');
           const label = el.querySelector('[data-replay-label]');
-          if (label) label.textContent = 'Повтор матча';
+          if (label) label.textContent = getDefaultLabel(el);
         });
       }
 
-      document.addEventListener('click', function(e) {
+            document.addEventListener('click', function(e) {
         const toggle = e.target.closest('[data-replay-toggle]');
         if (toggle) {
           e.preventDefault();
@@ -1295,15 +1299,20 @@
           }
           return;
         }
-        // Клик по элементу списка — не закрываем (даём ссылке сработать),
-        // но и не даём всплыть выше к обработчику .match
+        // Клик по элементу списка — закрываем селект и даём ссылке сработать
         if (e.target.closest('.replay-list')) {
           e.stopPropagation();
+          closeAllReplay();
           return;
         }
-        // Клик по самой кнопке «Повтор матча»/«Выбрать качество» уже обработан выше
+        // Клик по самой кнопке уже обработан выше
         closeAllReplay();
       }, true);
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeAllReplay();
+      });
+    })();
 
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') closeAllReplay();
