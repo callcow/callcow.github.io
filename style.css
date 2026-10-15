@@ -614,8 +614,16 @@ body.light .match-status {
 .replay-item:focus-visible { outline: 2px solid var(--neon); outline-offset: -2px; }
 
 @media (hover: hover) and (pointer: fine) {
-  .replay-toggle:hover { background: var(--neon); color: #fff; border-color: var(--neon); }
-  .replay-item:hover { background: rgba(0, 255, 213, 0.15); color: #fff; }
+  .replay-toggle:hover {
+    background: rgba(0, 255, 213, 0.18);
+    color: var(--neon);
+    border-color: var(--neon);
+    box-shadow: 0 0 12px rgba(0, 255, 213, 0.25);
+  }
+  .replay-item:hover {
+    background: rgba(0, 255, 213, 0.18);
+    color: var(--neon);
+  }
 }
 
 .quality-timer {
