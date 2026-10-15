@@ -1056,6 +1056,14 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .main-layout .match-score { min-width: 62px; height: 36px; font-size: 18px; padding: 0 10px; }
   .main-layout .quality-btn { padding: 2px 8px; font-size: 9px; }
 
+/* Разделитель между «Будущими» и «Прошедшими» матчами при фильтре */
+#sectionsDivider {
+  height: 1px;
+  margin: 20px 4px 16px;
+  background: linear-gradient(90deg, transparent 0%, var(--border-hover) 30%, var(--border-hover) 70%, transparent 100%);
+  border-radius: 1px;
+}
+
   .match { padding: 14px; gap: 12px; }
   .match-day { font-size: 13px; }
   .match-main { gap: 10px; }
