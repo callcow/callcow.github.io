@@ -556,47 +556,63 @@ body.light .match-status {
   .quality-btn:hover { background: var(--neon); color: #05060d; border-color: var(--neon); }
 }
 /* ============================================================
-   ПОВТОР МАТЧА (архив туров)
+   ПОВТОР МАТЧА (архив туров) — выпадающий селект
    ============================================================ */
+.replay-select {
+  position: relative;
+  display: inline-block;
+  width: 180px;
+  max-width: 100%;
+}
+
 .replay-toggle {
-  display: inline-flex; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.25);
   color: var(--neon);
-  padding: 3px 10px; border-radius: 4px;
-  font-size: 10px; font-weight: 800;
+  padding: 6px 10px; border-radius: 6px;
+  font-size: 11px; font-weight: 800;
   text-transform: uppercase; letter-spacing: 0.5px;
   cursor: pointer; font-family: inherit;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .replay-toggle:focus { outline: none; }
 .replay-toggle:focus-visible { outline: 2px solid var(--neon); outline-offset: 2px; }
+.replay-caret { font-size: 10px; margin-left: 8px; transition: transform 0.2s; }
+.replay-select.open .replay-caret { transform: rotate(180deg); }
 
-.replay-carousel {
+.replay-list {
+  position: absolute;
+  top: calc(100% + 4px); left: 0; right: 0;
   display: none;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 6px;
-  width: 100%;
+  flex-direction: column;
+  background: var(--topbar-bg);
+  border: 1px solid rgba(0, 255, 213, 0.35);
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  overflow: hidden;
 }
-.replay-carousel.open { display: flex; }
+.replay-select.open .replay-list { display: flex; }
 
-.replay-btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  background: rgba(0, 255, 213, 0.08);
-  border: 1px solid rgba(0, 255, 213, 0.25);
-  color: var(--neon);
-  padding: 3px 10px; border-radius: 4px;
-  font-size: 10px; font-weight: 800;
-  text-decoration: none; text-transform: uppercase;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+.replay-item {
+  display: block;
+  padding: 8px 12px;
+  color: var(--text);
+  font-size: 11px; font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s, color 0.15s;
 }
-.replay-btn:focus { outline: none; }
-.replay-btn:focus-visible { outline: 2px solid var(--neon); outline-offset: 2px; }
+.replay-item:last-child { border-bottom: none; }
+.replay-item:focus { outline: none; }
+.replay-item:focus-visible { outline: 2px solid var(--neon); outline-offset: -2px; }
 
 @media (hover: hover) and (pointer: fine) {
   .replay-toggle:hover { background: var(--neon); color: #05060d; border-color: var(--neon); }
-  .replay-btn:hover { background: var(--neon); color: #05060d; border-color: var(--neon); }
+  .replay-item:hover { background: rgba(0, 255, 213, 0.15); color: var(--neon); }
 }
 
 .quality-timer {
