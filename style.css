@@ -427,7 +427,8 @@ body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb { backgro
 .match:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); }
 .match.match-focused {
   border-color: var(--neon);
-  box-shadow: none;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .match-top {
@@ -889,8 +890,9 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
 
    .match.match-focused {
     box-shadow: none !important;
-    outline: 2px solid var(--neon);
-    outline-offset: 0;
+    outline: none !important;
+    border-color: var(--neon) !important;
+    border-width: 2px !important;
   }
 
   .quality-timer.expiring {
