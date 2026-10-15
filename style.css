@@ -555,6 +555,51 @@ body.light .match-status {
 @media (hover: hover) and (pointer: fine) {
   .quality-btn:hover { background: var(--neon); color: #05060d; border-color: var(--neon); }
 }
+/* ============================================================
+   ПОВТОР МАТЧА (архив туров)
+   ============================================================ */
+.replay-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(0, 255, 213, 0.08);
+  border: 1px solid rgba(0, 255, 213, 0.25);
+  color: var(--neon);
+  padding: 3px 10px; border-radius: 4px;
+  font-size: 10px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  cursor: pointer; font-family: inherit;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.replay-toggle:focus { outline: none; }
+.replay-toggle:focus-visible { outline: 2px solid var(--neon); outline-offset: 2px; }
+
+.replay-carousel {
+  display: none;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+  width: 100%;
+}
+.replay-carousel.open { display: flex; }
+
+.replay-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(0, 255, 213, 0.08);
+  border: 1px solid rgba(0, 255, 213, 0.25);
+  color: var(--neon);
+  padding: 3px 10px; border-radius: 4px;
+  font-size: 10px; font-weight: 800;
+  text-decoration: none; text-transform: uppercase;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.replay-btn:focus { outline: none; }
+.replay-btn:focus-visible { outline: 2px solid var(--neon); outline-offset: 2px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .replay-toggle:hover { background: var(--neon); color: #05060d; border-color: var(--neon); }
+  .replay-btn:hover { background: var(--neon); color: #05060d; border-color: var(--neon); }
+}
+
+.quality-timer {
 
 .quality-timer {
   display: inline-flex; align-items: center; justify-content: center;
