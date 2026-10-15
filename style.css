@@ -578,17 +578,28 @@ body.light .match-status {
   overflow: visible;
 }
 
-.replay-toggle {
-  display: inline-flex; align-items: center; gap: 4px;
+.replay-toggle,
+.review-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 12px;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.25);
   color: var(--neon);
-  padding: 6px 12px; border-radius: 6px;
+  border-radius: 6px;
   font-size: 11px; font-weight: 800;
   text-transform: uppercase; letter-spacing: 0.5px;
   cursor: pointer; font-family: inherit;
+  line-height: 1;
+  box-sizing: border-box;
+  text-decoration: none;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
+.replay-toggle:focus,
+.review-toggle:focus { outline: none; }
+.replay-toggle:focus-visible,
+.review-toggle:focus-visible { outline: 2px solid var(--neon); outline-offset: 2px; }
 .replay-toggle:focus { outline: none; }
 .replay-toggle:focus-visible { outline: 2px solid var(--neon); outline-offset: 2px; }
 .replay-caret { font-size: 10px; margin-left: 0; transition: transform 0.2s; }
@@ -624,10 +635,7 @@ body.light .match-status {
 .replay-item:focus { outline: none; }
 .replay-item:focus-visible { outline: 2px solid var(--neon); outline-offset: -2px; }
 
-/* Кнопка «Обзор матча» — тот же стиль, что у .replay-toggle */
-.review-toggle {
-  text-decoration: none;
-}
+/* Кнопка «Обзор матча» — стиль общий с .replay-toggle (см. выше) */
 
 @media (hover: hover) and (pointer: fine) {
   .replay-toggle:hover {
