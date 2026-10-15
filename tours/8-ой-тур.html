@@ -580,7 +580,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">15.10.2026 18:46 МСК</span><br>
+      Обновлено <span class="neon">15.10.2026 18:54 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -789,6 +789,7 @@
 
       let lastCardClickTs = 0;
       document.addEventListener('click', function(e) {
+        if (e.target.closest('.replay-select')) return;
         const card = e.target.closest('.match');
         if (!card) {
           const inputEl = document.getElementById('searchInput');
@@ -1270,42 +1271,92 @@
       startTimers();
     })();
     
-        (function() {
+    (function() {
       function getDefaultLabel(select) {
         return select.hasAttribute('data-watch') ? 'Смотреть' : 'Повтор матча';
       }
 
-      function closeAllReplay() {
+      function getList(select) {
+        return select.querySelector('[data-replay-list]');
+      }
+
+      function openReplay(select) {
+        const list = getList(select);
+        if (!list) return;
+        const label = select.querySelector('[data-replay-label]');
+        if (list._hideAnim) { list._hideAnim.cancel(); list._hideAnim = null; }
+        if (list._showAnim) { list._showAnim.cancel(); list._showAnim = null; }
+        select.classList.add('open');
+        if (label) label.textContent = 'Выбрать качество';
+        list.style.display = 'flex';
+        list.style.overflow = 'hidden';
+        const finalHeight = list.scrollHeight;
+        list._showAnim = list.animate(
+          [
+            { opacity: 0, transform: 'translateY(-6px)', maxHeight: '0px' },
+            { opacity: 1, transform: 'translateY(0)',    maxHeight: finalHeight + 'px' }
+          ],
+          { duration: 220, easing: 'cubic-bezier(0.2, 0.9, 0.3, 1.05)', fill: 'forwards' }
+        );
+        list._showAnim.onfinish = function() {
+          list._showAnim = null;
+          list.style.maxHeight = '';
+          list.style.overflow = '';
+        };
+      }
+
+      function closeReplay(select) {
+        const list = getList(select);
+        if (!list) return;
+        const label = select.querySelector('[data-replay-label]');
+        if (!select.classList.contains('open')) return;
+        if (list._showAnim) { list._showAnim.cancel(); list._showAnim = null; }
+        if (list._hideAnim) { list._hideAnim.cancel(); list._hideAnim = null; }
+        const startHeight = list.scrollHeight;
+        list.style.overflow = 'hidden';
+        list._hideAnim = list.animate(
+          [
+            { opacity: 1, transform: 'translateY(0)',    maxHeight: startHeight + 'px' },
+            { opacity: 0, transform: 'translateY(-6px)', maxHeight: '0px' }
+          ],
+          { duration: 180, easing: 'ease-in', fill: 'forwards' }
+        );
+        list._hideAnim.onfinish = function() {
+          list._hideAnim = null;
+          select.classList.remove('open');
+          list.style.cssText = '';
+          if (label) label.textContent = getDefaultLabel(select);
+        };
+      }
+
+      function closeAllReplay(except) {
         document.querySelectorAll('.replay-select.open').forEach(function(el) {
-          el.classList.remove('open');
-          const label = el.querySelector('[data-replay-label]');
-          if (label) label.textContent = getDefaultLabel(el);
+          if (el === except) return;
+          closeReplay(el);
         });
       }
 
-            document.addEventListener('click', function(e) {
+      document.addEventListener('click', function(e) {
         const toggle = e.target.closest('[data-replay-toggle]');
         if (toggle) {
           e.preventDefault();
           e.stopPropagation();
           const select = toggle.closest('.replay-select');
           if (!select) return;
-          const label = select.querySelector('[data-replay-label]');
           const wasOpen = select.classList.contains('open');
-          closeAllReplay();
-          if (!wasOpen) {
-            select.classList.add('open');
-            if (label) label.textContent = 'Выбрать качество';
+          closeAllReplay(select);
+          if (wasOpen) {
+            closeReplay(select);
+          } else {
+            openReplay(select);
           }
           return;
         }
-        // Клик по элементу списка — закрываем селект и даём ссылке сработать
         if (e.target.closest('.replay-list')) {
           e.stopPropagation();
           closeAllReplay();
           return;
         }
-        // Клик по самой кнопке уже обработан выше
         closeAllReplay();
       }, true);
 
@@ -1313,7 +1364,6 @@
         if (e.key === 'Escape') closeAllReplay();
       });
     })();
-
     (function() {
       const btn = document.getElementById('scrollTop');
       if (!btn) return;
