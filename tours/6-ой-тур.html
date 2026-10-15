@@ -580,7 +580,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">15.10.2026 20:22 МСК</span><br>
+      Обновлено <span class="neon">15.10.2026 20:39 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -900,16 +900,19 @@
           if (typeof window.__highlightFromHash === 'function') window.__highlightFromHash('never');
         }
 
+        const divider = document.getElementById('sectionsDivider');
         if (q === '' || !anyFound) {
           if (pastSection) pastSection.style.display = 'none';
           if (currentSection) currentSection.style.display = '';
           if (headerDefault) headerDefault.style.display = '';
           if (headerSearch) headerSearch.style.display = 'none';
+          if (divider) divider.style.display = 'none';
         } else {
           if (currentSection) currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
           if (headerDefault) headerDefault.style.display = 'none';
           if (headerSearch) headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
           if (pastSection) pastSection.style.display = visiblePast > 0 ? '' : 'none';
+          if (divider) divider.style.display = (visibleCurrent > 0 && visiblePast > 0) ? '' : 'none';
         }
       }
 
@@ -1057,6 +1060,21 @@
           const badge = el.querySelector('.tag-4k');
           el.style.display = badge ? '' : 'none';
         });
+
+        // Скрываем заголовки дней, под которыми не осталось видимых матчей
+        document.querySelectorAll('.day-head').forEach(function(head) {
+          let next = head.nextElementSibling;
+          let hasVisible = false;
+          while (next && !next.classList.contains('day-head')) {
+            if (next.classList.contains('match') && next.style.display !== 'none') {
+              hasVisible = true;
+              break;
+            }
+            next = next.nextElementSibling;
+          }
+          head.style.display = hasVisible ? '' : 'none';
+        });
+
         const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
         const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
         const pastSection = document.getElementById('pastSection');
@@ -1074,6 +1092,10 @@
           pastSection.style.display = visiblePast > 0 ? '' : 'none';
           const pastHeaderTeam = document.getElementById('pastHeaderTeam');
           if (pastHeaderTeam) pastHeaderTeam.textContent = ' · 4K UHD';
+        }
+        const divider = document.getElementById('sectionsDivider');
+        if (divider) {
+          divider.style.display = (visibleCurrent > 0 && visiblePast > 0) ? '' : 'none';
         }
       }
     })();
