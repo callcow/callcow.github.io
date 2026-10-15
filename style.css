@@ -154,6 +154,37 @@ body::before {
 .cal-teams-arrow:active { transform: scale(0.95); }
 
 /* ============================================================
+   ЗАГОЛОВОК ДНЯ
+   ============================================================ */
+.day-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 6px 4px 2px;
+  margin-top: 4px;
+}
+.day-head:first-child { margin-top: 0; }
+.day-head-text {
+  font-size: 12px; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--neon);
+  display: flex; align-items: center; gap: 8px;
+  white-space: nowrap;
+}
+.day-head-text::before {
+  content: ''; width: 4px; height: 14px;
+  background: linear-gradient(180deg, var(--neon), var(--neon-3));
+  border-radius: 2px;
+}
+.day-head::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border-hover), transparent);
+}
+
+@media (max-width: 600px) {
+  .day-head-text { font-size: 10px; letter-spacing: 1.2px; }
+  .day-head { padding: 4px 2px 0; }
+}
+
+/* ============================================================
    КОНТЕЙНЕР И ТОПБАР
    ============================================================ */
 .container { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; animation: pageFadeIn 0.3s ease-out; }
