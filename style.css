@@ -606,8 +606,9 @@ body.light .match-status {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   z-index: 50;
   overflow: hidden;
+  opacity: 0;
 }
-.replay-select.open .replay-list { display: flex; }
+.replay-select.open .replay-list { display: flex; opacity: 1; }
 
 .replay-item {
   display: block;
