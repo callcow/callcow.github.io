@@ -987,7 +987,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">15.10.2026 17:33 МСК</span><br>
+      Обновлено <span class="neon">15.10.2026 17:51 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1264,6 +1264,20 @@
             const match = words.every(function(w) { return teams.includes(w); });
             el.style.display = match ? '' : 'none';
           }
+        });
+
+        // Скрываем заголовки дней, под которыми не осталось видимых матчей
+        document.querySelectorAll('.day-head').forEach(function(head) {
+          let next = head.nextElementSibling;
+          let hasVisible = false;
+          while (next && !next.classList.contains('day-head')) {
+            if (next.classList.contains('match') && next.style.display !== 'none') {
+              hasVisible = true;
+              break;
+            }
+            next = next.nextElementSibling;
+          }
+          head.style.display = hasVisible ? '' : 'none';
         });
 
         const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
@@ -1662,6 +1676,21 @@
       timers.forEach(function(el) { updateTimer(el, el.startMs); });
       startTimers();
     })();
+    (function() {
+      document.addEventListener('click', function(e) {
+        const toggle = e.target.closest('[data-replay-toggle]');
+        if (!toggle) return;
+        e.preventDefault();
+        const carousel = toggle.parentElement.querySelector('[data-replay-carousel]');
+        if (!carousel) return;
+        const label = toggle.querySelector('[data-replay-label]');
+        const isOpen = carousel.classList.toggle('open');
+        if (label) label.textContent = isOpen ? 'Выбрать качество' : 'Повтор матча';
+      });
+    })();
+
+    (function() {
+      const btn = document.getElementById('scrollTop');
 
     (function() {
       const btn = document.getElementById('scrollTop');
