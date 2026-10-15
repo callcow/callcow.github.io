@@ -627,7 +627,6 @@ body.light .match-status {
 /* Кнопка «Обзор матча» — тот же стиль, что у .replay-toggle */
 .review-toggle {
   text-decoration: none;
-  gap: 4px;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -638,8 +637,8 @@ body.light .match-status {
     box-shadow: 0 0 12px rgba(0, 255, 213, 0.25);
   }
     .review-toggle:hover {
-    background: var(--neon);
-    color: #05060d;
+    background: rgba(0, 255, 213, 0.18);
+    color: var(--neon);
     border-color: var(--neon);
     box-shadow: 0 0 12px rgba(0, 255, 213, 0.25);
   }
