@@ -601,7 +601,7 @@ body.light .match-status {
   font-size: 9px; font-weight: 800;
   text-transform: uppercase; letter-spacing: 0.5px;
   cursor: pointer; font-family: inherit;
-  line-height: 20px;
+  line-height: 1;
   box-sizing: border-box;
   text-decoration: none;
   vertical-align: middle;
@@ -666,7 +666,7 @@ body.light .match-status {
     border-color: var(--neon);
     box-shadow: 0 0 12px rgba(0, 255, 213, 0.25);
   }
-    .review-toggle:hover {
+  .review-toggle:hover {
     background: rgba(0, 255, 213, 0.18);
     color: var(--neon);
     border-color: var(--neon);
