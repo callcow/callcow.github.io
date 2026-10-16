@@ -169,6 +169,9 @@ body::before {
   display: flex; align-items: center; gap: 8px;
   white-space: nowrap;
 }
+.day-head-text > span:first-child {
+  color: #fff;
+}
 .day-head-text::before {
   content: none;
 }
