@@ -470,6 +470,11 @@ a.tag-4k:hover { transform: translateY(-1px); box-shadow: 0 0 15px rgba(255, 0, 
 .match-team.home { justify-content: flex-start; }
 .match-team.away { justify-content: flex-end; }
 .match-team:hover { color: var(--neon); }
+.match-team.match-team-hl { color: var(--neon); }
+.match-team.match-team-hl .team-logo {
+  border-color: var(--neon);
+  background: rgba(0, 255, 213, 0.08);
+}
 .match-team:hover .team-logo { border-color: var(--neon); background: rgba(0, 255, 213, 0.08); }
 
 .team-name { min-width: 0; line-height: 1.15; word-break: break-word; }
