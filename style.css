@@ -591,8 +591,8 @@ body.light .match-status {
 .review-toggle {
   display: inline-flex; align-items: center; justify-content: center;
   gap: 4px;
-  height: 28px;
-  padding: 0 12px;
+  height: 26px;
+  padding: 0 10px;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.25);
   color: var(--neon);
