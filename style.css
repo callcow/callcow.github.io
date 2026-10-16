@@ -732,7 +732,7 @@ body.light .form-l { background: #b91c1c; }
 .tour-card-large { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 22px; }
 .tour-card-info { display: flex; flex-direction: column; gap: 4px; }
 .tour-name-big { font-size: 17px; font-weight: 900; }
-.tour-dates { font-size: 12px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.3px; }
+.tour-dates { font-size: 11px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ============================================================
    КОМАНДЫ
@@ -1128,7 +1128,7 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .tours-grid { grid-template-columns: 1fr 1fr; }
   .tour-card-large { padding: 16px 18px; }
   .tour-name-big { font-size: 15px; }
-  .tour-dates { font-size: 11px; }
+  .tour-dates { font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
   .teams-grid { grid-template-columns: 1fr 1fr; }
   .team-card { padding: 14px 10px; }
