@@ -592,16 +592,16 @@ body.light .match-status {
 .review-toggle {
   display: inline-flex; align-items: center; justify-content: center;
   gap: 4px;
-  height: 26px;
-  padding: 0 10px;
+  height: 20px;
+  padding: 0 8px;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.25);
   color: var(--neon);
   border-radius: 6px;
-  font-size: 11px; font-weight: 800;
+  font-size: 9px; font-weight: 800;
   text-transform: uppercase; letter-spacing: 0.5px;
   cursor: pointer; font-family: inherit;
-  line-height: 26px;
+  line-height: 20px;
   box-sizing: border-box;
   text-decoration: none;
   vertical-align: middle;
@@ -634,9 +634,9 @@ body.light .match-status {
 
 .replay-item {
   display: block;
-  padding: 8px 12px;
+  padding: 6px 10px;
   color: var(--text);
-  font-size: 11px; font-weight: 800;
+  font-size: 9px; font-weight: 800;
   text-decoration: none;
   text-transform: uppercase; letter-spacing: 0.5px;
   border-bottom: 1px solid var(--border);
@@ -654,9 +654,9 @@ body.light .match-status {
   margin: 0 4px 12px;
 }
 .tour-review-btn {
-  height: 30px;
-  padding: 0 14px;
-  font-size: 11px;
+  height: 20px;
+  padding: 0 8px;
+  font-size: 9px;
 }
 
 @media (hover: hover) and (pointer: fine) {
