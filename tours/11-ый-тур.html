@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>11-ый тур — РПЛ</title>
+<link rel="icon" type="image/svg+xml" href="../logo/rpl.svg">
+<link rel="apple-touch-icon" href="../logo/rpl.svg">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="container">
+
+    <div class="topbar">
+    <nav class="nav-tabs">
+      <a class="nav-tab " href="../">Главная</a>
+      <a class="nav-tab " href="../tours.html">Туры</a>
+      <a class="nav-tab " href="../teams.html">Команды</a>
+      <a class="nav-tab " href="../calendar.html">Календарь</a>
+    </nav>
+    <div class="topbar-search" id="searchBox">
+      <img class="search-box-logo" id="searchBoxLogo" src="" alt="" style="display:none;">
+      <input type="text" id="searchInput" placeholder="" autocomplete="off">
+      <button class="search-clear" id="searchClear" style="display:none">✕</button>
+      <div class="search-suggestions" id="searchSuggestions"></div>
+    </div>
+    <button class="search-toggle" id="searchToggle" aria-label="Поиск">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+  </div>
+
+    
+    <div class="main-layout">
+      <div class="main-layout-col">
+        <div id="currentSection">
+          <div class="section-head" id="currentHeaderDefault">
+            <div class="section-head-title">Расписание матчей 11-ый тур</div>
+          </div>
+          
+          <div class="matches" id="matchesContainer"><div class="day-head"><span class="day-head-text"><span>17 окт</span><span class="day-head-rest"> · суббота</span></span></div><div class="match" id="match-17-окт-крылья-советов-факел" data-teams="крылья советов факел">
+        <div class="match-top">
+          <div class="match-when">
+            <span class="match-day">17</span>
+            <span class="match-month">окт</span>
+            <span class="match-dot">·</span>
+            <span class="match-time">14:00</span>
+          </div>
+          <div class="match-tags">
+            <span class="tag tag-tour">11-ый тур</span>
+            
+          </div>
+        </div>
+
+        <div class="match-main">
+          <a class="match-team home" href="../index.html?team=%D0%9A%D1%80%D1%8B%D0%BB%D1%8C%D1%8F%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2">
+            <span class="team-logo"><img src="../logo/krylyasovetov.svg" alt="Крылья Советов"></span>
+            <span class="team-name">Крылья Советов</span>
+          </a>
+          <div class="match-score-block">
+            <div class="match-score match-score-upcoming">- : -</div>
+            
+          </div>
+          <a class="match-team away" href="../index.html?team=%D0%A4%D0%B0%D0%BA%D0%B5%D0%BB">
+            <span class="team-name">Факел</span>
+            <span class="team-logo"><img src="../logo/fakel.svg" alt="Факел"></span>
+          </a>
+        </div>
+
+        <div class="match-form">
+          <div class="match-form-side match-form-home"><span class="form-row"><a class="form-sq form-d" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-ахмат-крылья-советов" title="29.08.26 Ахмат — Крылья Советов 3:3">Н</a><a class="form-sq form-d" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-крылья-советов-краснодар" title="05.09.26 Крылья Советов — Краснодар 2:2">Н</a><a class="form-sq form-w" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-11-сен-крылья-советов-родина" title="11.09.26 Крылья Советов — Родина 2:1">В</a><a class="form-sq form-d" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-локомотив-крылья-советов" title="16.09.26 Локомотив — Крылья Советов 1:1">Н</a><a class="form-sq form-d" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-крылья-советов-спартак" title="10.10.26 Крылья Советов — Спартак 1:1">Н</a></span></div>
+          <div class="match-form-side match-form-away"><span class="form-row"><a class="form-sq form-l" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-факел-зенит" title="29.08.26 Факел — Зенит 0:1">П</a><a class="form-sq form-l" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-ростов-факел" title="05.09.26 Ростов — Факел 3:1">П</a><a class="form-sq form-d" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-факел-балтика" title="12.09.26 Факел — Балтика 2:2">Н</a><a class="form-sq form-l" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-спартак-факел" title="16.09.26 Спартак — Факел 1:0">П</a><a class="form-sq form-l" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-факел-локомотив" title="10.10.26 Факел — Локомотив 0:5">П</a></span></div>
+        </div>
+
+        <div class="match-bottom">
+          <div class="quality-row" data-match-start="2026-10-17T14:00:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_0df4943cd01ee0b0d574cbb4d1419445/17_1036001/1080p50fps/efe825541c619d0ddbea76da4ffefeb1/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_0df4943cd01ee0b0d574cbb4d1419445/17_1036001/720/efe825541c619d0ddbea76da4ffefeb1/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_0df4943cd01ee0b0d574cbb4d1419445/17_1036001/480/efe825541c619d0ddbea76da4ffefeb1/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_0df4943cd01ee0b0d574cbb4d1419445/17_1036001/360/efe825541c619d0ddbea76da4ffefeb1/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
+          <div class="quality-timer" data-match-start="2026-10-17T14:00:00+03:00" ></div>
+          <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Солидарность Самара Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Самара</span></div>
+        </div>
+      </div>
+<div class="match" id="match-17-окт-динамо-махачкала-акрон" data-teams="динамо махачкала акрон">
+        <div class="match-top">
+          <div class="match-when">
+            <span class="match-day">17</span>
+            <span class="match-month">окт</span>
+            <span class="match-dot">·</span>
+            <span class="match-time">16:30</span>
+          </div>
+          <div class="match-tags">
+            <span class="tag tag-tour">11-ый тур</span>
+            
+          </div>
+        </div>
+
+        <div class="match-main">
+          <a class="match-team home" href="../index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%B0%D1%85%D0%B0%D1%87%D0%BA%D0%B0%D0%BB%D0%B0">
+            <span class="team-logo"><img src="../logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>
+            <span class="team-name">Динамо Махачкала</span>
+          </a>
+          <div class="match-score-block">
+            <div class="match-score match-score-upcoming">- : -</div>
+            
+          </div>
+          <a class="match-team away" href="../index.html?team=%D0%90%D0%BA%D1%80%D0%BE%D0%BD">
+            <span class="team-name">Акрон</span>
+            <span class="team-logo"><img src="../logo/akron.svg" alt="Акрон"></span>
+          </a>
+        </div>
+
+        <div class="match-form">
+          <div class="match-form-side match-form-home"><span class="form-row"><a class="form-sq form-l" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-рубин-динамо-махачкала" title="30.08.26 Рубин — Динамо Махачкала 3:1">П</a><a class="form-sq form-w" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-динамо-махачкала-родина" title="06.09.26 Динамо Махачкала — Родина 2:0">В</a><a class="form-sq form-l" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-ахмат-динамо-махачкала" title="13.09.26 Ахмат — Динамо Махачкала 3:2">П</a><a class="form-sq form-l" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-динамо-махачкала-цска" title="17.09.26 Динамо Махачкала — ЦСКА 1:3">П</a><a class="form-sq form-l" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-оренбург-динамо-махачкала" title="10.10.26 Оренбург — Динамо Махачкала 4:0">П</a></span></div>
+          <div class="match-form-side match-form-away"><span class="form-row"><a class="form-sq form-d" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-28-авг-акрон-цска" title="28.08.26 Акрон — ЦСКА 2:2">Н</a><a class="form-sq form-d" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-оренбург-акрон" title="06.09.26 Оренбург — Акрон 2:2">Н</a><a class="form-sq form-d" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-краснодар-акрон" title="13.09.26 Краснодар — Акрон 1:1">Н</a><a class="form-sq form-w" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-акрон-ахмат" title="17.09.26 Акрон — Ахмат 2:0">В</a><a class="form-sq form-l" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-09-окт-ростов-акрон" title="09.10.26 Ростов — Акрон 1:0">П</a></span></div>
+        </div>
+
+        <div class="match-bottom">
+          <div class="quality-row" data-match-start="2026-10-17T16:30:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_35e21c6f22f58a2e4ffc4cb13e5d1575/17_1036019/1080p50fps/5fb0e6a0dd42e160acd258a2c4fcc439/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_35e21c6f22f58a2e4ffc4cb13e5d1575/17_1036019/720/5fb0e6a0dd42e160acd258a2c4fcc439/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_35e21c6f22f58a2e4ffc4cb13e5d1575/17_1036019/480/5fb0e6a0dd42e160acd258a2c4fcc439/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_35e21c6f22f58a2e4ffc4cb13e5d1575/17_1036019/360/5fb0e6a0dd42e160acd258a2c4fcc439/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
+          <div class="quality-timer" data-match-start="2026-10-17T16:30:00+03:00" ></div>
+          <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Анжи Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Махачкала</span></div>
+        </div>
+      </div>
+<div class="match" id="match-17-окт-локомотив-краснодар" data-teams="локомотив краснодар">
+        <div class="match-top">
+          <div class="match-when">
+            <span class="match-day">17</span>
+            <span class="match-month">окт</span>
+            <span class="match-dot">·</span>
+            <span class="match-time">19:30</span>
+          </div>
+          <div class="match-tags">
+            <span class="tag tag-tour">11-ый тур</span>
+            <a class="tag tag-4k" href="../index.html?filter=4k">4K UHD</a>
+          </div>
+        </div>
+
+        <div class="match-main">
+          <a class="match-team home" href="../index.html?team=%D0%9B%D0%BE%D0%BA%D0%BE%D0%BC%D0%BE%D1%82%D0%B8%D0%B2">
+            <span class="team-logo"><img src="../logo/lokomotiv.svg" alt="Локомотив"></span>
+            <span class="team-name">Локомотив</span>
+          </a>
+          <div class="match-score-block">
+            <div class="match-score match-score-upcoming">- : -</div>
+            
+          </div>
+          <a class="match-team away" href="../index.html?team=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80">
+            <span class="team-name">Краснодар</span>
+            <span class="team-logo"><img src="../logo/krasnodar.svg" alt="Краснодар"></span>
+          </a>
+        </div>
+
+        <div class="match-form">
+          <div class="match-form-side match-form-home"><span class="form-row"><a class="form-sq form-l" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-локомотив-динамо-москва" title="29.08.26 Локомотив — Динамо Москва 0:1">П</a><a class="form-sq form-w" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-балтика-локомотив" title="06.09.26 Балтика — Локомотив 0:1">В</a><a class="form-sq form-l" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-зенит-локомотив" title="12.09.26 Зенит — Локомотив 2:1">П</a><a class="form-sq form-d" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-локомотив-крылья-советов" title="16.09.26 Локомотив — Крылья Советов 1:1">Н</a><a class="form-sq form-w" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-факел-локомотив" title="10.10.26 Факел — Локомотив 0:5">В</a></span></div>
+          <div class="match-form-side match-form-away"><span class="form-row"><a class="form-sq form-w" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-краснодар-ростов" title="29.08.26 Краснодар — Ростов 1:0">В</a><a class="form-sq form-d" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-крылья-советов-краснодар" title="05.09.26 Крылья Советов — Краснодар 2:2">Н</a><a class="form-sq form-d" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-краснодар-акрон" title="13.09.26 Краснодар — Акрон 1:1">Н</a><a class="form-sq form-d" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-оренбург-краснодар" title="17.09.26 Оренбург — Краснодар 0:0">Н</a><a class="form-sq form-l" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-краснодар-зенит" title="10.10.26 Краснодар — Зенит 2:3">П</a></span></div>
+        </div>
+
+        <div class="match-bottom">
+          <div class="quality-row" data-match-start="2026-10-17T19:30:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2784963e00a13c51fb0cbf971c4608e9/17_1034811/2160/7012ed53a9f91f992639fa756543f463/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">2160</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2784963e00a13c51fb0cbf971c4608e9/17_1034811/1080/7012ed53a9f91f992639fa756543f463/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2784963e00a13c51fb0cbf971c4608e9/17_1034811/720/7012ed53a9f91f992639fa756543f463/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2784963e00a13c51fb0cbf971c4608e9/17_1034811/480/7012ed53a9f91f992639fa756543f463/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2784963e00a13c51fb0cbf971c4608e9/17_1034811/360/7012ed53a9f91f992639fa756543f463/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
+          <div class="quality-timer" data-match-start="2026-10-17T19:30:00+03:00" ></div>
+          <div class="match-meta"><span class="meta-item" title="Стадион">🏟 РЖД Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Москва</span></div>
+        </div>
+      </div>
+<div class="day-head"><span class="day-head-text"><span>18 окт</span><span class="day-head-rest"> · воскресенье</span></span></div><div class="match" id="match-18-окт-зенит-ахмат" data-teams="зенит ахмат">
+        <div class="match-top">
+          <div class="match-when">
+            <span class="match-day">18</span>
+            <span class="match-month">окт</span>
+            <span class="match-dot">·</span>
+            <span class="match-time">14:00</span>
+          </div>
+          <div class="match-tags">
+            <span class="tag tag-tour">11-ый тур</span>
+            <a class="tag tag-4k" href="../index.html?filter=4k">4K UHD</a>
+          </div>
+        </div>
+
+        <div class="match-main">
+          <a class="match-team home" href="../index.html?team=%D0%97%D0%B5%D0%BD%D0%B8%D1%82">
+            <span class="team-logo"><img src="../logo/zenit.svg" alt="Зенит"></span>
+            <span class="team-name">Зенит</span>
+          </a>
+          <div class="match-score-block">
+            <div class="match-score match-score-upcoming">- : -</div>
+            
+          </div>
+          <a class="match-team away" href="../index.html?team=%D0%90%D1%85%D0%BC%D0%B0%D1%82">
+            <span class="team-name">Ахмат</span>
+            <span class="team-logo"><img src="../logo/akhmat.svg" alt="Ахмат"></span>
+          </a>
+        </div>
+
+        <div class="match-form">
+          <div class="match-form-side match-form-home"><span class="form-row"><a class="form-sq form-w" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-факел-зенит" title="29.08.26 Факел — Зенит 0:1">В</a><a class="form-sq form-l" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-зенит-цска" title="05.09.26 Зенит — ЦСКА 1:2">П</a><a class="form-sq form-w" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-зенит-локомотив" title="12.09.26 Зенит — Локомотив 2:1">В</a><a class="form-sq form-w" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-балтика-зенит" title="16.09.26 Балтика — Зенит 2:3">В</a><a class="form-sq form-w" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-краснодар-зенит" title="10.10.26 Краснодар — Зенит 2:3">В</a></span></div>
+          <div class="match-form-side match-form-away"><span class="form-row"><a class="form-sq form-d" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-ахмат-крылья-советов" title="29.08.26 Ахмат — Крылья Советов 3:3">Н</a><a class="form-sq form-d" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-07-сен-рубин-ахмат" title="07.09.26 Рубин — Ахмат 1:1">Н</a><a class="form-sq form-w" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-ахмат-динамо-махачкала" title="13.09.26 Ахмат — Динамо Махачкала 3:2">В</a><a class="form-sq form-l" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-акрон-ахмат" title="17.09.26 Акрон — Ахмат 2:0">П</a><a class="form-sq form-d" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-ахмат-балтика" title="11.10.26 Ахмат — Балтика 0:0">Н</a></span></div>
+        </div>
+
+        <div class="match-bottom">
+          <div class="quality-row" data-match-start="2026-10-18T14:00:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_b5b0fe2e1092e1acbe744c34e7113d2f/17_1035349/2160/a82de3170d6cff53ec67186423be325d/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">2160</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_b5b0fe2e1092e1acbe744c34e7113d2f/17_1035349/1080/a82de3170d6cff53ec67186423be325d/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_b5b0fe2e1092e1acbe744c34e7113d2f/17_1035349/720/a82de3170d6cff53ec67186423be325d/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_b5b0fe2e1092e1acbe744c34e7113d2f/17_1035349/480/a82de3170d6cff53ec67186423be325d/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_b5b0fe2e1092e1acbe744c34e7113d2f/17_1035349/360/a82de3170d6cff53ec67186423be325d/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
+          <div class="quality-timer" data-match-start="2026-10-18T14:00:00+03:00" ></div>
+          <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Газпром Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Санкт-Петербург</span></div>
+        </div>
+      </div>
+<div class="match" id="match-18-окт-динамо-москва-цска" data-teams="динамо москва цска">
+        <div class="match-top">
+          <div class="match-when">
+            <span class="match-day">18</span>
+            <span class="match-month">окт</span>
+            <span class="match-dot">·</span>
+            <span class="match-time">16:15</span>
+          </div>
+          <div class="match-tags">
+            <span class="tag tag-tour">11-ый тур</span>
+            
+          </div>
+        </div>
+
+        <div class="match-main">
+          <a class="match-team home" href="../index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0">
+            <span class="team-logo"><img src="../logo/dynamomoscov.svg" alt="Динамо Москва"></span>
+            <span class="team-name">Динамо Москва</span>
+          </a>
+          <div class="match-score-block">
+            <div class="match-score match-score-upcoming">- : -</div>
+            
+          </div>
+          <a class="match-team away" href="../index.html?team=%D0%A6%D0%A1%D0%9A%D0%90">
+            <span class="team-name">ЦСКА</span>
+            <span class="team-logo"><img src="../logo/cska.svg" alt="ЦСКА"></span>
+          </a>
+        </div>
+
+        <div class="match-form">
+          <div class="match-form-side match-form-home"><span class="form-row"><a class="form-sq form-w" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-локомотив-динамо-москва" title="29.08.26 Локомотив — Динамо Москва 0:1">В</a><a class="form-sq form-w" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-динамо-москва-спартак" title="06.09.26 Динамо Москва — Спартак 2:1">В</a><a class="form-sq form-w" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-динамо-москва-оренбург" title="12.09.26 Динамо Москва — Оренбург 1:0">В</a><a class="form-sq form-w" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-ростов-динамо-москва" title="17.09.26 Ростов — Динамо Москва 0:3">В</a><a class="form-sq form-w" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-рубин-динамо-москва" title="11.10.26 Рубин — Динамо Москва 0:1">В</a></span></div>
+          <div class="match-form-side match-form-away"><span class="form-row"><a class="form-sq form-d" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-28-авг-акрон-цска" title="28.08.26 Акрон — ЦСКА 2:2">Н</a><a class="form-sq form-w" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-зенит-цска" title="05.09.26 Зенит — ЦСКА 1:2">В</a><a class="form-sq form-d" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-цска-рубин" title="12.09.26 ЦСКА — Рубин 1:1">Н</a><a class="form-sq form-w" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-динамо-махачкала-цска" title="17.09.26 Динамо Махачкала — ЦСКА 1:3">В</a><a class="form-sq form-w" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-цска-родина" title="11.10.26 ЦСКА — Родина 3:0">В</a></span></div>
+        </div>
+
+        <div class="match-bottom">
+          <div class="quality-row" data-match-start="2026-10-18T16:15:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_05af290228a59f5562edc549549bc86d/17_1034813/1080p50fps/502f585a35ebaaecbcedb73510a2ebba/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_05af290228a59f5562edc549549bc86d/17_1034813/720/502f585a35ebaaecbcedb73510a2ebba/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_05af290228a59f5562edc549549bc86d/17_1034813/480/502f585a35ebaaecbcedb73510a2ebba/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_05af290228a59f5562edc549549bc86d/17_1034813/360/502f585a35ebaaecbcedb73510a2ebba/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
+          <div class="quality-timer" data-match-start="2026-10-18T16:15:00+03:00" ></div>
+          <div class="match-meta"><span class="meta-item" title="Стадион">🏟 ВТБ Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Москва</span></div>
+        </div>
+      </div>
+<div class="match" id="match-18-окт-спартак-рубин" data-teams="спартак рубин">
+        <div class="match-top">
+          <div class="match-when">
+            <span class="match-day">18</span>
+            <span class="match-month">окт</span>
+            <span class="match-dot">·</span>
+            <span class="match-time">18:30</span>
+          </div>
+          <div class="match-tags">
+            <span class="tag tag-tour">11-ый тур</span>
+            
+          </div>
+        </div>
+
+        <div class="match-main">
+          <a class="match-team home" href="../index.html?team=%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA">
+            <span class="team-logo"><img src="../logo/spartak.svg" alt="Спартак"></span>
+            <span class="team-name">Спартак</span>
+          </a>
+          <div class="match-score-block">
+            <div class="match-score match-score-upcoming">- : -</div>
+            
+          </div>
+          <a class="match-team away" href="../index.html?team=%D0%A0%D1%83%D0%B1%D0%B8%D0%BD">
+            <span class="team-name">Рубин</span>
+            <span class="team-logo"><img src="../logo/rubin.svg" alt="Рубин"></span>
+          </a>
+        </div>
+
+        <div class="match-form">
+          <div class="match-form-side match-form-home"><span class="form-row"><a class="form-sq form-d" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-спартак-оренбург" title="30.08.26 Спартак — Оренбург 1:1">Н</a><a class="form-sq form-l" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-динамо-москва-спартак" title="06.09.26 Динамо Москва — Спартак 2:1">П</a><a class="form-sq form-w" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-спартак-ростов" title="13.09.26 Спартак — Ростов 3:0">В</a><a class="form-sq form-w" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-спартак-факел" title="16.09.26 Спартак — Факел 1:0">В</a><a class="form-sq form-d" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-крылья-советов-спартак" title="10.10.26 Крылья Советов — Спартак 1:1">Н</a></span></div>
+          <div class="match-form-side match-form-away"><span class="form-row"><a class="form-sq form-w" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-рубин-динамо-махачкала" title="30.08.26 Рубин — Динамо Махачкала 3:1">В</a><a class="form-sq form-d" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-07-сен-рубин-ахмат" title="07.09.26 Рубин — Ахмат 1:1">Н</a><a class="form-sq form-d" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-цска-рубин" title="12.09.26 ЦСКА — Рубин 1:1">Н</a><a class="form-sq form-d" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-родина-рубин" title="16.09.26 Родина — Рубин 1:1">Н</a><a class="form-sq form-l" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-рубин-динамо-москва" title="11.10.26 Рубин — Динамо Москва 0:1">П</a></span></div>
+        </div>
+
+        <div class="match-bottom">
+          <div class="quality-row" data-match-start="2026-10-18T18:30:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_59694f3b44062b0ceb34f35543863594/17_1036112/1080p50fps/83942c5c1205dec24a860d72db255c4f/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_59694f3b44062b0ceb34f35543863594/17_1036112/720/83942c5c1205dec24a860d72db255c4f/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_59694f3b44062b0ceb34f35543863594/17_1036112/480/83942c5c1205dec24a860d72db255c4f/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_59694f3b44062b0ceb34f35543863594/17_1036112/360/83942c5c1205dec24a860d72db255c4f/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
+          <div class="quality-timer" data-match-start="2026-10-18T18:30:00+03:00" ></div>
+          <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Лукойл Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Москва</span></div>
+        </div>
+      </div>
+<div class="match" id="match-18-окт-балтика-ростов" data-teams="балтика ростов">
+        <div class="match-top">
+          <div class="match-when">
+            <span class="match-day">18</span>
+            <span class="match-month">окт</span>
+            <span class="match-dot">·</span>
+            <span class="match-time">20:45</span>
+          </div>
+          <div class="match-tags">
+            <span class="tag tag-tour">11-ый тур</span>
+            
+          </div>
+        </div>
+
+        <div class="match-main">
+          <a class="match-team home" href="../index.html?team=%D0%91%D0%B0%D0%BB%D1%82%D0%B8%D0%BA%D0%B0">
+            <span class="team-logo"><img src="../logo/baltika.svg" alt="Балтика"></span>
+            <span class="team-name">Балтика</span>
+          </a>
+          <div class="match-score-block">
+            <div class="match-score match-score-upcoming">- : -</div>
+            
+          </div>
+          <a class="match-team away" href="../index.html?team=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2">
+            <span class="team-name">Ростов</span>
+            <span class="team-logo"><img src="../logo/rostov.svg" alt="Ростов"></span>
+          </a>
+        </div>
+
+        <div class="match-form">
+          <div class="match-form-side match-form-home"><span class="form-row"><a class="form-sq form-w" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-родина-балтика" title="30.08.26 Родина — Балтика 0:3">В</a><a class="form-sq form-l" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-балтика-локомотив" title="06.09.26 Балтика — Локомотив 0:1">П</a><a class="form-sq form-d" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-факел-балтика" title="12.09.26 Факел — Балтика 2:2">Н</a><a class="form-sq form-l" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-балтика-зенит" title="16.09.26 Балтика — Зенит 2:3">П</a><a class="form-sq form-d" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-ахмат-балтика" title="11.10.26 Ахмат — Балтика 0:0">Н</a></span></div>
+          <div class="match-form-side match-form-away"><span class="form-row"><a class="form-sq form-l" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-29-авг-краснодар-ростов" title="29.08.26 Краснодар — Ростов 1:0">П</a><a class="form-sq form-w" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-05-сен-ростов-факел" title="05.09.26 Ростов — Факел 3:1">В</a><a class="form-sq form-l" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-13-сен-спартак-ростов" title="13.09.26 Спартак — Ростов 3:0">П</a><a class="form-sq form-l" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-ростов-динамо-москва" title="17.09.26 Ростов — Динамо Москва 0:3">П</a><a class="form-sq form-w" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-09-окт-ростов-акрон" title="09.10.26 Ростов — Акрон 1:0">В</a></span></div>
+        </div>
+
+        <div class="match-bottom">
+          <div class="quality-row" data-match-start="2026-10-18T20:45:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_407a81cfb23188628cdcbb71d84f58c3/17_1036118/1080p50fps/4d08e523ed241fe2c82361fa2cc91f00/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_407a81cfb23188628cdcbb71d84f58c3/17_1036118/720/4d08e523ed241fe2c82361fa2cc91f00/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_407a81cfb23188628cdcbb71d84f58c3/17_1036118/480/4d08e523ed241fe2c82361fa2cc91f00/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_407a81cfb23188628cdcbb71d84f58c3/17_1036118/360/4d08e523ed241fe2c82361fa2cc91f00/4947486302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=618d495e1daabc391adfc4dcc83e508e" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
+          <div class="quality-timer" data-match-start="2026-10-18T20:45:00+03:00" ></div>
+          <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Ростех Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Калининград</span></div>
+        </div>
+      </div>
+<div class="day-head"><span class="day-head-text"><span>19 окт</span><span class="day-head-rest"> · понедельник</span></span></div><div class="match" id="match-19-окт-родина-оренбург" data-teams="родина оренбург">
+        <div class="match-top">
+          <div class="match-when">
+            <span class="match-day">19</span>
+            <span class="match-month">окт</span>
+            <span class="match-dot">·</span>
+            <span class="match-time">19:30</span>
+          </div>
+          <div class="match-tags">
+            <span class="tag tag-tour">11-ый тур</span>
+            
+          </div>
+        </div>
+
+        <div class="match-main">
+          <a class="match-team home" href="../index.html?team=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0">
+            <span class="team-logo"><img src="../logo/rodina.svg" alt="Родина"></span>
+            <span class="team-name">Родина</span>
+          </a>
+          <div class="match-score-block">
+            <div class="match-score match-score-upcoming">- : -</div>
+            
+          </div>
+          <a class="match-team away" href="../index.html?team=%D0%9E%D1%80%D0%B5%D0%BD%D0%B1%D1%83%D1%80%D0%B3">
+            <span class="team-name">Оренбург</span>
+            <span class="team-logo"><img src="../logo/orenburg.svg" alt="Оренбург"></span>
+          </a>
+        </div>
+
+        <div class="match-form">
+          <div class="match-form-side match-form-home"><span class="form-row"><a class="form-sq form-l" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-родина-балтика" title="30.08.26 Родина — Балтика 0:3">П</a><a class="form-sq form-l" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-динамо-махачкала-родина" title="06.09.26 Динамо Махачкала — Родина 2:0">П</a><a class="form-sq form-l" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-11-сен-крылья-советов-родина" title="11.09.26 Крылья Советов — Родина 2:1">П</a><a class="form-sq form-d" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-16-сен-родина-рубин" title="16.09.26 Родина — Рубин 1:1">Н</a><a class="form-sq form-l" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-11-окт-цска-родина" title="11.10.26 ЦСКА — Родина 3:0">П</a></span></div>
+          <div class="match-form-side match-form-away"><span class="form-row"><a class="form-sq form-d" href="../tours/6-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-30-авг-спартак-оренбург" title="30.08.26 Спартак — Оренбург 1:1">Н</a><a class="form-sq form-d" href="../tours/7-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-06-сен-оренбург-акрон" title="06.09.26 Оренбург — Акрон 2:2">Н</a><a class="form-sq form-l" href="../tours/8-%D0%BE%D0%B9-%D1%82%D1%83%D1%80.html#match-12-сен-динамо-москва-оренбург" title="12.09.26 Динамо Москва — Оренбург 1:0">П</a><a class="form-sq form-d" href="../tours/9-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-17-сен-оренбург-краснодар" title="17.09.26 Оренбург — Краснодар 0:0">Н</a><a class="form-sq form-w" href="../tours/10-%D1%8B%D0%B9-%D1%82%D1%83%D1%80.html#match-10-окт-оренбург-динамо-махачкала" title="10.10.26 Оренбург — Динамо Махачкала 4:0">В</a></span></div>
+        </div>
+
+        <div class="match-bottom">
+          <div class="quality-row" data-match-start="2026-10-19T19:30:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_1d68c3ad117addb1f841adbc3c73228e/17_41f83e48ab4a92e5afd57c6ab57b2584/2163e78f566315c306b904493b480920/4832671965.m3u8?type_id=&sr=26&width=640&height=360&disable_share=1&live=15&ol=1&s=151e51315d61473170f4687123b9e331" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_1d68c3ad117addb1f841adbc3c73228e/17_41f83e48ab4a92e5afd57c6ab57b2584/2163e78f566315c306b904493b480920/4832671965.m3u8?type_id=&sr=26&width=640&height=360&disable_share=1&live=15&ol=1&s=151e51315d61473170f4687123b9e331" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_1d68c3ad117addb1f841adbc3c73228e/17_41f83e48ab4a92e5afd57c6ab57b2584/2163e78f566315c306b904493b480920/4832671965.m3u8?type_id=&sr=26&width=640&height=360&disable_share=1&live=15&ol=1&s=151e51315d61473170f4687123b9e331" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_1d68c3ad117addb1f841adbc3c73228e/17_41f83e48ab4a92e5afd57c6ab57b2584/2163e78f566315c306b904493b480920/4832671965.m3u8?type_id=&sr=26&width=640&height=360&disable_share=1&live=15&ol=1&s=151e51315d61473170f4687123b9e331" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
+          <div class="quality-timer" data-match-start="2026-10-19T19:30:00+03:00" ></div>
+          <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Арена Химки</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Химки</span></div>
+        </div>
+      </div>
+</div>
+        </div>
+      </div>
+      <aside class="main-layout-side">
+    <div class="table-card">
+      <div class="table-header">
+        <div class="table-header-pos">#</div>
+        <div class="table-header-club">Клуб</div>
+        <div class="table-stat table-stat-i">И</div>
+        <div class="table-stat table-stat-w">В</div>
+        <div class="table-stat table-stat-d">Н</div>
+        <div class="table-stat table-stat-l">П</div>
+        <div class="table-header-pts">О</div>
+      </div>
+      <div class="table-body"><a class="table-row" href="../index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0">
+          <div class="table-pos table-pos-gold">1</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/dynamomoscov.svg" alt="Динамо Москва"></span>
+            <span class="table-club-name">Динамо Москва</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">7</div>
+          <div class="table-stat">1</div>
+          <div class="table-stat">2</div>
+          <div class="table-pts">22</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%A6%D0%A1%D0%9A%D0%90">
+          <div class="table-pos table-pos-silver">2</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/cska.svg" alt="ЦСКА"></span>
+            <span class="table-club-name">ЦСКА</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">6</div>
+          <div class="table-stat">4</div>
+          <div class="table-stat">0</div>
+          <div class="table-pts">22</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%97%D0%B5%D0%BD%D0%B8%D1%82">
+          <div class="table-pos table-pos-bronze">3</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/zenit.svg" alt="Зенит"></span>
+            <span class="table-club-name">Зенит</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">7</div>
+          <div class="table-stat">0</div>
+          <div class="table-stat">3</div>
+          <div class="table-pts">21</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80">
+          <div class="table-pos ">4</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/krasnodar.svg" alt="Краснодар"></span>
+            <span class="table-club-name">Краснодар</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">6</div>
+          <div class="table-stat">3</div>
+          <div class="table-stat">1</div>
+          <div class="table-pts">21</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA">
+          <div class="table-pos ">5</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/spartak.svg" alt="Спартак"></span>
+            <span class="table-club-name">Спартак</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">6</div>
+          <div class="table-stat">2</div>
+          <div class="table-stat">2</div>
+          <div class="table-pts">20</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%A0%D1%83%D0%B1%D0%B8%D0%BD">
+          <div class="table-pos ">6</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/rubin.svg" alt="Рубин"></span>
+            <span class="table-club-name">Рубин</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">2</div>
+          <div class="table-stat">6</div>
+          <div class="table-stat">2</div>
+          <div class="table-pts">12</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%91%D0%B0%D0%BB%D1%82%D0%B8%D0%BA%D0%B0">
+          <div class="table-pos ">7</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/baltika.svg" alt="Балтика"></span>
+            <span class="table-club-name">Балтика</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">3</div>
+          <div class="table-stat">3</div>
+          <div class="table-stat">4</div>
+          <div class="table-pts">12</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%9E%D1%80%D0%B5%D0%BD%D0%B1%D1%83%D1%80%D0%B3">
+          <div class="table-pos ">8</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/orenburg.svg" alt="Оренбург"></span>
+            <span class="table-club-name">Оренбург</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">2</div>
+          <div class="table-stat">6</div>
+          <div class="table-stat">2</div>
+          <div class="table-pts">12</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%20%D0%9C%D0%B0%D1%85%D0%B0%D1%87%D0%BA%D0%B0%D0%BB%D0%B0">
+          <div class="table-pos ">9</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/dynamomaxachkala.svg" alt="Динамо Махачкала"></span>
+            <span class="table-club-name">Динамо Махачкала</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">4</div>
+          <div class="table-stat">0</div>
+          <div class="table-stat">6</div>
+          <div class="table-pts">12</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%9A%D1%80%D1%8B%D0%BB%D1%8C%D1%8F%20%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2">
+          <div class="table-pos ">10</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/krylyasovetov.svg" alt="Крылья Советов"></span>
+            <span class="table-club-name">Крылья Советов</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">2</div>
+          <div class="table-stat">6</div>
+          <div class="table-stat">2</div>
+          <div class="table-pts">12</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%90%D1%85%D0%BC%D0%B0%D1%82">
+          <div class="table-pos ">11</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/akhmat.svg" alt="Ахмат"></span>
+            <span class="table-club-name">Ахмат</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">2</div>
+          <div class="table-stat">5</div>
+          <div class="table-stat">3</div>
+          <div class="table-pts">11</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2">
+          <div class="table-pos ">12</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/rostov.svg" alt="Ростов"></span>
+            <span class="table-club-name">Ростов</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">3</div>
+          <div class="table-stat">2</div>
+          <div class="table-stat">5</div>
+          <div class="table-pts">11</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%9B%D0%BE%D0%BA%D0%BE%D0%BC%D0%BE%D1%82%D0%B8%D0%B2">
+          <div class="table-pos table-pos-playoff">13</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/lokomotiv.svg" alt="Локомотив"></span>
+            <span class="table-club-name">Локомотив</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">2</div>
+          <div class="table-stat">4</div>
+          <div class="table-stat">4</div>
+          <div class="table-pts">10</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%90%D0%BA%D1%80%D0%BE%D0%BD">
+          <div class="table-pos table-pos-playoff">14</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/akron.svg" alt="Акрон"></span>
+            <span class="table-club-name">Акрон</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">1</div>
+          <div class="table-stat">5</div>
+          <div class="table-stat">4</div>
+          <div class="table-pts">8</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0">
+          <div class="table-pos table-pos-relegation">15</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/rodina.svg" alt="Родина"></span>
+            <span class="table-club-name">Родина</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">1</div>
+          <div class="table-stat">2</div>
+          <div class="table-stat">7</div>
+          <div class="table-pts">5</div>
+        </a>
+<a class="table-row" href="../index.html?team=%D0%A4%D0%B0%D0%BA%D0%B5%D0%BB">
+          <div class="table-pos table-pos-relegation">16</div>
+          <div class="table-club">
+            <span class="table-club-logo"><img src="../logo/fakel.svg" alt="Факел"></span>
+            <span class="table-club-name">Факел</span>
+          </div>
+          <div class="table-stat">10</div>
+          <div class="table-stat">0</div>
+          <div class="table-stat">3</div>
+          <div class="table-stat">7</div>
+          <div class="table-pts">3</div>
+        </a>
+</div>
+      <div class="table-legend">
+        <span><i class="table-legend-playoff"></i>Стыковые матчи</span>
+        <span><i class="table-legend-relegation"></i>Зона вылета</span>
+      </div>
+    </div>
+</aside>
+    </div>
+
+
+    <div class="disclaimer">
+      <div class="disclaimer-icon">⚠️</div>
+      <div class="disclaimer-text">
+        Все ссылки на и данные результатов матчей берутся из <b>открытых источников</b>. Администрация сайта не несёт ответственности за их содержание, доступность и законность использования.
+      </div>
+    </div>
+
+    <div class="footer">
+      Обновлено <span class="neon">16.10.2026 14:55 МСК</span><br>
+      Данные обновляются автоматически из открытых источников
+    </div>
+
+    <button class="scroll-top" id="scrollTop" aria-label="Наверх">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+    </button>
+  <script>
+
+    (function() {
+      const toggle = document.getElementById('themeToggle');
+      if (!toggle) return;
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light');
+        toggle.textContent = '☀️';
+      } else {
+        toggle.textContent = '🌙';
+      }
+      toggle.addEventListener('click', function() {
+        document.body.classList.toggle('light');
+        const isLight = document.body.classList.contains('light');
+        toggle.textContent = isLight ? '☀️' : '🌙';
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+    })();
+
+    (function() {
+      const searchBox = document.getElementById('searchBox');
+      const searchToggle = document.getElementById('searchToggle');
+      const searchInput = document.getElementById('searchInput');
+
+      function closeSearch() {
+        if (!searchBox.classList.contains('expanded')) return;
+        if (searchBox.classList.contains('closing')) return;
+        searchBox.classList.add('closing');
+        searchBox.classList.remove('expanded');
+        setTimeout(function() { searchBox.classList.remove('closing'); }, 300);
+      }
+
+      function openSearch() {
+        searchBox.classList.remove('closing');
+        searchBox.classList.add('expanded');
+        setTimeout(function() { searchInput.focus(); }, 100);
+      }
+
+      if (searchToggle && searchBox && searchInput) {
+        searchToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (searchBox.classList.contains('expanded') && searchInput.value.trim() !== '') {
+            searchInput.value = '';
+            searchBox.classList.remove('has-logo');
+            searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+            closeSearch();
+            return;
+          }
+          if (searchBox.classList.contains('expanded')) {
+            closeSearch();
+          } else {
+            openSearch();
+          }
+        });
+
+        document.addEventListener('click', function(e) {
+          if (!e.target.closest('.topbar-search') && !e.target.closest('.search-toggle')) {
+            if (searchInput.value.trim() === '') {
+              closeSearch();
+            }
+          }
+        });
+      }
+    })();
+
+    (function() {
+      const input = document.getElementById('searchInput');
+      const clearBtn = document.getElementById('searchClear');
+      if (!input) return;
+
+      const searchBox = document.getElementById('searchBox');
+      const searchBoxLogo = document.getElementById('searchBoxLogo');
+      const suggestBox = document.getElementById('searchSuggestions');
+      const allTeams = [{"name": "Акрон", "logo": "../logo/akron.svg"}, {"name": "Ахмат", "logo": "../logo/akhmat.svg"}, {"name": "Балтика", "logo": "../logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "../logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "../logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "../logo/zenit.svg"}, {"name": "Краснодар", "logo": "../logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "../logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "../logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "../logo/orenburg.svg"}, {"name": "Родина", "logo": "../logo/rodina.svg"}, {"name": "Ростов", "logo": "../logo/rostov.svg"}, {"name": "Рубин", "logo": "../logo/rubin.svg"}, {"name": "Спартак", "logo": "../logo/spartak.svg"}, {"name": "Факел", "logo": "../logo/fakel.svg"}, {"name": "ЦСКА", "logo": "../logo/cska.svg"}];
+
+      function setSearchLogo(teamName) {
+        if (!searchBox || !searchBoxLogo) return;
+        const team = allTeams.find(function(t) {
+          return t.name.toLowerCase() === teamName.toLowerCase();
+        });
+        if (team) {
+          searchBoxLogo.src = team.logo;
+          searchBoxLogo.style.display = 'block';
+          searchBox.classList.add('has-logo');
+        } else {
+          searchBoxLogo.src = '';
+          searchBoxLogo.style.display = 'none';
+          searchBox.classList.remove('has-logo');
+        }
+      }
+
+      function highlightTableRow(teamName) {
+        const rows = document.querySelectorAll('.table-row');
+        rows.forEach(function(row) {
+          row.classList.remove('table-row-active');
+          if (!teamName) return;
+          const nameEl = row.querySelector('.table-club-name');
+          if (!nameEl) return;
+          if (nameEl.textContent.trim().toLowerCase() === teamName.toLowerCase()) {
+            row.classList.add('table-row-active');
+          }
+        });
+      }
+
+      function highlightMatchTeams(dataTeams) {
+        const rows = document.querySelectorAll('.table-row');
+        rows.forEach(function(row) {
+          row.classList.remove('table-row-match');
+          if (!dataTeams) return;
+          const nameEl = row.querySelector('.table-club-name');
+          if (!nameEl) return;
+          const rowTeam = nameEl.textContent.trim().toLowerCase();
+          if (rowTeam && dataTeams.indexOf(rowTeam) !== -1) {
+            row.classList.add('table-row-match');
+          }
+        });
+      }
+
+      function highlightMatchCard(cardId) {
+        const allCards = document.querySelectorAll('.match');
+        allCards.forEach(function(c) { c.classList.remove('match-focused'); });
+        if (!cardId) return;
+        const el = document.getElementById(cardId);
+        if (el) el.classList.add('match-focused');
+      }
+
+      function scrollCardToCenter(cardId, scrollIfNeeded, behavior) {
+        if (!cardId) return;
+        const el = document.getElementById(cardId);
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        if (scrollIfNeeded) {
+          const topOk = rect.top >= vh * 0.10;
+          const bottomOk = rect.bottom <= vh * 0.90;
+          if (topOk && bottomOk) return;
+        }
+        const targetY = rect.top + window.pageYOffset - (vh / 2) + (rect.height / 2);
+        const finalY = Math.max(0, targetY);
+        if (behavior === 'smooth') {
+          const startY = window.scrollY;
+          const startTime = performance.now();
+          const DURATION = 400;
+          function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+          function step(now) {
+            const t = Math.min(1, (now - startTime) / DURATION);
+            window.scrollTo(0, startY + (finalY - startY) * easeOutCubic(t));
+            if (t < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        } else {
+          window.scrollTo(0, finalY);
+        }
+      }
+      function applyMatchFocus(cardId, scrollMode) {
+        const inputEl = document.getElementById('searchInput');
+        const isSearchActive = inputEl && inputEl.value.trim() !== '';
+        if (isSearchActive) {
+          highlightMatchCard(null);
+          highlightMatchTeams(null);
+          return;
+        }
+        if (!cardId) {
+          highlightMatchCard(null);
+          highlightMatchTeams(null);
+          return;
+        }
+        const el = document.getElementById(cardId);
+        if (!el) {
+          highlightMatchCard(null);
+          highlightMatchTeams(null);
+          return;
+        }
+        highlightMatchCard(cardId);
+        const dataTeams = el.getAttribute('data-teams') || '';
+        highlightMatchTeams(dataTeams);
+        if (scrollMode === 'always') {
+          scrollCardToCenter(cardId, false, 'auto');
+        } else if (scrollMode === 'smart') {
+          scrollCardToCenter(cardId, true, 'smooth');
+        }
+      }
+
+      function highlightFromHash(scrollMode) {
+        const mode = scrollMode || 'always';
+        const hash = window.location.hash;
+        if (!hash || hash.indexOf('#match-') !== 0) {
+          const inputEl = document.getElementById('searchInput');
+          const isSearchActive = inputEl && inputEl.value.trim() !== '';
+          if (!isSearchActive) {
+            highlightMatchCard(null);
+            highlightMatchTeams(null);
+          }
+          return;
+        }
+        const id = decodeURIComponent(hash.slice(1));
+        applyMatchFocus(id, mode);
+      }
+
+      let lastCardClickTs = 0;
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.replay-select')) return;
+        const card = e.target.closest('.match');
+        if (!card) {
+          const inputEl = document.getElementById('searchInput');
+          const isSearchActive = inputEl && inputEl.value.trim() !== '';
+          if (!isSearchActive) {
+            highlightMatchCard(null);
+            highlightMatchTeams(null);
+          }
+          return;
+        }
+        if (e.target.closest('a')) return;
+        if (e.target.closest('button')) return;
+        const inputEl = document.getElementById('searchInput');
+        const isSearchActive = inputEl && inputEl.value.trim() !== '';
+        if (isSearchActive) return;
+        const cardId = card.getAttribute('id') || '';
+        if (!cardId) return;
+
+        const now = Date.now();
+        const isRepeat = (now - lastCardClickTs) < 600 && card.classList.contains('match-focused');
+        lastCardClickTs = now;
+
+        highlightMatchCard(cardId);
+        const dataTeams = card.getAttribute('data-teams') || '';
+        highlightMatchTeams(dataTeams);
+
+        if (!isRepeat) {
+          scrollCardToCenter(cardId, true, 'smooth');
+        }
+
+        try {
+          const newHash = '#' + cardId;
+          if (window.location.hash !== newHash) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
+          }
+        } catch (err) { /* ignore */ }
+      });
+      window.__highlightFromHash = highlightFromHash;
+      window.__highlightMatchTeams = highlightMatchTeams;
+
+      function filter() {
+        const q = input.value.trim().toLowerCase();
+        clearBtn.style.display = q ? 'block' : 'none';
+        setSearchLogo(input.value.trim());
+
+        const words = q === '' ? [] : q.split(/\s+/).filter(Boolean);
+        const allMatches = document.querySelectorAll('.match');
+        let anyFound = false;
+
+        if (words.length > 0) {
+          allMatches.forEach(function(el) {
+            const teams = el.getAttribute('data-teams') || '';
+            const match = words.every(function(w) { return teams.includes(w); });
+            if (match) anyFound = true;
+          });
+        }
+
+        const effectivelyEmpty = (words.length === 0) || !anyFound;
+
+        allMatches.forEach(function(el) {
+          const isPast = el.classList.contains('past-match');
+          if (effectivelyEmpty) {
+            el.style.display = isPast ? 'none' : '';
+          } else {
+            const teams = el.getAttribute('data-teams') || '';
+            const match = words.every(function(w) { return teams.includes(w); });
+            el.style.display = match ? '' : 'none';
+          }
+        });
+
+        // Скрываем заголовки дней, под которыми не осталось видимых матчей
+        document.querySelectorAll('.day-head').forEach(function(head) {
+          let next = head.nextElementSibling;
+          let hasVisible = false;
+          while (next && !next.classList.contains('day-head')) {
+            if (next.classList.contains('match') && next.style.display !== 'none') {
+              hasVisible = true;
+              break;
+            }
+            next = next.nextElementSibling;
+          }
+          head.style.display = hasVisible ? '' : 'none';
+        });
+
+        const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
+        const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
+
+        const pastSection = document.getElementById('pastSection');
+        const currentSection = document.getElementById('currentSection');
+        const headerDefault = document.getElementById('currentHeaderDefault');
+        const headerSearch = document.getElementById('currentHeaderSearch');
+
+        const currentHeaderTeam = document.getElementById('currentHeaderTeam');
+        const pastHeaderTeam = document.getElementById('pastHeaderTeam');
+
+        const typed = input.value.trim();
+        const matchedTeam = allTeams.find(function(t) { return t.name.toLowerCase() === typed.toLowerCase(); });
+        const teamLabel = (q === '' || !matchedTeam) ? '' : ' · ' + matchedTeam.name;
+        if (currentHeaderTeam) currentHeaderTeam.textContent = teamLabel;
+        if (pastHeaderTeam) pastHeaderTeam.textContent = teamLabel;
+
+        highlightTableRow(matchedTeam ? matchedTeam.name : null);
+
+        // Подсветка команды внутри карточек матчей
+        document.querySelectorAll('.match').forEach(function(el) {
+          el.querySelectorAll('.match-team').forEach(function(t) {
+            t.classList.remove('match-team-hl');
+          });
+          if (!matchedTeam) return;
+          const names = el.querySelectorAll('.match-team .team-name');
+          names.forEach(function(n) {
+            if (n.textContent.trim().toLowerCase() === matchedTeam.name.toLowerCase()) {
+              n.closest('.match-team').classList.add('match-team-hl');
+            }
+          });
+        });
+
+        if (matchedTeam) {
+          if (typeof window.__highlightMatchTeams === 'function') window.__highlightMatchTeams(null);
+          document.querySelectorAll('.match-focused').forEach(function(el) { el.classList.remove('match-focused'); });
+        } else {
+          if (typeof window.__highlightFromHash === 'function') window.__highlightFromHash('never');
+        }
+
+        const divider = document.getElementById('sectionsDivider');
+        if (q === '' || !anyFound) {
+          if (pastSection) pastSection.style.display = 'none';
+          if (currentSection) currentSection.style.display = '';
+          if (headerDefault) headerDefault.style.display = '';
+          if (headerSearch) headerSearch.style.display = 'none';
+          if (divider) divider.style.display = 'none';
+        } else {
+          if (currentSection) currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
+          if (headerDefault) headerDefault.style.display = 'none';
+          if (headerSearch) headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
+          if (pastSection) pastSection.style.display = visiblePast > 0 ? '' : 'none';
+          if (divider) divider.style.display = (visibleCurrent > 0 && visiblePast > 0) ? '' : 'none';
+        }
+      }
+
+      function showSuggestions(query) {
+        if (!query) { hideSuggestions(); return; }
+        const q = query.toLowerCase();
+        const matches = allTeams.filter(function(t) { return t.name.toLowerCase().includes(q); }).slice(0, 8);
+        if (matches.length === 0) { hideSuggestions(); return; }
+        suggestBox.innerHTML = matches.map(function(t) {
+          return '<a class="search-suggestion" href="../index.html?team=' + encodeURIComponent(t.name) + '" data-team="' + t.name + '">' +
+            '<span class="search-suggestion-logo"><img src="' + t.logo + '" alt=""></span>' +
+            '<span class="search-suggestion-name">' + t.name + '</span>' +
+          '</a>';
+        }).join('');
+        showSuggestionsPanel();
+      }
+
+      function showSuggestionsPanel() {
+        if (suggestBox._hideAnim) { suggestBox._hideAnim.cancel(); suggestBox._hideAnim = null; }
+        if (suggestBox._showAnim) { suggestBox._showAnim.cancel(); suggestBox._showAnim = null; }
+        suggestBox.classList.add('active');
+        const finalHeight = suggestBox.scrollHeight;
+        suggestBox._showAnim = suggestBox.animate(
+          [
+            { opacity: 0, transform: 'translateY(-8px)', maxHeight: '0px' },
+            { opacity: 1, transform: 'translateY(0)',    maxHeight: finalHeight + 'px' }
+          ],
+          { duration: 260, easing: 'cubic-bezier(0.2, 0.9, 0.3, 1.05)', fill: 'forwards' }
+        );
+        suggestBox._showAnim.onfinish = function() { suggestBox._showAnim = null; };
+      }
+
+      function hideSuggestions() {
+        if (suggestBox._showAnim) { suggestBox._showAnim.cancel(); suggestBox._showAnim = null; }
+        if (suggestBox._hideAnim) { suggestBox._hideAnim.cancel(); suggestBox._hideAnim = null; }
+        if (!suggestBox.classList.contains('active')) { suggestBox.innerHTML = ''; return; }
+        const startHeight = suggestBox.scrollHeight;
+        suggestBox._hideAnim = suggestBox.animate(
+          [
+            { opacity: 1, transform: 'translateY(0)',    maxHeight: startHeight + 'px' },
+            { opacity: 0, transform: 'translateY(-8px)', maxHeight: '0px' }
+          ],
+          { duration: 220, easing: 'ease-in', fill: 'forwards' }
+        );
+        suggestBox._hideAnim.onfinish = function() {
+          suggestBox._hideAnim = null;
+          suggestBox.classList.remove('active');
+          suggestBox.innerHTML = '';
+          suggestBox.style.cssText = '';
+        };
+      }
+
+      input.addEventListener('input', function() {
+        if (!window.__suppressSuggestions) {
+          showSuggestions(input.value.trim());
+        }
+        filter();
+      });
+      input.addEventListener('keydown', function(e) {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        const typed = input.value.trim();
+        if (!typed) return;
+        const team = allTeams.find(function(t) { return t.name.toLowerCase() === typed.toLowerCase(); })
+                  || allTeams.find(function(t) { return t.name.toLowerCase().includes(typed.toLowerCase()); });
+        if (team) input.value = team.name;
+        hideSuggestions();
+        filter();
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.topbar-search')) hideSuggestions();
+      });
+
+      clearBtn.addEventListener('click', function() {
+        input.value = '';
+        hideSuggestions();
+        setSearchLogo('');
+        highlightTableRow(null);
+        filter();
+        if (typeof window.__highlightFromHash === 'function') window.__highlightFromHash('never');
+        input.focus();
+      });
+
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="index.html?team="]');
+        if (!link) return;
+        const path = window.location.pathname;
+        const isIndexPage = path === '/' || path.endsWith('/index.html') || path.endsWith('/rpl-playlist/');
+        if (!isIndexPage) return;
+        const url = new URL(link.href, window.location.origin);
+        const team = url.searchParams.get('team');
+        if (!team) return;
+        e.preventDefault();
+
+        const cleanUrl = url.pathname + url.search;
+
+        hideSuggestions();
+
+        // Своя анимация скролла на rAF — её не может отменить браузер
+        // при изменении высоты документа (в отличие от scrollTo smooth).
+        const startY = window.scrollY;
+        if (startY > 0) {
+          const startTime = performance.now();
+          const DURATION = 500;
+          function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+          function step(now) {
+            const t = Math.min(1, (now - startTime) / DURATION);
+            window.scrollTo(0, startY * (1 - easeOutCubic(t)));
+            if (t < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }
+
+        // Параллельно применяем фильтр — он раздувает страницу, но наша
+        // анимация это игнорирует, потому что мы каждый кадр ставим scrollY сами.
+        const inputEl = document.getElementById('searchInput');
+        if (inputEl) {
+          inputEl.value = team;
+          window.__suppressSuggestions = true;
+          inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+          window.__suppressSuggestions = false;
+        }
+
+        // Скрываем выпадашку ПОСЛЕ обработки input — иначе input-хендлер
+        // снова её откроет (он вызывает showSuggestions).
+        hideSuggestions();
+
+        try { window.history.pushState(null, '', cleanUrl); } catch (err) { /* ignore */ }
+      });
+
+      const params = new URLSearchParams(window.location.search);
+      const teamParam = params.get('team');
+      const filterParam = params.get('filter');
+
+      if (teamParam) {
+        input.value = teamParam;
+        setSearchLogo(teamParam);
+        filter();
+      }
+
+      if (filterParam === '4k') {
+        const allMatches = document.querySelectorAll('.match');
+        allMatches.forEach(function(el) {
+          const badge = el.querySelector('.tag-4k');
+          el.style.display = badge ? '' : 'none';
+        });
+
+        // Скрываем заголовки дней, под которыми не осталось видимых матчей
+        document.querySelectorAll('.day-head').forEach(function(head) {
+          let next = head.nextElementSibling;
+          let hasVisible = false;
+          while (next && !next.classList.contains('day-head')) {
+            if (next.classList.contains('match') && next.style.display !== 'none') {
+              hasVisible = true;
+              break;
+            }
+            next = next.nextElementSibling;
+          }
+          head.style.display = hasVisible ? '' : 'none';
+        });
+
+        const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
+        const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
+        const pastSection = document.getElementById('pastSection');
+        const currentSection = document.getElementById('currentSection');
+        const headerDefault = document.getElementById('currentHeaderDefault');
+        const headerSearch = document.getElementById('currentHeaderSearch');
+        if (currentSection) currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
+        if (headerDefault) headerDefault.style.display = 'none';
+        if (headerSearch) {
+          headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
+          const currentHeaderTeam = document.getElementById('currentHeaderTeam');
+          if (currentHeaderTeam) currentHeaderTeam.textContent = ' · 4K UHD';
+        }
+        if (pastSection) {
+          pastSection.style.display = visiblePast > 0 ? '' : 'none';
+          const pastHeaderTeam = document.getElementById('pastHeaderTeam');
+          if (pastHeaderTeam) pastHeaderTeam.textContent = ' · 4K UHD';
+        }
+        const divider = document.getElementById('sectionsDivider');
+        if (divider) {
+          divider.style.display = (visibleCurrent > 0 && visiblePast > 0) ? '' : 'none';
+        }
+      }
+    })();
+
+    (function() {
+      const filterBar = document.getElementById('calTeamsFilter');
+      if (!filterBar) return;
+      const resetBtn = document.getElementById('calTeamReset');
+      let activeTeam = null;
+
+      function applyFilter() {
+        const allCal = document.querySelectorAll('.cal-tour-group .cal-match');
+        allCal.forEach(function(el) {
+          if (!activeTeam) {
+            el.style.display = '';
+          } else {
+            const names = Array.from(el.querySelectorAll('.cal-team-name')).map(function(n) {
+              return n.textContent.trim().toLowerCase();
+            });
+            el.style.display = names.includes(activeTeam) ? '' : 'none';
+          }
+        });
+        document.querySelectorAll('.cal-tour-group').forEach(function(group) {
+          const visible = group.querySelectorAll('.cal-match:not([style*="display: none"])').length;
+          group.style.display = visible > 0 ? '' : 'none';
+        });
+        document.querySelectorAll('.cal-month').forEach(function(month) {
+          const visible = month.querySelectorAll('.cal-match:not([style*="display: none"])').length;
+          month.style.display = visible > 0 ? '' : 'none';
+        });
+        if (resetBtn) resetBtn.style.display = activeTeam ? 'flex' : 'none';
+      }
+
+      filterBar.querySelectorAll('.cal-team-filter:not(.cal-team-filter-reset)').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const team = btn.getAttribute('data-team');
+          activeTeam = (activeTeam === team) ? null : team;
+          filterBar.querySelectorAll('.cal-team-filter').forEach(function(b) { b.classList.remove('active'); });
+          if (activeTeam) btn.classList.add('active');
+          applyFilter();
+        });
+      });
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+          activeTeam = null;
+          filterBar.querySelectorAll('.cal-team-filter').forEach(function(b) { b.classList.remove('active'); });
+          applyFilter();
+        });
+      }
+
+      const prevBtn = document.getElementById('calTeamsPrev');
+      const nextBtn = document.getElementById('calTeamsNext');
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', function() { filterBar.scrollTo({ left: 0, behavior: 'smooth' }); });
+        nextBtn.addEventListener('click', function() { filterBar.scrollTo({ left: filterBar.scrollWidth, behavior: 'smooth' }); });
+      }
+    })();
+
+    (function() {
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+      function onAnchorChange() {
+        if (typeof window.__highlightFromHash === 'function') window.__highlightFromHash('always');
+      }
+
+      if (document.readyState === 'complete') {
+        onAnchorChange();
+      } else {
+        window.addEventListener('load', onAnchorChange, { once: true });
+      }
+      window.addEventListener('hashchange', onAnchorChange);
+    })();
+
+    (function() {
+      const STREAM_OPEN_BEFORE_MS = 15 * 60 * 1000;
+
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+            // Возвращает массив пар [число, единица]: [[16,'ч'], [41,'м'], [15,'с']]
+      // Ноль часов/дней не показываем.
+      function formatRemainParts(ms) {
+        const total = Math.max(0, Math.floor(ms / 1000));
+        const days = Math.floor(total / 86400);
+        const h = Math.floor((total % 86400) / 3600);
+        const m = Math.floor((total % 3600) / 60);
+        const s = total % 60;
+        const parts = [];
+        if (days > 0) parts.push([String(days), 'д']);
+        if (days > 0 || h > 0) parts.push([pad(h), 'ч']);
+        parts.push([pad(m), 'м']);
+        parts.push([pad(s), 'с']);
+        return parts;
+      }
+
+      function updateTimer(el, startMs) {
+        const now = Date.now();
+        const diff = startMs - now;
+        if (diff <= STREAM_OPEN_BEFORE_MS) {
+          el.timer.style.display = 'none';
+          el.row.style.display = '';
+          return true;
+        }
+        el.timer.style.display = '';
+        el.row.style.display = 'none';
+        const remainMs = diff - STREAM_OPEN_BEFORE_MS;
+
+        if (remainMs <= 60 * 1000) {
+          if (!el.timer._expiring) {
+            el.timer.classList.add('expiring');
+            el.timer.innerHTML = '<span class="timer-icon">🔴</span><span>LIVE</span>';
+            el.timer._expiring = true;
+            el.timer._countEl = null;
+          }
+        } else {
+          if (el.timer._expiring) {
+            el.timer.classList.remove('expiring');
+            el.timer._expiring = false;
+            el.timer._countEl = null;
+          }
+          // Строим структуру один раз: <span class="timer-icon">🔒</span><span class="timer-count">
+          //   <span class="timer-part"><span class="timer-num"></span><span class="timer-unit">ч</span></span>...
+          // </span>
+          if (!el.timer._countEl) {
+            el.timer.innerHTML = '<span class="timer-icon">🔒</span><span class="timer-count"></span>';
+            el.timer._countEl = el.timer.querySelector('.timer-count');
+            el.timer._partNodes = null;
+          }
+
+          const parts = formatRemainParts(remainMs);
+
+          // Если количество частей изменилось (например, был день, стал час) —
+          // пересобираем структуру. Иначе просто обновляем числа.
+          if (!el.timer._partNodes || el.timer._partNodes.length !== parts.length) {
+            el.timer._countEl.innerHTML = parts.map(function(p) {
+              return '<span class="timer-part">' +
+                '<span class="timer-num"></span>' +
+                '<span class="timer-unit">' + p[1] + '</span>' +
+              '</span>';
+            }).join(' ');
+            el.timer._partNodes = Array.from(el.timer._countEl.querySelectorAll('.timer-num'));
+          }
+
+          for (let i = 0; i < parts.length; i++) {
+            const numEl = el.timer._partNodes[i];
+            const newVal = parts[i][0];
+            if (numEl.textContent !== newVal) {
+              numEl.textContent = newVal;
+            }
+          }
+        }
+        return false;
+      }
+
+      const timers = [];
+      document.querySelectorAll('.quality-timer').forEach(function(timerEl) {
+        const iso = timerEl.getAttribute('data-match-start');
+        if (!iso) return;
+        const startMs = Date.parse(iso);
+        if (isNaN(startMs)) return;
+        const row = timerEl.parentElement.querySelector('.quality-row');
+        if (!row) return;
+        const el = { timer: timerEl, row: row, startMs: startMs };
+        if (!updateTimer(el, startMs)) timers.push(el);
+      });
+
+      if (timers.length === 0) return;
+
+      let interval = null;
+
+      function startTimers() {
+        if (interval || timers.length === 0) return;
+        interval = setInterval(function() {
+          for (let i = timers.length - 1; i >= 0; i--) {
+            if (updateTimer(timers[i], timers[i].startMs)) timers.splice(i, 1);
+          }
+          if (timers.length === 0) { clearInterval(interval); interval = null; }
+        }, 1000);
+      }
+
+      function stopTimers() {
+        if (interval) { clearInterval(interval); interval = null; }
+      }
+
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          stopTimers();
+        } else {
+          timers.forEach(function(el) { updateTimer(el, el.startMs); });
+          startTimers();
+        }
+      });
+
+      timers.forEach(function(el) { updateTimer(el, el.startMs); });
+      startTimers();
+    })();
+    
+    (function() {
+      function getDefaultLabel(select) {
+        return select.hasAttribute('data-watch') ? 'Смотреть' : 'Повтор';
+      }
+
+      function getList(select) {
+        return select.querySelector('[data-replay-list]');
+      }
+
+      function openReplay(select) {
+        const list = getList(select);
+        if (!list) return;
+        const label = select.querySelector('[data-replay-label]');
+        if (list._hideAnim) { list._hideAnim.cancel(); list._hideAnim = null; }
+        if (list._showAnim) { list._showAnim.cancel(); list._showAnim = null; }
+        select.classList.add('open');
+        if (label) label.textContent = 'Качество';
+        list.style.display = 'flex';
+        list.style.overflow = 'hidden';
+        const finalHeight = list.scrollHeight;
+        list._showAnim = list.animate(
+          [
+            { opacity: 0, transform: 'translateY(-6px)', maxHeight: '0px' },
+            { opacity: 1, transform: 'translateY(0)',    maxHeight: finalHeight + 'px' }
+          ],
+          { duration: 220, easing: 'cubic-bezier(0.2, 0.9, 0.3, 1.05)', fill: 'forwards' }
+        );
+        list._showAnim.onfinish = function() {
+          list._showAnim = null;
+          list.style.maxHeight = '';
+          list.style.overflow = '';
+        };
+      }
+
+      function closeReplay(select) {
+        const list = getList(select);
+        if (!list) return;
+        const label = select.querySelector('[data-replay-label]');
+        if (!select.classList.contains('open')) return;
+        if (list._showAnim) { list._showAnim.cancel(); list._showAnim = null; }
+        if (list._hideAnim) { list._hideAnim.cancel(); list._hideAnim = null; }
+        const startHeight = list.scrollHeight;
+        list.style.overflow = 'hidden';
+        list._hideAnim = list.animate(
+          [
+            { opacity: 1, transform: 'translateY(0)',    maxHeight: startHeight + 'px' },
+            { opacity: 0, transform: 'translateY(-6px)', maxHeight: '0px' }
+          ],
+          { duration: 180, easing: 'ease-in', fill: 'forwards' }
+        );
+        list._hideAnim.onfinish = function() {
+          list._hideAnim = null;
+          select.classList.remove('open');
+          list.style.cssText = '';
+          if (label) label.textContent = getDefaultLabel(select);
+        };
+      }
+
+      function closeAllReplay(except) {
+        document.querySelectorAll('.replay-select.open').forEach(function(el) {
+          if (el === except) return;
+          closeReplay(el);
+        });
+      }
+
+      document.addEventListener('click', function(e) {
+        const toggle = e.target.closest('[data-replay-toggle]');
+        if (toggle) {
+          e.preventDefault();
+          e.stopPropagation();
+          const select = toggle.closest('.replay-select');
+          if (!select) return;
+          const wasOpen = select.classList.contains('open');
+          closeAllReplay(select);
+          if (wasOpen) {
+            closeReplay(select);
+          } else {
+            openReplay(select);
+          }
+          return;
+        }
+        if (e.target.closest('.replay-list')) {
+          e.stopPropagation();
+          closeAllReplay();
+          return;
+        }
+        closeAllReplay();
+      }, true);
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeAllReplay();
+      });
+    })();
+    (function() {
+      const btn = document.getElementById('scrollTop');
+      if (!btn) return;
+      let ticking = false;
+      function toggleBtn() {
+        btn.classList.toggle('visible', window.scrollY > 300);
+        ticking = false;
+      }
+      function onScroll() {
+        if (!ticking) { window.requestAnimationFrame(toggleBtn); ticking = true; }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      toggleBtn();
+      btn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    })();
+
+    (function() {
+      const input = document.getElementById('searchInput');
+      if (!input) return;
+      const texts = ['Поиск команды...', 'Поиск матча...', 'ЦСКА, Спартак, Зенит...'];
+      let textIndex = 0, charIndex = 0, isDeleting = false, isPaused = false;
+
+      function type() {
+        if (input.value.trim() !== '') {
+          input.placeholder = 'Поиск команды...';
+          setTimeout(type, 1000);
+          return;
+        }
+        const currentText = texts[textIndex];
+        if (isPaused) { isPaused = false; isDeleting = true; setTimeout(type, 50); return; }
+        if (isDeleting) {
+          charIndex--;
+          input.placeholder = currentText.substring(0, charIndex);
+          if (charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            setTimeout(type, 500);
+            return;
+          }
+          setTimeout(type, 50);
+        } else {
+          charIndex++;
+          input.placeholder = currentText.substring(0, charIndex);
+          if (charIndex === currentText.length) {
+            isPaused = true;
+            setTimeout(type, 2000);
+            return;
+          }
+          setTimeout(type, 100);
+        }
+      }
+      setTimeout(type, 1500);
+    })();
+
+  </script>
+</body>
+</html>
