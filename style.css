@@ -646,6 +646,17 @@ body.light .match-status {
 
 /* Кнопка «Обзор матча» — стиль общий с .replay-toggle (см. выше) */
 
+/* Тур-подборки: сейвы / моменты / все голы — над карточками тура */
+.tour-reviews-row {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin: 0 4px 12px;
+}
+.tour-review-btn {
+  height: 30px;
+  padding: 0 14px;
+  font-size: 11px;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .replay-toggle:hover {
     background: rgba(0, 255, 213, 0.18);
