@@ -987,7 +987,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">15.10.2026 22:08 МСК</span><br>
+      Обновлено <span class="neon">16.10.2026 11:19 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -1299,6 +1299,20 @@
         if (pastHeaderTeam) pastHeaderTeam.textContent = teamLabel;
 
         highlightTableRow(matchedTeam ? matchedTeam.name : null);
+
+        // Подсветка команды внутри карточек матчей
+        document.querySelectorAll('.match').forEach(function(el) {
+          el.querySelectorAll('.match-team').forEach(function(t) {
+            t.classList.remove('match-team-hl');
+          });
+          if (!matchedTeam) return;
+          const names = el.querySelectorAll('.match-team .team-name');
+          names.forEach(function(n) {
+            if (n.textContent.trim().toLowerCase() === matchedTeam.name.toLowerCase()) {
+              n.closest('.match-team').classList.add('match-team-hl');
+            }
+          });
+        });
 
         if (matchedTeam) {
           if (typeof window.__highlightMatchTeams === 'function') window.__highlightMatchTeams(null);

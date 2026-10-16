@@ -193,7 +193,7 @@
         <div class="match-bottom">
           <div class="quality-row" data-match-start="2026-08-23T13:00:00+03:00" ><div class="replay-select" data-replay><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Повтор</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_5a10a279dc7d60a819ac361437cd7be2/17_1026576/1080p50fps/a4c23f05a21e4b4ae28b655541b70d78/4942829701.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=2121f0c553685a262b2bdb1f7f0e9a61" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_5a10a279dc7d60a819ac361437cd7be2/17_1026576/720/a4c23f05a21e4b4ae28b655541b70d78/4942829701.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=2121f0c553685a262b2bdb1f7f0e9a61" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_5a10a279dc7d60a819ac361437cd7be2/17_1026576/480/a4c23f05a21e4b4ae28b655541b70d78/4942829701.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=2121f0c553685a262b2bdb1f7f0e9a61" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_5a10a279dc7d60a819ac361437cd7be2/17_1026576/360/a4c23f05a21e4b4ae28b655541b70d78/4942829701.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=2121f0c553685a262b2bdb1f7f0e9a61" target="_blank" referrerpolicy="no-referrer">360</a></div></div><a class="replay-toggle review-toggle" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456268128" target="_blank" rel="noopener noreferrer"><span>Обзор</span></a></div>
           <div class="quality-timer" data-match-start="2026-08-23T13:00:00+03:00" style="display:none;"></div>
-          <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Солидарность Самара Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Тольятти</span></div>
+          <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Солидарность Самара Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Самара</span></div>
         </div>
       </div>
 <div class="match" id="match-23-авг-динамо-москва-родина" data-teams="динамо москва родина">
@@ -580,7 +580,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">15.10.2026 22:08 МСК</span><br>
+      Обновлено <span class="neon">16.10.2026 11:19 МСК</span><br>
       Автоматически через GitHub Actions
     </div>
 
@@ -892,6 +892,20 @@
         if (pastHeaderTeam) pastHeaderTeam.textContent = teamLabel;
 
         highlightTableRow(matchedTeam ? matchedTeam.name : null);
+
+        // Подсветка команды внутри карточек матчей
+        document.querySelectorAll('.match').forEach(function(el) {
+          el.querySelectorAll('.match-team').forEach(function(t) {
+            t.classList.remove('match-team-hl');
+          });
+          if (!matchedTeam) return;
+          const names = el.querySelectorAll('.match-team .team-name');
+          names.forEach(function(n) {
+            if (n.textContent.trim().toLowerCase() === matchedTeam.name.toLowerCase()) {
+              n.closest('.match-team').classList.add('match-team-hl');
+            }
+          });
+        });
 
         if (matchedTeam) {
           if (typeof window.__highlightMatchTeams === 'function') window.__highlightMatchTeams(null);
