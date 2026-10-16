@@ -172,6 +172,9 @@ body::before {
 .day-head-text > span:first-child {
   color: #fff;
 }
+.day-head-text > span.day-head-rest {
+  color: var(--neon);
+}
 .day-head-text::before {
   content: none;
 }
