@@ -553,6 +553,7 @@ body.light .match-status {
 }
 
 .quality-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; }
+.quality-row > * { vertical-align: middle; }
 .quality-btn {
   display: inline-flex; align-items: center; justify-content: center;
   background: rgba(0, 255, 213, 0.08);
