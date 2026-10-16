@@ -577,6 +577,7 @@ body.light .match-status {
   display: inline-block;
   width: auto;
   max-width: 100%;
+  line-height: 1;
 }
 .replay-select.open {
   z-index: 100;
