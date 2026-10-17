@@ -39,12 +39,12 @@
     <div class="disclaimer">
       <div class="disclaimer-icon">⚠️</div>
       <div class="disclaimer-text">
-        Все ссылки на и данные результатов матчей берутся из <b>открытых источников</b>. Администрация сайта не несёт ответственности за их содержание, доступность и законность использования.
+        Все ссылки и данные результатов матчей берутся из <b>открытых источников</b>. Администрация сайта не несёт ответственности за их содержание, доступность и законность использования.
       </div>
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">16.10.2026 19:31 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 13:48 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -681,48 +681,34 @@
         el.row.style.display = 'none';
         const remainMs = diff - STREAM_OPEN_BEFORE_MS;
 
-        if (remainMs <= 60 * 1000) {
-          if (!el.timer._expiring) {
-            el.timer.classList.add('expiring');
-            el.timer.innerHTML = '<span class="timer-icon">🔴</span><span>LIVE</span>';
-            el.timer._expiring = true;
-            el.timer._countEl = null;
-          }
-        } else {
-          if (el.timer._expiring) {
-            el.timer.classList.remove('expiring');
-            el.timer._expiring = false;
-            el.timer._countEl = null;
-          }
-          // Строим структуру один раз: <span class="timer-icon">🔒</span><span class="timer-count">
-          //   <span class="timer-part"><span class="timer-num"></span><span class="timer-unit">ч</span></span>...
-          // </span>
-          if (!el.timer._countEl) {
-            el.timer.innerHTML = '<span class="timer-icon">🔒</span><span class="timer-count"></span>';
-            el.timer._countEl = el.timer.querySelector('.timer-count');
-            el.timer._partNodes = null;
-          }
+        // Строим структуру один раз: <span class="timer-icon">🔒</span><span class="timer-count">
+        //   <span class="timer-part"><span class="timer-num"></span><span class="timer-unit">ч</span></span>...
+        // </span>
+        if (!el.timer._countEl) {
+          el.timer.innerHTML = '<span class="timer-icon">🔒</span><span class="timer-count"></span>';
+          el.timer._countEl = el.timer.querySelector('.timer-count');
+          el.timer._partNodes = null;
+        }
 
-          const parts = formatRemainParts(remainMs);
+        const parts = formatRemainParts(remainMs);
 
-          // Если количество частей изменилось (например, был день, стал час) —
-          // пересобираем структуру. Иначе просто обновляем числа.
-          if (!el.timer._partNodes || el.timer._partNodes.length !== parts.length) {
-            el.timer._countEl.innerHTML = parts.map(function(p) {
-              return '<span class="timer-part">' +
-                '<span class="timer-num"></span>' +
-                '<span class="timer-unit">' + p[1] + '</span>' +
-              '</span>';
-            }).join(' ');
-            el.timer._partNodes = Array.from(el.timer._countEl.querySelectorAll('.timer-num'));
-          }
+        // Если количество частей изменилось (например, был день, стал час) —
+        // пересобираем структуру. Иначе просто обновляем числа.
+        if (!el.timer._partNodes || el.timer._partNodes.length !== parts.length) {
+          el.timer._countEl.innerHTML = parts.map(function(p) {
+            return '<span class="timer-part">' +
+              '<span class="timer-num"></span>' +
+              '<span class="timer-unit">' + p[1] + '</span>' +
+            '</span>';
+          }).join(' ');
+          el.timer._partNodes = Array.from(el.timer._countEl.querySelectorAll('.timer-num'));
+        }
 
-          for (let i = 0; i < parts.length; i++) {
-            const numEl = el.timer._partNodes[i];
-            const newVal = parts[i][0];
-            if (numEl.textContent !== newVal) {
-              numEl.textContent = newVal;
-            }
+        for (let i = 0; i < parts.length; i++) {
+          const numEl = el.timer._partNodes[i];
+          const newVal = parts[i][0];
+          if (numEl.textContent !== newVal) {
+            numEl.textContent = newVal;
           }
         }
         return false;
