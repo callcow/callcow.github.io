@@ -558,22 +558,20 @@ a.match-score:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 
 
 /* LIVE-плашка под счётом */
 .match-live-badge {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  width: 100%;
-  min-width: 76px; /* Ширина как у блока счёта */
-  box-sizing: border-box;
-  font-size: 10px;
+  width: auto;
+  font-size: 9px; /* Как у "Завершён" */
   font-weight: 900;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #ff3b3b;
   background: rgba(255, 59, 59, 0.12);
   border: 1px solid rgba(255, 59, 59, 0.4);
-  border-radius: 4px;
-  padding: 3px 8px;
+  border-radius: 3px; /* Как у "Завершён" */
+  padding: 2px 6px; /* Как у "Завершён" */
   line-height: 1.2;
   white-space: nowrap;
   margin-top: 4px;
@@ -1172,7 +1170,6 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .main-layout .match-team { font-size: 13px; gap: 6px; }
   .main-layout .team-logo { width: 26px; height: 26px; padding: 2px; }
   .main-layout .match-score { min-width: 62px; height: 36px; font-size: 18px; padding: 0 10px; }
-  .match-live-badge { min-width: 62px; }
   .main-layout .quality-btn { padding: 2px 8px; font-size: 9px; }
   .match { padding: 14px; gap: 12px; }
   .match-day { font-size: 13px; }
