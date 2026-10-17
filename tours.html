@@ -55,7 +55,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 18:16 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 18:53 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1006,21 +1006,20 @@
 
           if (!badge) {
             badge = document.createElement('div');
-            badge.className = 'match-live-badge';
+            // СРАЗУ даем базовый класс, как у плашки "Завершён"
+            badge.className = 'match-status match-live-badge';
             const block = card.querySelector('.match-score-block');
             if (block) block.appendChild(badge);
           }
 
           if (m.half === 0) {
             badge.innerHTML = 'ПЕРЕРЫВ';
-            badge.classList.add('match-status');
+            badge.classList.remove('match-status-live');
           } else {
-            badge.innerHTML = 'LIVE';
-            badge.classList.add('match-status', 'match-status-live');
+            // Возвращаем пульсирующий кружок
+            badge.innerHTML = '<span class="live-dot"></span>LIVE';
+            badge.classList.add('match-status-live');
           }
-        });
-      }
-
       updateLive();
       setInterval(updateLive, 30000);
     })();
