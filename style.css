@@ -420,7 +420,7 @@ body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb { backgro
 .matches { 
   display: flex; 
   flex-direction: column; 
-  gap: 12px; 
+  gap: 20px; 
   margin-bottom: 36px; 
 }
 
