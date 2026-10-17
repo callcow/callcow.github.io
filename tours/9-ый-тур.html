@@ -581,7 +581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 13:48 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 14:16 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1439,6 +1439,115 @@
         }
       }
       setTimeout(type, 1500);
+    })();
+
+    (function() {
+      // ===== LIVE-МАТЧИ: ТАЙМЕР И ПОДНЯТИЕ НАВЕРХ =====
+
+      const MATCH_DURATION_MS = 125 * 60 * 1000;   // 125 минут от старта — конец матча
+      const LIVE_DELAY_MS = 3 * 60 * 1000;         // LIVE появляется через 3 мин после старта
+      const FIRST_HALF_MS = 45 * 60 * 1000;
+      const BREAK_MS = 15 * 60 * 1000;             // перерыв
+      const SECOND_HALF_START_MS = FIRST_HALF_MS + BREAK_MS;
+
+      const liveMatches = [];
+      document.querySelectorAll('.match').forEach(function(card) {
+        const timerEl = card.querySelector('.quality-timer[data-match-start]');
+        if (!timerEl) return;
+        const iso = timerEl.getAttribute('data-match-start');
+        if (!iso) return;
+        const startMs = Date.parse(iso);
+        if (isNaN(startMs)) return;
+        if (card.querySelector('.match-status')) return; // завершён — пропускаем
+        liveMatches.push({ card: card, startMs: startMs, timerEl: timerEl });
+      });
+
+      if (liveMatches.length === 0) return;
+
+      function getMatchMinute(elapsed) {
+        // elapsed — миллисекунды с начала матча
+        if (elapsed < FIRST_HALF_MS) {
+          return { half: 1, minute: Math.floor(elapsed / 60000) + 1 };
+        }
+        if (elapsed < SECOND_HALF_START_MS) {
+          return { half: 0, minute: 0 }; // перерыв
+        }
+        return { half: 2, minute: Math.floor((elapsed - SECOND_HALF_START_MS) / 60000) + 46 };
+      }
+
+      function updateLive() {
+        const now = Date.now();
+        liveMatches.forEach(function(item) {
+          const elapsed = now - item.startMs;
+          const endMs = MATCH_DURATION_MS;
+
+          let badge = item.card.querySelector('.match-live-badge');
+          const row = item.card.querySelector('.quality-row');
+          const timerEl = item.timerEl;
+
+          // LIVE появляется только через LIVE_DELAY_MS после старта
+          if (elapsed < LIVE_DELAY_MS || elapsed > endMs) {
+            if (badge) badge.remove();
+            item.card.classList.remove('is-live');
+            // Показываем кнопки после конца матча
+            if (elapsed > endMs && row) row.style.display = '';
+            if (timerEl) timerEl.style.display = 'none';
+            return;
+          }
+
+          item.card.classList.add('is-live');
+          if (row) row.style.display = 'none';
+          if (timerEl) timerEl.style.display = 'none';
+
+          const m = getMatchMinute(elapsed);
+
+          if (!badge) {
+            badge = document.createElement('div');
+            badge.className = 'match-live-badge';
+            const block = item.card.querySelector('.match-score-block');
+            if (block) block.appendChild(badge);
+            else return;
+          }
+
+          if (m.half === 0) {
+            badge.innerHTML = '<span class="live-dot live-dot-pause">⏸</span><span>ПЕРЕРЫВ</span>';
+          } else {
+            badge.innerHTML = '<span class="live-dot"></span><span>LIVE ' + m.minute + "'</span>";
+          }
+        });
+      }
+
+      // Поднимаем live-матчи наверх списка
+      (function reorderLiveMatches() {
+        const now = Date.now();
+        const container = document.getElementById('matchesContainer');
+        if (!container) return;
+
+        const cards = Array.from(container.querySelectorAll('.match'));
+        const liveSet = new Set();
+        cards.forEach(function(card) {
+          const timerEl = card.querySelector('.quality-timer[data-match-start]');
+          if (!timerEl) return;
+          const startMs = Date.parse(timerEl.getAttribute('data-match-start') || '');
+          if (isNaN(startMs)) return;
+          if (now >= startMs + LIVE_DELAY_MS && now < startMs + MATCH_DURATION_MS) {
+            liveSet.add(card);
+          }
+        });
+
+        if (liveSet.size === 0) return;
+
+        const liveArr = cards.filter(function(c) { return liveSet.has(c); });
+        const restArr = cards.filter(function(c) { return !liveSet.has(c); });
+
+        container.innerHTML = '';
+        liveArr.concat(restArr).forEach(function(c) {
+          container.appendChild(c);
+        });
+      })();
+
+      updateLive();
+      setInterval(updateLive, 30000); // обновляем каждые 30 секунд
     })();
 
   </script>
