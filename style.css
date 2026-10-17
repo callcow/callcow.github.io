@@ -533,7 +533,7 @@ a.match-score:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 
   font-size: 15px; font-weight: 800;
 }
 
-/* ===== Блок счёта + статус «Завершён» ===== */
+/* ===== Блок счёта ===== */
 .match-score-block {
   display: flex;
   flex-direction: column;
@@ -553,6 +553,7 @@ a.match-score:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 
   padding: 2px 6px;
   line-height: 1.2;
   white-space: nowrap;
+  justify-self: center; /* Центрируем в гриде */
 }
 
 /* ===== Плашка LIVE / ПЕРЕРЫВ (в стиле статуса «Завершён») ===== */
@@ -759,7 +760,13 @@ body.light .match-status {
 /* ============================================================
    ФОРМА КОМАНД (5 квадратиков)
    ============================================================ */
-.match-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: -4px; }
+.match-form { 
+  display: grid; 
+  grid-template-columns: 1fr auto 1fr; /* 3 колонки: лево, центр (плашка), право */
+  align-items: center;
+  gap: 10px; 
+  margin-top: -4px; 
+}
 .match-form-side { display: flex; align-items: center; min-width: 0; }
 .match-form-home { justify-content: flex-start; }
 .match-form-away { justify-content: flex-end; }
