@@ -37,7 +37,7 @@
             <div class="section-head-title">Расписание матчей 11-ый тур</div>
           </div>
           
-          <div class="matches" id="matchesContainer"><div class="day-group" style="display: flex; flex-direction: column; gap: 12px; width: 100%;"><div class="day-head"><span class="day-head-text"><span>17 окт</span><span class="day-head-rest"> · суббота</span></span></div><div class="match" id="match-17-окт-крылья-советов-факел" data-teams="крылья советов факел">
+          <div class="matches" id="matchesContainer"><div class="day-group"><div class="day-head"><span class="day-head-text"><span>17 окт</span><span class="day-head-rest"> · суббота</span></span></div><div class="match" id="match-17-окт-крылья-советов-факел" data-teams="крылья советов факел">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">17</span>
@@ -157,7 +157,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 РЖД Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Москва</span></div>
         </div>
       </div>
-</div><div class="day-group" style="display: flex; flex-direction: column; gap: 12px; width: 100%;"><div class="day-head"><span class="day-head-text"><span>18 окт</span><span class="day-head-rest"> · воскресенье</span></span></div><div class="match" id="match-18-окт-зенит-ахмат" data-teams="зенит ахмат">
+</div><div class="day-group"><div class="day-head"><span class="day-head-text"><span>18 окт</span><span class="day-head-rest"> · воскресенье</span></span></div><div class="match" id="match-18-окт-зенит-ахмат" data-teams="зенит ахмат">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">18</span>
@@ -317,7 +317,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Ростех Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Калининград</span></div>
         </div>
       </div>
-</div><div class="day-group" style="display: flex; flex-direction: column; gap: 12px; width: 100%;"><div class="day-head"><span class="day-head-text"><span>19 окт</span><span class="day-head-rest"> · понедельник</span></span></div><div class="match" id="match-19-окт-родина-оренбург" data-teams="родина оренбург">
+</div><div class="day-group"><div class="day-head"><span class="day-head-text"><span>19 окт</span><span class="day-head-rest"> · понедельник</span></span></div><div class="match" id="match-19-окт-родина-оренбург" data-teams="родина оренбург">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">19</span>
@@ -581,7 +581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 17:40 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 17:46 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1511,7 +1511,7 @@
           }
         });
 
-        // ===== УМНАЯ СОРТИРОВКА ДНЕЙ И МАТЧЕЙ =====
+               // ===== УМНАЯ СОРТИРОВКА ДНЕЙ И МАТЧЕЙ =====
         const container = document.getElementById('matchesContainer');
         if (!container) return;
 
@@ -1523,6 +1523,18 @@
           group.style.order = '0';
         });
 
+        // Находим первый блок с live-матчем и поднимаем его наверх
+        let liveGroup = null;
+        for (let i = 0; i < dayGroups.length; i++) {
+          if (dayGroups[i].querySelector('.match.is-live')) {
+            liveGroup = dayGroups[i];
+            break;
+          }
+        }
+
+        if (liveGroup) {
+          liveGroup.style.order = '-1';
+        }
         // Находим первый блок с live-матчем и поднимаем его наверх
         let liveGroup = null;
         for (let i = 0; i < dayGroups.length; i++) {

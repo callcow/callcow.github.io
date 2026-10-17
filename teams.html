@@ -44,7 +44,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 17:40 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 17:46 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -974,7 +974,7 @@
           }
         });
 
-        // ===== УМНАЯ СОРТИРОВКА ДНЕЙ И МАТЧЕЙ =====
+               // ===== УМНАЯ СОРТИРОВКА ДНЕЙ И МАТЧЕЙ =====
         const container = document.getElementById('matchesContainer');
         if (!container) return;
 
@@ -986,6 +986,18 @@
           group.style.order = '0';
         });
 
+        // Находим первый блок с live-матчем и поднимаем его наверх
+        let liveGroup = null;
+        for (let i = 0; i < dayGroups.length; i++) {
+          if (dayGroups[i].querySelector('.match.is-live')) {
+            liveGroup = dayGroups[i];
+            break;
+          }
+        }
+
+        if (liveGroup) {
+          liveGroup.style.order = '-1';
+        }
         // Находим первый блок с live-матчем и поднимаем его наверх
         let liveGroup = null;
         for (let i = 0; i < dayGroups.length; i++) {
