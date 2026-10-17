@@ -70,7 +70,7 @@ body::before {
    ============================================================ */
 .scroll-top {
   position: fixed; bottom: 20px; right: 20px;
-  width: 44px; height: 44px; padding: 0; border-radius: 10px;
+  width: 44px; height: 44px; padding: 0; border-radius: 8px;
   background: var(--topbar-bg);
   border: 1px solid var(--border);
   color: var(--neon);
@@ -115,14 +115,14 @@ body::before {
 }
 
 .cal-team-filter {
-  width: 24px; height: 24px; padding: 2px; border-radius: 5px;
+  width: 24px; height: 24px; padding: 2px; border-radius: 8px;
   background: transparent; border: 1px solid transparent;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
-.cal-team-filter img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; transition: transform 0.15s; }
+.cal-team-filter img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; transition: transform 0.15s; }
 .cal-team-filter:hover { background: rgba(0, 255, 213, 0.08); border-color: var(--border-hover); }
 .cal-team-filter:hover img { transform: scale(1.1); }
 .cal-team-filter.active {
@@ -140,7 +140,7 @@ body::before {
 .cal-teams-wrapper { display: flex; align-items: center; gap: 4px; margin-left: auto; max-width: 100%; }
 .cal-teams-arrow {
   display: none;
-  width: 26px; height: 26px; padding: 0; border-radius: 6px;
+  width: 26px; height: 26px; padding: 0; border-radius: 8px;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid var(--border);
   color: var(--text-dim);
@@ -202,12 +202,12 @@ body::before {
   gap: 12px; min-height: 44px; padding: 5px 10px;
   background: var(--topbar-bg);
   border: 1px solid var(--border);
-  border-radius: 10px; margin-bottom: 12px;
+  border-radius: 8px; margin-bottom: 12px;
   position: relative; z-index: 1000; isolation: isolate;
 }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
 .brand-logo {
-  width: 36px; height: 36px; border-radius: 6px;
+  width: 36px; height: 36px; border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; overflow: hidden; padding: 2px;
 }
@@ -222,7 +222,7 @@ body::before {
 
 .theme-toggle {
   display: flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border-radius: 6px;
+  width: 32px; height: 32px; border-radius: 8px;
   background: rgba(0, 255, 213, 0.1);
   border: 1px solid rgba(0, 255, 213, 0.3);
   color: var(--neon); font-size: 16px;
@@ -237,7 +237,7 @@ body::before {
   height: 32px; padding: 0 16px;
   background: linear-gradient(135deg, rgba(0, 255, 213, 0.1), rgba(168, 85, 247, 0.1));
   border: 1px solid rgba(0, 255, 213, 0.4);
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .tour-badge-value { font-size: 16px; font-weight: 900; color: var(--text); letter-spacing: -0.5px; line-height: 1; }
 
@@ -248,7 +248,7 @@ body::before {
 .nav-tabs::-webkit-scrollbar { display: none; }
 .nav-tab {
   display: flex; align-items: center; justify-content: center;
-  height: 32px; padding: 0 12px; border-radius: 6px;
+  height: 32px; padding: 0 12px; border-radius: 8px;
   text-decoration: none; color: var(--text-dim);
   font-weight: 800; font-size: 12px; white-space: nowrap;
   transition: background 0.2s, color 0.2s;
@@ -265,7 +265,7 @@ body::before {
    ============================================================ */
 .search-toggle {
   display: none;
-  width: 32px; height: 32px; padding: 0; border-radius: 6px;
+  width: 32px; height: 32px; padding: 0; border-radius: 8px;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid var(--border);
   color: var(--text-dim);
@@ -288,7 +288,7 @@ body::before {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.35-4.35'/></svg>");
   background-repeat: no-repeat; background-position: 10px center; background-size: 16px 16px;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--text);
   font-size: 12px; font-weight: 700; font-family: inherit;
   transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
@@ -309,7 +309,7 @@ body::before {
 
 .topbar-search .search-suggestions {
   position: absolute; top: calc(100% + 4px); left: 0; right: 0;
-  border-radius: 6px;
+  border-radius: 8px;
   background: rgba(20, 25, 40, 0.98);
   border: 1px solid rgba(0, 255, 213, 0);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 255, 213, 0.15), 0 0 20px rgba(0, 255, 213, 0.1);
@@ -322,7 +322,7 @@ body::before {
 }
 .topbar-search .search-suggestions::-webkit-scrollbar { width: 6px; }
 .topbar-search .search-suggestions::-webkit-scrollbar-track { background: transparent; margin: 4px 0; }
-.topbar-search .search-suggestions::-webkit-scrollbar-thumb { background: linear-gradient(180deg, rgba(0, 255, 213, 0.5), rgba(168, 85, 247, 0.5)); border-radius: 3px; }
+.topbar-search .search-suggestions::-webkit-scrollbar-thumb { background: linear-gradient(180deg, rgba(0, 255, 213, 0.5), rgba(168, 85, 247, 0.5)); border-radius: 8px; }
 .topbar-search .search-suggestions::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--neon), var(--neon-3)); }
 .topbar-search .search-suggestions.active {
   display: block; overflow-y: auto;
@@ -354,7 +354,7 @@ body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb { backgro
 }
 .topbar-search .search-suggestion:hover { background: rgba(0, 255, 213, 0.15); color: var(--neon); }
 .topbar-search .search-suggestion-logo { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.topbar-search .search-suggestion-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; transition: transform 0.15s; }
+.topbar-search .search-suggestion-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; transition: transform 0.15s; }
 .topbar-search .search-suggestion:hover .search-suggestion-logo img { transform: scale(1.1); }
 .topbar-search .search-suggestion-name { font-size: 12px; font-weight: 700; }
 
@@ -423,7 +423,7 @@ body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb { backgro
   display: flex; flex-direction: column; gap: 14px;
   background: var(--match-bg);
   padding: 16px 20px;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid var(--border);
   position: relative; overflow: visible;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.3s;
@@ -451,7 +451,7 @@ body:has(.replay-select.open) .match:hover {
 .match-dot  { color: var(--text-muted); opacity: 0.6; }
 .match-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 
-.tag { padding: 3px 8px; border-radius: 3px; font-size: 9px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+.tag { padding: 3px 8px; border-radius: 8px; font-size: 9px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
 .tag-tour {
   background: rgba(168, 85, 247, 0.12);
   border: 1px solid rgba(168, 85, 247, 0.35);
@@ -484,7 +484,7 @@ a.tag-4k:hover { transform: translateY(-1px); box-shadow: 0 0 15px rgba(255, 0, 
 .match-team.away .team-name { text-align: right; }
 
 .team-logo {
-  width: 30px; height: 30px; border-radius: 5px;
+  width: 30px; height: 30px; border-radius: 8px;
   background: rgba(128, 128, 128, 0.08);
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
@@ -497,7 +497,7 @@ a.tag-4k:hover { transform: translateY(-1px); box-shadow: 0 0 15px rgba(255, 0, 
 .match-score {
   display: flex; align-items: center; justify-content: center;
   min-width: 76px; height: 40px; padding: 0 14px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 22px; font-weight: 900; letter-spacing: 1px;
   text-align: center; font-variant-numeric: tabular-nums;
   text-decoration: none; cursor: pointer;
@@ -534,7 +534,7 @@ a.match-score:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 
   color: var(--text-dim);
   background: rgba(100, 116, 139, 0.1);
   border: 1px solid rgba(100, 116, 139, 0.25);
-  border-radius: 3px;
+  border-radius: 8px;
   padding: 2px 6px;
   line-height: 1.2;
   white-space: nowrap;
@@ -559,7 +559,7 @@ body.light .match-status {
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.25);
   color: var(--neon);
-  padding: 3px 10px; border-radius: 4px;
+  padding: 3px 10px; border-radius: 8px;
   font-size: 10px; font-weight: 800;
   text-decoration: none; text-transform: uppercase;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
@@ -582,6 +582,13 @@ body.light .match-status {
 .replay-select.open {
   z-index: 100;
 }
+/* Скругления кнопок и списков */
+.replay-toggle,
+.review-toggle,
+.replay-list,
+.tour-review-btn {
+  border-radius: 8px;
+}
 /* Когда селект открыт — вся карточка .match поднимается над соседними */
 .match:has(.replay-select.open) {
   z-index: 200;
@@ -598,7 +605,7 @@ body.light .match-status {
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.25);
   color: var(--neon);
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 11px; font-weight: 800;
   text-transform: uppercase; letter-spacing: 0.5px;
   cursor: pointer; font-family: inherit;
@@ -625,7 +632,7 @@ body.light .match-status {
   flex-direction: column;
   background: var(--topbar-bg);
   border: 1px solid rgba(0, 255, 213, 0.35);
-  border-radius: 6px;
+  border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   z-index: 50;
   overflow: hidden;
@@ -681,7 +688,7 @@ body.light .match-status {
 
 .quality-timer {
   display: inline-flex; align-items: center; justify-content: center;
-  gap: 6px; padding: 3px 10px; border-radius: 4px;
+  gap: 6px; padding: 3px 10px; border-radius: 8px;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.25);
   color: var(--neon);
@@ -711,7 +718,7 @@ body.light .match-status {
 .form-row { display: inline-flex; align-items: center; gap: 3px; }
 .form-sq {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 13px; height: 13px; border-radius: 2px;
+  width: 13px; height: 13px; border-radius: 8px;
   font-size: 7px; font-weight: 900; line-height: 1;
   color: #fff; user-select: none; flex-shrink: 0;
   text-decoration: none; opacity: 0.75;
@@ -787,7 +794,7 @@ body.light .form-l { background: #b91c1c; }
   text-transform: uppercase; letter-spacing: 1.5px;
   background: rgba(168, 85, 247, 0.08);
   border: 1px solid rgba(168, 85, 247, 0.3);
-  border-radius: 5px;
+  border-radius: 8px;
   text-decoration: none; cursor: pointer;
   transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
 }
@@ -795,7 +802,7 @@ a.cal-tour-title:hover { background: rgba(168, 85, 247, 0.2); border-color: var(
 .cal-tour-title.cal-tour-future { background: rgba(0, 255, 213, 0.1); border-color: rgba(0, 255, 213, 0.4); color: var(--neon); }
 .cal-tour-title.cal-tour-upcoming { background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.4); color: var(--neon-3); }
 .cal-tour-title.cal-tour-past { background: rgba(100, 116, 139, 0.08); border-color: rgba(100, 116, 139, 0.3); color: var(--text-dim); }
-.cal-tour-status { font-size: 9px; font-weight: 800; letter-spacing: 0.5px; padding: 2px 6px; background: rgba(255, 255, 255, 0.08); border-radius: 3px; text-transform: none; line-height: 1; }
+.cal-tour-status { font-size: 9px; font-weight: 800; letter-spacing: 0.5px; padding: 2px 6px; background: rgba(255, 255, 255, 0.08); border-radius: 8px; text-transform: none; line-height: 1; }
 
 .cal-month-title {
   display: inline-flex; align-items: center;
@@ -804,7 +811,7 @@ a.cal-tour-title:hover { background: rgba(168, 85, 247, 0.2); border-color: var(
   color: var(--neon);
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.3);
-  border-radius: 5px;
+  border-radius: 8px;
   text-transform: uppercase; letter-spacing: 1.5px;
 }
 
@@ -814,7 +821,7 @@ a.cal-tour-title:hover { background: rgba(168, 85, 247, 0.2); border-color: var(
   padding: 12px 16px; margin-bottom: 6px;
   background: var(--match-bg);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 14px;
   text-decoration: none; color: inherit;
   transition: border-color 0.2s, transform 0.2s;
@@ -836,7 +843,7 @@ a.cal-team:hover { color: var(--neon); }
 .cal-score {
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  gap: 2px; min-width: 44px; padding: 6px 10px; border-radius: 5px;
+  gap: 2px; min-width: 44px; padding: 6px 10px; border-radius: 8px;
   font-size: 14px; font-weight: 900; letter-spacing: 0.5px;
   text-align: center; font-variant-numeric: tabular-nums;
 }
@@ -883,7 +890,7 @@ body, .topbar, .nav-tabs, .nav-tab, .match, .tour-card, .team-card,
 .main-layout-side { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow-y: auto; overflow-x: hidden; padding-right: 2px; }
 .main-layout-side::-webkit-scrollbar { width: 4px; }
 .main-layout-side::-webkit-scrollbar-track { background: transparent; }
-.main-layout-side::-webkit-scrollbar-thumb { background: rgba(0, 255, 213, 0.2); border-radius: 2px; }
+.main-layout-side::-webkit-scrollbar-thumb { background: rgba(0, 255, 213, 0.2); border-radius: 8px; }
 
 .main-layout .match { padding: 14px 16px; gap: 12px; }
 .main-layout .match-team { font-size: 14px; gap: 8px; }
@@ -896,7 +903,7 @@ body, .topbar, .nav-tabs, .nav-tab, .match, .tour-card, .team-card,
 /* ============================================================
    ТУРНИРНАЯ ТАБЛИЦА
    ============================================================ */
-.table-card { background: var(--match-bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 0; }
+.table-card { background: var(--match-bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 0; }
 
 .table-header {
   display: grid;
@@ -963,7 +970,7 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
 
 .table-pos {
   display: flex; align-items: center; justify-content: center;
-  width: 20px; height: 20px; border-radius: 4px;
+  width: 20px; height: 20px; border-radius: 8px;
   font-size: 10px; font-weight: 900; color: var(--text-dim);
   background: rgba(255, 255, 255, 0.04);
 }
@@ -983,7 +990,7 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
 
 .table-legend { display: flex; flex-wrap: wrap; gap: 12px; padding: 8px 12px; border-top: 1px solid var(--border); font-size: 9px; color: var(--text-dim); font-weight: 600; }
 .table-legend span { display: flex; align-items: center; gap: 5px; }
-.table-legend i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+.table-legend i { width: 8px; height: 8px; border-radius: 8px; display: inline-block; }
 .table-legend-playoff { background: #ff8a8a; }
 .table-legend-relegation { background: #ff2d55; }
 
@@ -1001,7 +1008,7 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     rgba(0, 255, 213, 0.6) 50%,
     rgba(0, 255, 213, 0.35) 80%,
     transparent 100%);
-  border-radius: 1px;
+  border-radius: 8px;
 }
 
 /* ============================================================
@@ -1046,23 +1053,23 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     padding: 8px 10px;
     z-index: 1000; isolation: isolate;
     background: var(--topbar-bg);
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 8px 8px;
     margin-left: -12px; margin-right: -12px;
     padding-left: 22px; padding-right: 22px;
     margin-bottom: 12px; margin-top: 0;
     min-height: 44px; gap: 8px;
   }
 
-  .brand-logo { width: 34px; height: 34px; border-radius: 6px; }
+  .brand-logo { width: 34px; height: 34px; border-radius: 8px; }
   .brand-name { font-size: 12px; }
   .brand-sub { font-size: 9px; letter-spacing: 1.2px; }
-  .theme-toggle { width: 30px; height: 30px; font-size: 14px; border-radius: 6px; }
-  .tour-badge { height: 30px; padding: 0 12px; border-radius: 6px; }
+  .theme-toggle { width: 30px; height: 30px; font-size: 14px; border-radius: 8px; }
+  .tour-badge { height: 30px; padding: 0 12px; border-radius: 8px; }
   .tour-badge-value { font-size: 14px; }
 
   .nav-tab { padding: 0 10px; font-size: 11px; height: 30px; }
 
-  .search-toggle { display: flex; width: 30px; height: 30px; border-radius: 6px; }
+  .search-toggle { display: flex; width: 30px; height: 30px; border-radius: 8px; }
   .search-toggle svg { width: 15px; height: 15px; }
 
   .topbar-search {
@@ -1092,7 +1099,7 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .topbar-search .search-clear { right: 10px; font-size: 14px; padding: 4px 8px; }
   .topbar-search .search-suggestions.active { max-height: 220px; }
   .topbar-search .search-suggestions::-webkit-scrollbar { width: 5px; }
-  .topbar-search .search-suggestions::-webkit-scrollbar-thumb { background: linear-gradient(180deg, rgba(0, 255, 213, 0.5), rgba(168, 85, 247, 0.5)); border-radius: 3px; }
+  .topbar-search .search-suggestions::-webkit-scrollbar-thumb { background: linear-gradient(180deg, rgba(0, 255, 213, 0.5), rgba(168, 85, 247, 0.5)); border-radius: 8px; }
   .topbar-search .search-suggestion { padding: 10px 12px; font-size: 14px; }
   .topbar-search .search-suggestion-logo { width: 22px; height: 22px; }
   .topbar-search .search-suggestion-name { font-size: 14px; }
