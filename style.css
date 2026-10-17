@@ -70,7 +70,7 @@ body::before {
    ============================================================ */
 .scroll-top {
   position: fixed; bottom: 20px; right: 20px;
-  width: 44px; height: 44px; padding: 0; border-radius: 10px;
+  width: 44px; height: 44px; padding: 0; border-radius: 12px;
   background: var(--topbar-bg);
   border: 1px solid var(--border);
   color: var(--neon);
@@ -202,7 +202,7 @@ body::before {
   gap: 12px; min-height: 44px; padding: 5px 10px;
   background: var(--topbar-bg);
   border: 1px solid var(--border);
-  border-radius: 10px; margin-bottom: 12px;
+  border-radius: 12px; margin-bottom: 12px;
   position: relative; z-index: 1000; isolation: isolate;
 }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
@@ -222,7 +222,7 @@ body::before {
 
 .theme-toggle {
   display: flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border-radius: 6px;
+  width: 32px; height: 32px; border-radius: 8px;
   background: rgba(0, 255, 213, 0.1);
   border: 1px solid rgba(0, 255, 213, 0.3);
   color: var(--neon); font-size: 16px;
@@ -248,7 +248,7 @@ body::before {
 .nav-tabs::-webkit-scrollbar { display: none; }
 .nav-tab {
   display: flex; align-items: center; justify-content: center;
-  height: 32px; padding: 0 12px; border-radius: 6px;
+  height: 32px; padding: 0 12px; border-radius: 8px;
   text-decoration: none; color: var(--text-dim);
   font-weight: 800; font-size: 12px; white-space: nowrap;
   transition: background 0.2s, color 0.2s;
@@ -288,7 +288,7 @@ body::before {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.35-4.35'/></svg>");
   background-repeat: no-repeat; background-position: 10px center; background-size: 16px 16px;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--text);
   font-size: 12px; font-weight: 700; font-family: inherit;
   transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
@@ -309,7 +309,7 @@ body::before {
 
 .topbar-search .search-suggestions {
   position: absolute; top: calc(100% + 4px); left: 0; right: 0;
-  border-radius: 6px;
+  border-radius: 8px;
   background: rgba(20, 25, 40, 0.98);
   border: 1px solid rgba(0, 255, 213, 0);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 255, 213, 0.15), 0 0 20px rgba(0, 255, 213, 0.1);
@@ -423,7 +423,7 @@ body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb { backgro
   display: flex; flex-direction: column; gap: 14px;
   background: var(--match-bg);
   padding: 16px 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   position: relative; overflow: visible;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.3s;
@@ -451,7 +451,7 @@ body:has(.replay-select.open) .match:hover {
 .match-dot  { color: var(--text-muted); opacity: 0.6; }
 .match-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 
-.tag { padding: 3px 8px; border-radius: 3px; font-size: 9px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+.tag { padding: 3px 8px; border-radius: 6px; font-size: 9px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
 .tag-tour {
   background: rgba(168, 85, 247, 0.12);
   border: 1px solid rgba(168, 85, 247, 0.35);
@@ -581,6 +581,13 @@ body.light .match-status {
 }
 .replay-select.open {
   z-index: 100;
+}
+/* Скругления кнопок и списков */
+.replay-toggle,
+.review-toggle,
+.replay-list,
+.tour-review-btn {
+  border-radius: 6px;
 }
 /* Когда селект открыт — вся карточка .match поднимается над соседними */
 .match:has(.replay-select.open) {
@@ -736,7 +743,7 @@ body.light .form-l { background: #b91c1c; }
   gap: 8px; height: 56px; padding: 0 18px;
   background: var(--tour-bg);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 12px;
   text-decoration: none; color: var(--text);
   font-size: 14px; font-weight: 800;
   transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.25s ease;
@@ -757,7 +764,7 @@ body.light .form-l { background: #b91c1c; }
   gap: 8px; padding: 18px 14px;
   background: var(--tour-bg);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 12px;
   text-decoration: none; color: var(--text);
   transition: all 0.25s ease;
 }
@@ -814,7 +821,7 @@ a.cal-tour-title:hover { background: rgba(168, 85, 247, 0.2); border-color: var(
   padding: 12px 16px; margin-bottom: 6px;
   background: var(--match-bg);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 12px;
   font-size: 14px;
   text-decoration: none; color: inherit;
   transition: border-color 0.2s, transform 0.2s;
@@ -860,7 +867,7 @@ a.cal-team:hover { color: var(--neon); }
   min-height: 56px;
   background: rgba(100, 116, 139, 0.06);
   border: 1px solid rgba(100, 116, 139, 0.2);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 12px 20px;
   margin-top: 32px; margin-bottom: 0;
 }
@@ -896,7 +903,7 @@ body, .topbar, .nav-tabs, .nav-tab, .match, .tour-card, .team-card,
 /* ============================================================
    ТУРНИРНАЯ ТАБЛИЦА
    ============================================================ */
-.table-card { background: var(--match-bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 0; }
+.table-card { background: var(--match-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 0; }
 
 .table-header {
   display: grid;
@@ -1062,7 +1069,7 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
 
   .nav-tab { padding: 0 10px; font-size: 11px; height: 30px; }
 
-  .search-toggle { display: flex; width: 30px; height: 30px; border-radius: 6px; }
+  .search-toggle { display: flex; width: 30px; height: 30px; border-radius: 8px; }
   .search-toggle svg { width: 15px; height: 15px; }
 
   .topbar-search {
