@@ -37,7 +37,7 @@
             <div class="section-head-title">Результаты матчей 3-ий тур</div>
           </div>
           <div class="tour-reviews-row"><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456268029" target="_blank" rel="noopener noreferrer"><span>Лучшие сейвы тура</span></a><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456268006" target="_blank" rel="noopener noreferrer"><span>Лучшие моменты · 10.08.2026</span></a><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456267982" target="_blank" rel="noopener noreferrer"><span>Все голы · 8.08.2026</span></a><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456267983" target="_blank" rel="noopener noreferrer"><span>Все голы · 9.08.2026</span></a></div>
-          <div class="matches" id="matchesContainer"><div class="day-group"><div class="day-head"><span class="day-head-text"><span>08 авг</span><span class="day-head-rest"> · суббота</span></span></div><div class="match" id="match-08-авг-крылья-советов-балтика" data-teams="крылья советов балтика">
+          <div class="matches" id="matchesContainer"><div class="day-group" style="display:flex;flex-direction:column;gap:12px;width:100%;"><div class="day-head"><span class="day-head-text"><span>08 авг</span><span class="day-head-rest"> · суббота</span></span></div><div class="match" id="match-08-авг-крылья-советов-балтика" data-teams="крылья советов балтика">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">08</span>
@@ -157,7 +157,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 ВЭБ Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Москва</span></div>
         </div>
       </div>
-</div><div class="day-group"><div class="day-head"><span class="day-head-text"><span>09 авг</span><span class="day-head-rest"> · воскресенье</span></span></div><div class="match" id="match-09-авг-динамо-москва-динамо-махачкала" data-teams="динамо москва динамо махачкала">
+</div><div class="day-group" style="display:flex;flex-direction:column;gap:12px;width:100%;"><div class="day-head"><span class="day-head-text"><span>09 авг</span><span class="day-head-rest"> · воскресенье</span></span></div><div class="match" id="match-09-авг-динамо-москва-динамо-махачкала" data-teams="динамо москва динамо махачкала">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">09</span>
@@ -317,7 +317,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Ак Барс Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Казань</span></div>
         </div>
       </div>
-</div><div class="day-group"><div class="day-head"><span class="day-head-text"><span>10 авг</span><span class="day-head-rest"> · понедельник</span></span></div><div class="match" id="match-10-авг-факел-ахмат" data-teams="факел ахмат">
+</div><div class="day-group" style="display:flex;flex-direction:column;gap:12px;width:100%;"><div class="day-head"><span class="day-head-text"><span>10 авг</span><span class="day-head-rest"> · понедельник</span></span></div><div class="match" id="match-10-авг-факел-ахмат" data-teams="факел ахмат">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">10</span>
@@ -581,7 +581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 17:46 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 17:50 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1523,18 +1523,6 @@
           group.style.order = '0';
         });
 
-        // Находим первый блок с live-матчем и поднимаем его наверх
-        let liveGroup = null;
-        for (let i = 0; i < dayGroups.length; i++) {
-          if (dayGroups[i].querySelector('.match.is-live')) {
-            liveGroup = dayGroups[i];
-            break;
-          }
-        }
-
-        if (liveGroup) {
-          liveGroup.style.order = '-1';
-        }
         // Находим первый блок с live-матчем и поднимаем его наверх
         let liveGroup = null;
         for (let i = 0; i < dayGroups.length; i++) {
