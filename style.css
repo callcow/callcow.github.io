@@ -557,9 +557,7 @@ a.match-score:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 
 
 /* ===== Плашка LIVE / ПЕРЕРЫВ (в стиле статуса «Завершён») ===== */
 .match-live-badge.match-status {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block; /* как блочный элемент — заполняет родителя */
   width: 100%;
   box-sizing: border-box;
   font-size: 9px;
@@ -573,6 +571,7 @@ a.match-score:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 
   padding: 2px 6px;
   line-height: 1.2;
   white-space: nowrap;
+  text-align: center;
   margin-top: 4px;
 }
 .match-live-badge.match-status-live {
