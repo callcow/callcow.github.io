@@ -37,7 +37,7 @@
             <div class="section-head-title">Результаты матчей 6-ой тур</div>
           </div>
           <div class="tour-reviews-row"><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456268192" target="_blank" rel="noopener noreferrer"><span>Лучшие сейвы тура</span></a><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456268154" target="_blank" rel="noopener noreferrer"><span>Все голы · 28.08.2026</span></a><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456268164" target="_blank" rel="noopener noreferrer"><span>Все голы · 29.08.2026</span></a><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456268175" target="_blank" rel="noopener noreferrer"><span>Все голы · 30.08.2026</span></a></div>
-          <div class="matches" id="matchesContainer"><div class="day-group"><div class="day-head"><span class="day-head-text"><span>28 авг</span><span class="day-head-rest"> · пятница</span></span></div><div class="match" id="match-28-авг-акрон-цска" data-teams="акрон цска">
+          <div class="matches" id="matchesContainer"><div class="day-group" style="display: flex; flex-direction: column; gap: 12px; width: 100%;"><div class="day-head"><span class="day-head-text"><span>28 авг</span><span class="day-head-rest"> · пятница</span></span></div><div class="match" id="match-28-авг-акрон-цска" data-teams="акрон цска">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">28</span>
@@ -77,7 +77,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Солидарность Самара Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Самара</span></div>
         </div>
       </div>
-</div><div class="day-group"><div class="day-head"><span class="day-head-text"><span>29 авг</span><span class="day-head-rest"> · суббота</span></span></div><div class="match" id="match-29-авг-факел-зенит" data-teams="факел зенит">
+</div><div class="day-group" style="display: flex; flex-direction: column; gap: 12px; width: 100%;"><div class="day-head"><span class="day-head-text"><span>29 авг</span><span class="day-head-rest"> · суббота</span></span></div><div class="match" id="match-29-авг-факел-зенит" data-teams="факел зенит">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">29</span>
@@ -237,7 +237,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Ахмат Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Грозный</span></div>
         </div>
       </div>
-</div><div class="day-group"><div class="day-head"><span class="day-head-text"><span>30 авг</span><span class="day-head-rest"> · воскресенье</span></span></div><div class="match" id="match-30-авг-родина-балтика" data-teams="родина балтика">
+</div><div class="day-group" style="display: flex; flex-direction: column; gap: 12px; width: 100%;"><div class="day-head"><span class="day-head-text"><span>30 авг</span><span class="day-head-rest"> · воскресенье</span></span></div><div class="match" id="match-30-авг-родина-балтика" data-teams="родина балтика">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">30</span>
@@ -581,7 +581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 17:30 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 17:40 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1511,19 +1511,30 @@
           }
         });
 
-                // ===== УМНАЯ СОРТИРОВКА ДНЕЙ И МАТЧЕЙ =====
+        // ===== УМНАЯ СОРТИРОВКА ДНЕЙ И МАТЧЕЙ =====
         const container = document.getElementById('matchesContainer');
         if (!container) return;
 
         // Находим все блоки дней
         const dayGroups = Array.from(container.querySelectorAll('.day-group'));
         
-        // У каждого блока проверяем: есть ли внутри Live-матч?
+        // Сначала сбрасываем order у всех
         dayGroups.forEach(function(group) {
-          const hasLive = group.querySelector('.match.is-live') !== null;
-          // Если есть Live — поднимаем весь блок дня наверх (order: -1). Если нет — возвращаем на место (order: 0).
-          group.style.order = hasLive ? '-1' : '0';
+          group.style.order = '0';
         });
+
+        // Находим первый блок с live-матчем и поднимаем его наверх
+        let liveGroup = null;
+        for (let i = 0; i < dayGroups.length; i++) {
+          if (dayGroups[i].querySelector('.match.is-live')) {
+            liveGroup = dayGroups[i];
+            break;
+          }
+        }
+
+        if (liveGroup) {
+          liveGroup.style.order = '-1';
+        }
       }
 
       updateLive();
