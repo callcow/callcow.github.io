@@ -544,10 +544,10 @@ a.match-score:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 
 }
 .match-status {
   position: absolute;
-  top: 100%; /* Встает ровно под счетом */
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 6px; /* Отступ от счета до плашки */
+  margin-top: 4px; /* Уменьшили отступ, чтобы не наезжала на форму */
   font-size: 9px;
   font-weight: 900;
   letter-spacing: 1px;
@@ -1233,15 +1233,34 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .cal-teams-filter::-webkit-scrollbar { display: none; }
   .cal-team-filter { width: 22px; height: 22px; padding: 2px; flex-shrink: 0; }
   .cal-teams-arrow { display: flex; }
-  .cal-match { grid-template-columns: auto 1fr auto 1fr; gap: 8px; padding: 10px 12px; }
-  .cal-date { padding-right: 8px; gap: 4px; }
+   /* На мобильных карточка календаря делится на 2 строки:
+     Сверху: Дата (слева) и Счёт (справа)
+     Снизу: Домашняя команда (слева) и Гостевая (справа) */
+  .cal-match { 
+    grid-template-columns: 1fr auto; 
+    grid-template-areas: 
+      "date score"
+      "home away";
+    gap: 8px 10px; 
+    padding: 12px; 
+    align-items: center;
+  }
+  
+  .cal-date { grid-area: date; padding-right: 0; border-right: none; justify-content: flex-start; }
+  .cal-score { grid-area: score; justify-self: end; min-width: 60px; }
+  
+  .cal-team { grid-area: home; justify-content: flex-start; text-align: left; } 
+  .cal-team-away { grid-area: away; justify-content: flex-end; text-align: right; }
+
   .cal-day { font-size: 14px; }
   .cal-month-short { font-size: 9px; letter-spacing: 0.5px; }
   .cal-time-inline { font-size: 11px; }
+  
   .cal-team { gap: 4px; }
   .cal-team .team-logo { width: 20px; height: 20px; }
   .cal-team-name { font-size: 12px; }
-  .cal-score { font-size: 14px; padding: 4px 6px; min-width: 50px; }
+  
+  .cal-score { font-size: 14px; padding: 4px 6px; }
   .cal-score.cal-score-upcoming { font-size: 12px; padding: 4px 8px; }
 
   .scroll-top { bottom: 16px; right: 16px; width: 40px; height: 40px; }
