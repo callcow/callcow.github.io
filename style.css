@@ -417,7 +417,12 @@ body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb { backgro
 /* ============================================================
    МАТЧИ
    ============================================================ */
-.matches { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+.matches { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+  margin-bottom: 36px; 
+}
 
 .match {
   display: flex; flex-direction: column; gap: 14px;
