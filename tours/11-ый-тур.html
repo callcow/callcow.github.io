@@ -581,7 +581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 18:00 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 18:16 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1538,9 +1538,11 @@
           }
 
           if (m.half === 0) {
-            badge.innerHTML = '<span>ПЕРЕРЫВ</span>';
+            badge.innerHTML = 'ПЕРЕРЫВ';
+            badge.classList.add('match-status');
           } else {
-            badge.innerHTML = '<span class="live-dot"></span><span>LIVE</span>';
+            badge.innerHTML = 'LIVE';
+            badge.classList.add('match-status', 'match-status-live');
           }
         });
       }
