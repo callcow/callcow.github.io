@@ -1523,7 +1523,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 23:32 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 23:41 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -2475,14 +2475,9 @@
           if (!badge) {
             badge = document.createElement('div');
             badge.className = 'match-status match-live-badge';
-            // Ищем блок формы, чтобы вставить плашку по центру
-            const formBlock = card.querySelector('.match-form');
-            if (formBlock) {
-              // Вставляем между левой и правой частью формы
-              formBlock.insertBefore(badge, formBlock.children[1]);
-            }
+            const block = card.querySelector('.match-score-block');
+            if (block) block.appendChild(badge);
           }
-
           if (m.half === 0) {
             badge.innerHTML = 'ПЕРЕРЫВ';
             badge.classList.remove('match-status-live');
