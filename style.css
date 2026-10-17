@@ -417,7 +417,19 @@ body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb { backgro
 /* ============================================================
    МАТЧИ
    ============================================================ */
-.matches { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+.matches { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+  margin-bottom: 36px; 
+}
+
+.day-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Отступы внутри блока дня */
+  width: 100%;
+}
 
 .match {
   display: flex; flex-direction: column; gap: 14px;
