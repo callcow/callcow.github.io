@@ -562,9 +562,27 @@ a.match-score:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 
   color: #ff3b3b;
   background: rgba(255, 59, 59, 0.1);
   border: 1px solid rgba(255, 59, 59, 0.3);
-  /* Убираем лишнее, чтобы не конфликтовало с .match-status */
-  display: inline-block;
+  display: flex; /* Flex, чтобы кружок и текст стояли в ряд */
+  align-items: center;
+  justify-content: center;
+  gap: 6px; /* Отступ между кружком и текстом */
   margin-top: 4px;
+}
+
+/* Пульсирующий кружок */
+.match-live-badge .live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff3b3b;
+  box-shadow: 0 0 8px #ff3b3b;
+  animation: livePulse 1.4s infinite ease-in-out;
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
 }
 .match-live-badge.match-status-live {
   color: #ff3b3b;
