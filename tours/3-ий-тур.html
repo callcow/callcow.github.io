@@ -581,7 +581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 14:32 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 14:37 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1480,12 +1480,13 @@
       function updateLive() {
         const now = Date.now();
         liveMatches.forEach(function(item) {
-          const elapsed = now - item.startMs;
+          const realElapsed = now - item.startMs;
+          const elapsed = realElapsed - LIVE_DELAY_MS;
           const endMs = MATCH_DURATION_MS;
 
           let badge = item.card.querySelector('.match-live-badge');
 
-          if (elapsed < LIVE_DELAY_MS || elapsed > endMs) {
+          if (realElapsed < LIVE_DELAY_MS || realElapsed > endMs) {
             if (badge) badge.remove();
             item.card.classList.remove('is-live');
             return;
