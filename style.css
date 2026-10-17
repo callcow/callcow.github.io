@@ -538,10 +538,15 @@ a.match-score:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  position: relative; /* Чтобы плашка позиционировалась относительно этого блока */
   min-width: 76px;
 }
 .match-status {
+  position: absolute;
+  bottom: -20px; /* Сдвигаем вниз, чтобы она оказалась ровно между квадратиками */
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 9px;
   font-weight: 900;
   letter-spacing: 1px;
@@ -553,7 +558,7 @@ a.match-score:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 
   padding: 2px 6px;
   line-height: 1.2;
   white-space: nowrap;
-  justify-self: center; /* Центрируем в гриде */
+  z-index: 2;
 }
 
 /* ===== Плашка LIVE / ПЕРЕРЫВ (в стиле статуса «Завершён») ===== */
@@ -762,10 +767,10 @@ body.light .match-status {
    ============================================================ */
 .match-form { 
   display: grid; 
-  grid-template-columns: 1fr auto 1fr; /* 3 колонки: лево, центр (плашка), право */
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
   gap: 10px; 
   margin-top: -4px; 
+  position: relative;
 }
 .match-form-side { display: flex; align-items: center; min-width: 0; }
 .match-form-home { justify-content: flex-start; }
