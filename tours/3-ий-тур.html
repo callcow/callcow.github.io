@@ -581,7 +581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 16:23 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 16:56 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1489,6 +1489,30 @@
           if (realElapsed < LIVE_DELAY_MS || realElapsed > endMs) {
             if (badge) badge.remove();
             item.card.classList.remove('is-live');
+            return;
+          }
+
+          const wasLive = item.card.classList.contains('is-live');
+          item.card.classList.add('is-live');
+
+          // Поднимаем live-матч наверх (сразу после заголовка дня)
+          if (!wasLive) {
+            const container = item.card.parentElement;
+            const dayHeader = item.card.previousElementSibling;
+            if (dayHeader && dayHeader.classList.contains('day-head')) {
+              // Вставляем после заголовка дня (перед первым матчем дня)
+              const firstMatch = dayHeader.nextElementSibling;
+              if (firstMatch && firstMatch !== item.card) {
+                container.insertBefore(item.card, firstMatch);
+              }
+            } else {
+              // Если нет заголовка — вставляем в самое начало контейнера
+              const firstChild = container.firstChild;
+              if (firstChild && firstChild !== item.card) {
+                container.insertBefore(item.card, firstChild);
+              }
+            }
+          }
             return;
           }
 
