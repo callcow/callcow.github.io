@@ -593,7 +593,7 @@ body.light .match-status {
 .review-toggle {
   display: inline-flex; align-items: center; justify-content: center;
   gap: 4px;
-  height: 20px;
+  height: 23px;
   padding: 0 8px;
   background: rgba(0, 255, 213, 0.08);
   border: 1px solid rgba(0, 255, 213, 0.25);
@@ -655,7 +655,7 @@ body.light .match-status {
   margin: 0 4px 12px;
 }
 .tour-review-btn {
-  height: 20px;
+  height: 23px;
   padding: 0 8px;
   font-size: 9px;
 }
