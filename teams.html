@@ -44,7 +44,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 21:53 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 23:26 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -995,10 +995,13 @@
 
           if (!badge) {
             badge = document.createElement('div');
-            // СРАЗУ даем базовый класс, как у плашки "Завершён"
             badge.className = 'match-status match-live-badge';
-            const block = card.querySelector('.match-score-block');
-            if (block) block.appendChild(badge);
+            // Ищем блок формы, чтобы вставить плашку по центру
+            const formBlock = card.querySelector('.match-form');
+            if (formBlock) {
+              // Вставляем между левой и правой частью формы
+              formBlock.insertBefore(badge, formBlock.children[1]);
+            }
           }
 
           if (m.half === 0) {
