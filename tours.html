@@ -55,7 +55,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 18:53 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 18:58 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -951,7 +951,7 @@
         return { half: 2, minute: Math.floor((elapsed - SECOND_HALF_START_MS) / 60000) + 46 };
       }
 
-            function updateLive() {
+      function updateLive() {
         const now = Date.now();
         const container = document.getElementById('matchesContainer');
         if (!container) return;
@@ -1020,6 +1020,9 @@
             badge.innerHTML = '<span class="live-dot"></span>LIVE';
             badge.classList.add('match-status-live');
           }
+        });
+      }
+
       updateLive();
       setInterval(updateLive, 30000);
     })();
