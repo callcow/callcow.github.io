@@ -55,7 +55,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 17:02 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 17:18 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -966,27 +966,7 @@
             return;
           }
 
-          const wasLive = item.card.classList.contains('is-live');
           item.card.classList.add('is-live');
-
-          // Поднимаем live-матч наверх (сразу после заголовка дня)
-          if (!wasLive) {
-            const container = item.card.parentElement;
-            const dayHeader = item.card.previousElementSibling;
-            if (dayHeader && dayHeader.classList.contains('day-head')) {
-              // Вставляем после заголовка дня (перед первым матчем дня)
-              const firstMatch = dayHeader.nextElementSibling;
-              if (firstMatch && firstMatch !== item.card) {
-                container.insertBefore(item.card, firstMatch);
-              }
-            } else {
-              // Если нет заголовка — вставляем в самое начало контейнера
-              const firstChild = container.firstChild;
-              if (firstChild && firstChild !== item.card) {
-                container.insertBefore(item.card, firstChild);
-              }
-            }
-          }
 
           const m = getMatchMinute(elapsed);
 
@@ -1003,6 +983,20 @@
           } else {
             badge.innerHTML = '<span class="live-dot"></span><span>LIVE ' + m.minute + "'</span>";
           }
+        });
+
+        // ===== УМНАЯ СОРТИРОВКА ДНЕЙ И МАТЧЕЙ =====
+        const container = document.getElementById('matchesContainer');
+        if (!container) return;
+
+        // Находим все блоки дней
+        const dayGroups = Array.from(container.querySelectorAll('.day-group'));
+        
+        // У каждого блока проверяем: есть ли внутри Live-матч?
+        dayGroups.forEach(function(group) {
+          const hasLive = group.querySelector('.match.is-live') !== null;
+          // Если есть Live — поднимаем весь блок дня наверх (order: -1). Если нет — возвращаем на место (order: 0).
+          group.style.order = hasLive ? '-1' : '0';
         });
       }
 

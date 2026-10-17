@@ -37,7 +37,7 @@
             <div class="section-head-title">Результаты матчей 4-ый тур</div>
           </div>
           <div class="tour-reviews-row"><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456268090" target="_blank" rel="noopener noreferrer"><span>Лучшие сейвы тура</span></a><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456268035" target="_blank" rel="noopener noreferrer"><span>Все голы · 14.08.2026</span></a><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456268041" target="_blank" rel="noopener noreferrer"><span>Все голы · 15.08.2026</span></a><a class="replay-toggle tour-review-btn" href="https://vkvideo.ru/video_ext.php?oid=-51812607&id=456268053" target="_blank" rel="noopener noreferrer"><span>Все голы · 16.08.2026</span></a></div>
-          <div class="matches" id="matchesContainer"><div class="day-head"><span class="day-head-text"><span>14 авг</span><span class="day-head-rest"> · пятница</span></span></div><div class="match" id="match-14-авг-оренбург-локомотив" data-teams="оренбург локомотив">
+          <div class="matches" id="matchesContainer"><div class="day-group"><div class="day-head"><span class="day-head-text"><span>14 авг</span><span class="day-head-rest"> · пятница</span></span></div><div class="match" id="match-14-авг-оренбург-локомотив" data-teams="оренбург локомотив">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">14</span>
@@ -77,7 +77,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Газовик</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Оренбург</span></div>
         </div>
       </div>
-<div class="day-head"><span class="day-head-text"><span>15 авг</span><span class="day-head-rest"> · суббота</span></span></div><div class="match" id="match-15-авг-родина-акрон" data-teams="родина акрон">
+</div><div class="day-group"><div class="day-head"><span class="day-head-text"><span>15 авг</span><span class="day-head-rest"> · суббота</span></span></div><div class="match" id="match-15-авг-родина-акрон" data-teams="родина акрон">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">15</span>
@@ -237,7 +237,7 @@
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Ozon Арена</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Краснодар</span></div>
         </div>
       </div>
-<div class="day-head"><span class="day-head-text"><span>16 авг</span><span class="day-head-rest"> · воскресенье</span></span></div><div class="match" id="match-16-авг-зенит-динамо-москва" data-teams="зенит динамо москва">
+</div><div class="day-group"><div class="day-head"><span class="day-head-text"><span>16 авг</span><span class="day-head-rest"> · воскресенье</span></span></div><div class="match" id="match-16-авг-зенит-динамо-москва" data-teams="зенит динамо москва">
         <div class="match-top">
           <div class="match-when">
             <span class="match-day">16</span>
@@ -581,7 +581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">17.10.2026 17:02 МСК</span><br>
+      Обновлено <span class="neon">17.10.2026 17:18 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1492,27 +1492,7 @@
             return;
           }
 
-          const wasLive = item.card.classList.contains('is-live');
           item.card.classList.add('is-live');
-
-          // Поднимаем live-матч наверх (сразу после заголовка дня)
-          if (!wasLive) {
-            const container = item.card.parentElement;
-            const dayHeader = item.card.previousElementSibling;
-            if (dayHeader && dayHeader.classList.contains('day-head')) {
-              // Вставляем после заголовка дня (перед первым матчем дня)
-              const firstMatch = dayHeader.nextElementSibling;
-              if (firstMatch && firstMatch !== item.card) {
-                container.insertBefore(item.card, firstMatch);
-              }
-            } else {
-              // Если нет заголовка — вставляем в самое начало контейнера
-              const firstChild = container.firstChild;
-              if (firstChild && firstChild !== item.card) {
-                container.insertBefore(item.card, firstChild);
-              }
-            }
-          }
 
           const m = getMatchMinute(elapsed);
 
@@ -1529,6 +1509,20 @@
           } else {
             badge.innerHTML = '<span class="live-dot"></span><span>LIVE ' + m.minute + "'</span>";
           }
+        });
+
+        // ===== УМНАЯ СОРТИРОВКА ДНЕЙ И МАТЧЕЙ =====
+        const container = document.getElementById('matchesContainer');
+        if (!container) return;
+
+        // Находим все блоки дней
+        const dayGroups = Array.from(container.querySelectorAll('.day-group'));
+        
+        // У каждого блока проверяем: есть ли внутри Live-матч?
+        dayGroups.forEach(function(group) {
+          const hasLive = group.querySelector('.match.is-live') !== null;
+          // Если есть Live — поднимаем весь блок дня наверх (order: -1). Если нет — возвращаем на место (order: 0).
+          group.style.order = hasLive ? '-1' : '0';
         });
       }
 
