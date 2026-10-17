@@ -1233,10 +1233,9 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .cal-teams-filter::-webkit-scrollbar { display: none; }
   .cal-team-filter { width: 22px; height: 22px; padding: 2px; flex-shrink: 0; }
   .cal-teams-arrow { display: flex; }
-   /* На мобильных карточка календаря делится на 2 строки:
-     Сверху: Дата (слева) и Счёт (справа)
-     Снизу: Домашняя команда (слева) и Гостевая (справа) */
+    /* --- МОБИЛЬНАЯ ВЕРСИЯ КАЛЕНДАРЯ --- */
   .cal-match { 
+    display: grid;
     grid-template-columns: 1fr auto; 
     grid-template-areas: 
       "date score"
@@ -1246,23 +1245,46 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     align-items: center;
   }
   
-  .cal-date { grid-area: date; padding-right: 0; border-right: none; justify-content: flex-start; }
-  .cal-score { grid-area: score; justify-self: end; min-width: 60px; }
+  /* Дата */
+  .cal-date { 
+    grid-area: date; 
+    padding-right: 0; 
+    border-right: none; 
+    justify-content: flex-start; 
+  }
   
-  .cal-team { grid-area: home; justify-content: flex-start; text-align: left; } 
-  .cal-team-away { grid-area: away; justify-content: flex-end; text-align: right; }
-
-  .cal-day { font-size: 14px; }
-  .cal-month-short { font-size: 9px; letter-spacing: 0.5px; }
-  .cal-time-inline { font-size: 11px; }
+  /* Счёт */
+  .cal-score { 
+    grid-area: score; 
+    justify-self: end; 
+    min-width: 60px; 
+    font-size: 14px; 
+    padding: 4px 6px; 
+  }
+  .cal-score.cal-score-upcoming { 
+    font-size: 12px; 
+    padding: 4px 8px; 
+  }
   
-  .cal-team { gap: 4px; }
+  /* Команды */
+  .cal-team { 
+    grid-area: home; 
+    justify-content: flex-start; 
+    text-align: left; 
+    gap: 4px;
+  } 
+  .cal-team-away { 
+    grid-area: away; 
+    justify-content: flex-end; 
+    text-align: right; 
+  }
+  
   .cal-team .team-logo { width: 20px; height: 20px; }
   .cal-team-name { font-size: 12px; }
   
-  .cal-score { font-size: 14px; padding: 4px 6px; }
-  .cal-score.cal-score-upcoming { font-size: 12px; padding: 4px 8px; }
-
+  .cal-day { font-size: 14px; }
+  .cal-month-short { font-size: 9px; letter-spacing: 0.5px; }
+  .cal-time-inline { font-size: 11px; }
   .scroll-top { bottom: 16px; right: 16px; width: 40px; height: 40px; }
   .scroll-top svg { width: 20px; height: 20px; }
 
