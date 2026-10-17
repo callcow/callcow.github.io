@@ -1233,58 +1233,59 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .cal-teams-filter::-webkit-scrollbar { display: none; }
   .cal-team-filter { width: 22px; height: 22px; padding: 2px; flex-shrink: 0; }
   .cal-teams-arrow { display: flex; }
-    /* --- МОБИЛЬНАЯ ВЕРСИЯ КАЛЕНДАРЯ --- */
+     /* --- МОБИЛЬНАЯ ВЕРСИЯ КАЛЕНДАРЯ --- */
   .cal-match { 
-    display: grid;
-    grid-template-columns: 1fr auto; 
+    display: grid !important;
+    grid-template-columns: 1fr auto !important; 
     grid-template-areas: 
       "date score"
-      "home away";
-    gap: 8px 10px; 
-    padding: 12px; 
-    align-items: center;
+      "home away" !important;
+    gap: 8px 10px !important; 
+    padding: 12px !important; 
+    align-items: center !important;
   }
   
   /* Дата */
   .cal-date { 
-    grid-area: date; 
-    padding-right: 0; 
-    border-right: none; 
-    justify-content: flex-start; 
+    grid-area: date !important; 
+    padding-right: 0 !important; 
+    border-right: none !important; 
+    justify-content: flex-start !important; 
   }
   
   /* Счёт */
   .cal-score { 
-    grid-area: score; 
-    justify-self: end; 
-    min-width: 60px; 
-    font-size: 14px; 
-    padding: 4px 6px; 
+    grid-area: score !important; 
+    justify-self: end !important; 
+    min-width: 60px !important; 
+    font-size: 14px !important; 
+    padding: 4px 6px !important; 
   }
   .cal-score.cal-score-upcoming { 
-    font-size: 12px; 
-    padding: 4px 8px; 
+    font-size: 12px !important; 
+    padding: 4px 8px !important; 
   }
   
   /* Команды */
-  .cal-team { 
-    grid-area: home; 
-    justify-content: flex-start; 
-    text-align: left; 
-    gap: 4px;
+  .cal-team-home { 
+    grid-area: home !important; 
+    justify-content: flex-start !important; 
+    text-align: left !important; 
+    gap: 4px !important;
   } 
   .cal-team-away { 
-    grid-area: away; 
-    justify-content: flex-end; 
-    text-align: right; 
+    grid-area: away !important; 
+    justify-content: flex-end !important; 
+    text-align: right !important; 
+    gap: 4px !important;
   }
   
-  .cal-team .team-logo { width: 20px; height: 20px; }
-  .cal-team-name { font-size: 12px; }
+  .cal-team .team-logo { width: 20px !important; height: 20px !important; }
+  .cal-team-name { font-size: 12px !important; }
   
-  .cal-day { font-size: 14px; }
-  .cal-month-short { font-size: 9px; letter-spacing: 0.5px; }
-  .cal-time-inline { font-size: 11px; }
+  .cal-day { font-size: 14px !important; }
+  .cal-month-short { font-size: 9px !important; letter-spacing: 0.5px !important; }
+  .cal-time-inline { font-size: 11px !important; }
   .scroll-top { bottom: 16px; right: 16px; width: 40px; height: 40px; }
   .scroll-top svg { width: 20px; height: 20px; }
 
