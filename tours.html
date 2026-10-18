@@ -55,7 +55,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">18.10.2026 12:41 МСК</span><br>
+      Обновлено <span class="neon">18.10.2026 12:49 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -324,18 +324,31 @@
 
         const effectivelyEmpty = (words.length === 0) || !anyFound;
 
+        const pastContainer = document.getElementById('pastMatchesContainer');
+        const currentContainer = document.getElementById('matchesContainer');
+
         allMatches.forEach(function(el) {
           const isPast = el.classList.contains('past-match');
+
           if (effectivelyEmpty) {
             el.style.display = isPast ? 'none' : '';
+            if (isPast && el.parentElement !== pastContainer) {
+              pastContainer.appendChild(el);
+            }
           } else {
             const teams = el.getAttribute('data-teams') || '';
             const match = words.every(function(w) { return teams.includes(w); });
             el.style.display = match ? '' : 'none';
+
+            if (match && isPast && el.parentElement !== pastContainer) {
+               pastContainer.appendChild(el);
+            }
+            if (match && !isPast && el.parentElement !== currentContainer) {
+               currentContainer.appendChild(el);
+            }
           }
         });
 
-        // Скрываем заголовки дней, под которыми не осталось видимых матчей
         document.querySelectorAll('.day-head').forEach(function(head) {
           let next = head.nextElementSibling;
           let hasVisible = false;
@@ -349,7 +362,7 @@
           head.style.display = hasVisible ? '' : 'none';
         });
 
-        const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
+        const visiblePast = document.querySelectorAll('#pastMatchesContainer .match:not([style*="display: none"])').length;
         const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
 
         const pastSection = document.getElementById('pastSection');
@@ -368,7 +381,6 @@
 
         highlightTableRow(matchedTeam ? matchedTeam.name : null);
 
-        // Подсветка команды внутри карточек матчей
         document.querySelectorAll('.match').forEach(function(el) {
           el.querySelectorAll('.match-team').forEach(function(t) {
             t.classList.remove('match-team-hl');
@@ -545,9 +557,22 @@
 
       if (filterParam === '4k') {
         const allMatches = document.querySelectorAll('.match');
+        const pastContainer = document.getElementById('pastMatchesContainer');
+        const currentContainer = document.getElementById('matchesContainer');
+
         allMatches.forEach(function(el) {
           const badge = el.querySelector('.tag-4k');
-          el.style.display = badge ? '' : 'none';
+          const isPast = el.classList.contains('past-match');
+          const visible = badge ? '' : 'none';
+          el.style.display = visible;
+
+          if (badge) {
+             if (isPast && el.parentElement !== pastContainer) {
+                pastContainer.appendChild(el);
+             } else if (!isPast && el.parentElement !== currentContainer) {
+                currentContainer.appendChild(el);
+             }
+          }
         });
 
         // Скрываем заголовки дней, под которыми не осталось видимых матчей
