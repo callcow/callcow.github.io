@@ -3631,7 +3631,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">18.10.2026 12:55 МСК</span><br>
+      Обновлено <span class="neon">18.10.2026 12:58 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -4139,7 +4139,21 @@
         const pastContainer = document.getElementById('pastMatchesContainer');
         const currentContainer = document.getElementById('matchesContainer');
 
-      allMatches.forEach(function(el) {
+        allMatches.forEach(function(el) {
+          const badge = el.querySelector('.tag-4k');
+          const isPast = el.classList.contains('past-match');
+          const visible = badge ? '' : 'none';
+          el.style.display = visible;
+
+          if (badge) {
+             // Если прошедший 4K — вставляем в НАЧАЛО контейнера прошедших
+             if (isPast && el.parentElement !== pastContainer) {
+                pastContainer.insertBefore(el, pastContainer.firstChild);
+             } else if (!isPast && el.parentElement !== currentContainer) {
+                currentContainer.appendChild(el);
+             }
+          }
+        });
 
         // Скрываем заголовки дней, под которыми не осталось видимых матчей
         document.querySelectorAll('.day-head').forEach(function(head) {
@@ -4155,7 +4169,7 @@
           head.style.display = hasVisible ? '' : 'none';
         });
 
-        const visiblePast = document.querySelectorAll('.past-match:not([style*="display: none"])').length;
+        const visiblePast = document.querySelectorAll('#pastMatchesContainer .match:not([style*="display: none"])').length;
         const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
         const pastSection = document.getElementById('pastSection');
         const currentSection = document.getElementById('currentSection');
