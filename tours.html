@@ -55,7 +55,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">18.10.2026 13:09 МСК</span><br>
+      Обновлено <span class="neon">18.10.2026 13:15 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -352,17 +352,10 @@
           }
         });
 
-        document.querySelectorAll('.day-head').forEach(function(head) {
-          let next = head.nextElementSibling;
-          let hasVisible = false;
-          while (next && !next.classList.contains('day-head')) {
-            if (next.classList.contains('match') && next.style.display !== 'none') {
-              hasVisible = true;
-              break;
-            }
-            next = next.nextElementSibling;
-          }
-          head.style.display = hasVisible ? '' : 'none';
+        // Скрываем целые группы дней, если в них не осталось видимых матчей
+        document.querySelectorAll('.day-group').forEach(function(group) {
+          const visibleInGroup = group.querySelectorAll('.match:not([style*="display: none"])').length;
+          group.style.display = visibleInGroup > 0 ? '' : 'none';
         });
 
         const visiblePast = document.querySelectorAll('#pastMatchesContainer .match:not([style*="display: none"])').length;
@@ -591,18 +584,10 @@
           }
         });
 
-        // Скрываем заголовки дней, под которыми не осталось видимых матчей
-        document.querySelectorAll('.day-head').forEach(function(head) {
-          let next = head.nextElementSibling;
-          let hasVisible = false;
-          while (next && !next.classList.contains('day-head')) {
-            if (next.classList.contains('match') && next.style.display !== 'none') {
-              hasVisible = true;
-              break;
-            }
-            next = next.nextElementSibling;
-          }
-          head.style.display = hasVisible ? '' : 'none';
+        // Скрываем целые группы дней, если в них не осталось видимых матчей
+        document.querySelectorAll('.day-group').forEach(function(group) {
+          const visibleInGroup = group.querySelectorAll('.match:not([style*="display: none"])').length;
+          group.style.display = visibleInGroup > 0 ? '' : 'none';
         });
 
         const visiblePast = document.querySelectorAll('#pastMatchesContainer .match:not([style*="display: none"])').length;
