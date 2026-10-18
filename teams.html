@@ -44,7 +44,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">18.10.2026 14:20 МСК</span><br>
+      Обновлено <span class="neon">18.10.2026 14:36 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1028,8 +1028,10 @@
           if (!badge) {
             badge = document.createElement('div');
             badge.className = 'match-status match-live-badge';
-            const block = card.querySelector('.match-score-block');
-            if (block) block.appendChild(badge);
+            const formBlock = card.querySelector('.match-form');
+            if (formBlock) {
+              formBlock.insertBefore(badge, formBlock.children[1]);
+            }
           }
           if (m.half === 0) {
             badge.innerHTML = 'ПЕРЕРЫВ';
