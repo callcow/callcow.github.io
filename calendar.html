@@ -1523,7 +1523,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">18.10.2026 12:58 МСК</span><br>
+      Обновлено <span class="neon">18.10.2026 13:03 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1875,12 +1875,18 @@
         const divider = document.getElementById('sectionsDivider');
         if (q === '' || !anyFound) {
           if (pastSection) pastSection.style.display = 'none';
-          if (currentSection) currentSection.style.display = '';
+          if (currentSection) {
+            currentSection.style.display = '';
+            currentSection.style.marginBottom = ''; // Возвращаем отступ
+          }
           if (headerDefault) headerDefault.style.display = '';
           if (headerSearch) headerSearch.style.display = 'none';
           if (divider) divider.style.display = 'none';
         } else {
-          if (currentSection) currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
+          if (currentSection) {
+            currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
+            currentSection.style.marginBottom = visibleCurrent > 0 ? '' : '0'; // Убираем отступ, если скрыто
+          }
           if (headerDefault) headerDefault.style.display = 'none';
           if (headerSearch) headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
           if (pastSection) pastSection.style.display = visiblePast > 0 ? '' : 'none';
