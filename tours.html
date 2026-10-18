@@ -55,7 +55,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">18.10.2026 12:49 МСК</span><br>
+      Обновлено <span class="neon">18.10.2026 12:55 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -332,6 +332,7 @@
 
           if (effectivelyEmpty) {
             el.style.display = isPast ? 'none' : '';
+            // Возвращаем в контейнер будущих (в конец)
             if (isPast && el.parentElement !== pastContainer) {
               pastContainer.appendChild(el);
             }
@@ -340,9 +341,11 @@
             const match = words.every(function(w) { return teams.includes(w); });
             el.style.display = match ? '' : 'none';
 
+            // Если прошедший — вставляем в САМОЕ НАЧАЛО контейнера прошедших
             if (match && isPast && el.parentElement !== pastContainer) {
-               pastContainer.appendChild(el);
+               pastContainer.insertBefore(el, pastContainer.firstChild);
             }
+            // Если будущий — оставляем в контейнере будущих (в конец)
             if (match && !isPast && el.parentElement !== currentContainer) {
                currentContainer.appendChild(el);
             }
@@ -560,20 +563,7 @@
         const pastContainer = document.getElementById('pastMatchesContainer');
         const currentContainer = document.getElementById('matchesContainer');
 
-        allMatches.forEach(function(el) {
-          const badge = el.querySelector('.tag-4k');
-          const isPast = el.classList.contains('past-match');
-          const visible = badge ? '' : 'none';
-          el.style.display = visible;
-
-          if (badge) {
-             if (isPast && el.parentElement !== pastContainer) {
-                pastContainer.appendChild(el);
-             } else if (!isPast && el.parentElement !== currentContainer) {
-                currentContainer.appendChild(el);
-             }
-          }
-        });
+      allMatches.forEach(function(el) {
 
         // Скрываем заголовки дней, под которыми не осталось видимых матчей
         document.querySelectorAll('.day-head').forEach(function(head) {
