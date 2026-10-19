@@ -112,15 +112,18 @@ body::before {
   flex-wrap: nowrap;
   justify-content: center;    
   gap: 6px; 
-  height: 32px;               /* <--- Сделали как у кнопок */
-  padding: 0 8px;             /* <--- Уменьшили отступы */
+  height: 32px;               
+  padding: 0 8px;             
   background: var(--match-bg);
   border: 1px solid var(--border);
   border-radius: 8px; 
-  width: 100%;                
+  width: max-content;         /* <--- Ширина по содержимому */
+  max-width: 100%;            /* <--- Но не больше экрана */
   box-sizing: border-box; 
   overflow-x: auto;           
   scrollbar-width: none;
+  flex: 1;                    /* <--- Занимает оставшееся место */
+  min-width: 0;               /* <--- Позволяет сжиматься */
 }
 .cal-teams-filter::-webkit-scrollbar {
   display: none;
@@ -887,6 +890,7 @@ body.light .form-l { background: #b91c1c; }
   border: 1px solid rgba(168, 85, 247, 0.3);
   border-radius: 5px;
   text-decoration: none; cursor: pointer;
+  white-space: nowrap;       /* <--- ДОБАВИТЬ ЭТО */
   transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
 }
 a.cal-tour-title:hover { background: rgba(168, 85, 247, 0.2); border-color: var(--neon-3); color: #fff; transform: translateY(-1px); }
@@ -904,6 +908,7 @@ a.cal-tour-title:hover { background: rgba(168, 85, 247, 0.2); border-color: var(
   border: 1px solid rgba(0, 255, 213, 0.3);
   border-radius: 5px;
   text-transform: uppercase; letter-spacing: 1.5px;
+  white-space: nowrap;       /* <--- ДОБАВИТЬ ЭТО */
 }
 
 .cal-match {
@@ -1393,13 +1398,17 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .cal-score.cal-score-upcoming { font-size: 15px; }
 
     /* --- Фильтр команд --- */
-  .cal-teams-filter {
-    height: 40px !important;           /* принудительно задаем высоту */
-    padding: 0 12px;
+   .cal-teams-filter {
+    height: 40px !important;
+    padding: 0 10px;
     gap: 8px;
-    border-radius: 12px;
-    flex-wrap: nowrap;                 /* строго в одну линию */
-    overflow-x: auto;                  /* если не влезут - будет скролл */
+    border-radius: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    width: max-content;       /* <--- Ширина по содержимому */
+    max-width: 100%;
+    flex: 1;
+    min-width: 0;
   }
   .cal-team-filter {
     width: 38px;
