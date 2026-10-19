@@ -1413,11 +1413,13 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .disclaimer { padding: 15px 25px; gap: 15px; margin-top: 40px; }
   .disclaimer-icon { font-size: 23px; }
   .disclaimer-text { font-size: 14px; }
-}
-/* ============================================================
-   ЖЁСТКОЕ УВЕЛИЧЕНИЕ ФИЛЬТРА КОМАНД (ПК)
-   ============================================================ */
-@media (min-width: 901px) {
+     /* --- Футер и дисклеймер --- */
+  .footer { font-size: 15px; margin-top: 60px; padding-top: 30px; }
+  .disclaimer { padding: 15px 25px; gap: 15px; margin-top: 40px; }
+  .disclaimer-icon { font-size: 23px; }
+  .disclaimer-text { font-size: 14px; }
+
+  /* --- ФИЛЬТР КОМАНД В КАЛЕНДАРЕ (ПК) --- */
   .cal-teams-filter {
     height: 54px !important;
     padding: 0 14px !important;
@@ -1426,8 +1428,6 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
     scrollbar-width: none !important;
-    background: rgba(13, 15, 26, 0.8) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
   .cal-teams-filter::-webkit-scrollbar {
     display: none !important;
@@ -1459,4 +1459,5 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     border-radius: 12px !important;
     flex-shrink: 0 !important;
   }
+} /* <--- Вот эта скобка закрывает @media (min-width: 901px) */
 }
