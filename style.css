@@ -1281,9 +1281,6 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .quality-btn:hover { background: rgba(0, 255, 213, 0.08) !important; color: var(--neon) !important; border-color: rgba(0, 255, 213, 0.25) !important; }
 }
 
-/* ============================================================
-   ПК-ВЕРСИЯ: УВЕЛИЧЕНИЕ ИНТЕРФЕЙСА НА 25%
-   ============================================================ */
 @media (min-width: 901px) {
   .container {
     animation: none;
@@ -1299,14 +1296,12 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     bottom: calc(20px / 1.25);
   }
 
-  /* === КРИТИЧНО: пересчёт sticky под scale(1.25) === */
-  /* При transform: scale(1.25) на .container sticky-элемент
-     внутри него «привязывается» к самому .container, а не к вьюпорту.
-     Поэтому top и max-height нужно делить на 1.25, чтобы sticky
-     вёл себя как обычно. */
+  /* Отключаем sticky на ПК — внутри scale() он ведёт себя непредсказуемо */
   .main-layout-side {
-    top: calc(12px / 1.25);
-    max-height: calc((100vh - 24px) / 1.25);
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
   }
 }
 
