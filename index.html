@@ -3711,7 +3711,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">19.10.2026 22:20 МСК</span><br>
+      Обновлено <span class="neon">19.10.2026 22:24 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -3923,15 +3923,22 @@
         if (e.target.closest('.replay-select')) return;
         const card = e.target.closest('.match');
         if (!card) {
-          // Если кликнули вне карточки — снимаем подсветку
-          highlightMatchCard(null);
-          highlightMatchTeams(null);
+          const inputEl = document.getElementById('searchInput');
+          const isSearchActive = inputEl && inputEl.value.trim() !== '';
+          if (!isSearchActive) {
+            highlightMatchCard(null);
+            highlightMatchTeams(null);
+          }
           return;
         }
         
-        // Если кликнули по ссылке или кнопке — не мешаем переходу
+        // Если кликнули по конкретной ссылке внутри (логотип, тег тура) — 
+        // даем браузеру выполнить стандартный переход по ней.
         if (e.target.closest('a')) return;
         if (e.target.closest('button')) return;
+
+        const inputEl = document.getElementById('searchInput');
+        const isSearchActive = inputEl && inputEl.value.trim() !== '';
 
         const cardId = card.getAttribute('id') || '';
         if (!cardId) return;
@@ -3944,27 +3951,22 @@
         const dataTeams = card.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
 
-        // Подсветка команд внутри карточки
-        document.querySelectorAll('.match').forEach(function(el) {
-          el.querySelectorAll('.match-team').forEach(function(t) { t.classList.remove('match-team-hl'); });
-        });
-        if (dataTeams) {
-          const teamsArray = dataTeams.split(' ');
-          card.querySelectorAll('.match-team').forEach(function(t) {
-            const nameEl = t.querySelector('.team-name');
-            if (!nameEl) return;
-            const name = nameEl.textContent.trim().toLowerCase();
-            if (teamsArray.some(w => name.includes(w))) {
-              t.classList.add('match-team-hl');
-            }
-          });
-        }
-
         if (!isRepeat) {
           scrollCardToCenter(cardId, true, 'smooth');
         }
 
-        // Обновляем хэш
+        // ЕСЛИ АКТИВЕН ФИЛЬТР (ПОИСК):
+        // клик по карточке переносит на страницу тура и выделяет этот матч.
+        if (isSearchActive) {
+          const tourLink = card.querySelector('.tag-tour');
+          if (tourLink) {
+            window.location.href = tourLink.href + '#' + cardId;
+            return;
+          }
+        }
+
+        // ЕСЛИ ПОИСК НЕ АКТИВЕН (обычный просмотр):
+        // просто обновляем хэш в адресной строке, никуда не переходя.
         try {
           const newHash = '#' + cardId;
           if (window.location.hash !== newHash) {
