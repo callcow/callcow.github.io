@@ -1421,3 +1421,26 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
    /* Увеличение названия выбранной команды в фильтре календаря */
 }
 
+/* ============================================================
+   ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ РАЗМЕРА КОМАНДЫ (ЖЁСТКО)
+   ============================================================ */
+#currentHeaderTeam,
+#pastHeaderTeam {
+  font-size: 13px !important;      /* Размер для мобилок */
+  font-weight: 900 !important;
+  color: var(--neon) !important;
+  letter-spacing: 2.5px !important;
+  text-transform: uppercase !important;
+  margin-left: 8px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+@media (min-width: 901px) {
+  #currentHeaderTeam,
+  #pastHeaderTeam {
+    font-size: 16px !important;    /* Размер для ПК */
+    letter-spacing: 3px !important;
+    margin-left: 12px !important;
+  }
+}
