@@ -116,7 +116,7 @@ body::before {
   padding: 0 8px;             
   background: var(--match-bg);
   border: 1px solid var(--border);
-  border-radius: 8px; 
+  border-radius: 5px; 
   width: max-content;         
   max-width: 100%;            
   box-sizing: border-box; 
@@ -1406,7 +1406,7 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     height: 40px !important;   
     padding: 0 10px;
     gap: 6px;
-    border-radius: 10px;
+    border-radius: 5px;
     flex-wrap: nowrap;         /* Иконки не переносятся внутри блока */
     justify-content: flex-start;
     overflow-x: auto;          /* Если не влезают — скролл */
