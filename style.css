@@ -368,7 +368,7 @@ body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb { backgro
   color: var(--text);
   display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
 }
-.section-head-title span { color: var(--neon); font-weight: 900; margin-left: 6px; font-size: 11px; letter-spacing: 1px; text-transform: none; }
+.section-head-title span:not(#currentHeaderTeam):not(#pastHeaderTeam) { color: var(--neon); font-weight: 900; margin-left: 6px; font-size: 11px; letter-spacing: 1px; text-transform: none; }
 .section-head-title::before { content: none; }
 
 /* ============================================================
@@ -1421,24 +1421,23 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
    /* Увеличение названия выбранной команды в фильтре календаря */
 }
 /* ============================================================
-   НАЗВАНИЕ КОМАНДЫ В ЗАГОЛОВКАХ (ЖЁСТКО)
+   НАЗВАНИЕ КОМАНДЫ В ЗАГОЛОВКАХ
    ============================================================ */
 span#currentHeaderTeam,
 span#pastHeaderTeam {
-  font-size: 13px !important;      /* Размер на мобильных */
-  font-weight: 900 !important;
-  color: var(--neon) !important;
-  letter-spacing: 2.5px !important;
-  text-transform: uppercase !important;
-  margin-left: 8px !important;
-  display: inline-block !important;
+  font-size: inherit;          /* Наследует размер от родителя */
+  font-weight: 900;
+  color: var(--neon);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-left: 8px;
+  display: inline-block;
 }
 
 @media (min-width: 901px) {
   span#currentHeaderTeam,
   span#pastHeaderTeam {
-    font-size: 16px !important;    /* Размер на ПК (как у "Будущие матчи") */
-    letter-spacing: 3px !important;
-    margin-left: 12px !important;
+    letter-spacing: 3px;
+    margin-left: 12px;
   }
 }
