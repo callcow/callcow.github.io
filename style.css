@@ -1400,42 +1400,29 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
      /* --- Фильтр команд --- */
   .cal-teams-filter {
     height: 40px !important;
-    padding: 0 10px;
-    gap: 8px;
+    padding: 0 8px;            /* Уменьшили горизонтальный отступ */
+    gap: 6px;                  /* Уменьшили расстояние между иконками */
     border-radius: 10px;
     flex-wrap: nowrap;
-    overflow-x: auto;          /* Включаем прокрутку */
-    scrollbar-width: thin;     /* Тонкий скроллбар для Firefox */
-    scrollbar-color: rgba(0, 255, 213, 0.3) transparent;
+    overflow-x: auto;
     width: max-content;
     max-width: 100%;
     flex: 1;
     min-width: 0;
   }
-  /* Стилизация скроллбара для WebKit (Chrome, Safari, Edge) */
-  .cal-teams-filter::-webkit-scrollbar {
-    height: 4px;
-  }
-  .cal-teams-filter::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .cal-teams-filter::-webkit-scrollbar-thumb {
-    background: rgba(0, 255, 213, 0.3);
-    border-radius: 2px;
-  }
   .cal-team-filter {
-    width: 38px;
-    height: 38px;
-    padding: 5px;
-    border-radius: 10px;
+    width: 30px;               /* Уменьшили размер с 38px до 30px */
+    height: 30px;              /* Уменьшили размер с 38px до 30px */
+    padding: 3px;              /* Уменьшили внутренний отступ */
+    border-radius: 8px;
     flex-shrink: 0;
   }
   .cal-team-filter-reset {
-    width: 38px;
-    height: 38px;
-    font-size: 20px;
+    width: 30px;               /* Кнопка сброса теперь того же размера */
+    height: 30px;
+    font-size: 16px;
     flex-shrink: 0;
-    display: none;
+    display: none;             /* Скрыта по умолчанию, JS включает её как flex */
   }
   /* --- Туры (архив) --- */
   .tours-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 13px; }
