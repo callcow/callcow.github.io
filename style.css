@@ -107,14 +107,23 @@ body::before {
    ФИЛЬТР КОМАНД В КАЛЕНДАРЕ
    ============================================================ */
 .cal-teams-filter {
-  display: flex; align-items: center; flex-wrap: nowrap;
-  gap: 6px; height: 40px; padding: 0 12px;
+  display: flex; 
+  align-items: center; 
+  flex-wrap: nowrap;
+  gap: 6px; 
+  height: 40px; 
+  padding: 0 12px;
   background: var(--match-bg);
   border: 1px solid var(--border);
   border-radius: 10px; 
   box-sizing: border-box; 
-  overflow-x: auto;          /* Если логотипы не влезут — будет скролл */
+  overflow-x: auto;
   scrollbar-width: none;
+  
+  /* НОВОЕ: Чтобы плашка растягивалась и прижималась вправо */
+  flex: 1;             /* Занимает всё свободное место в ряду */
+  min-width: 0;        /* Позволяет сжиматься, если места мало */
+  margin-left: 10px;   /* Отступ от кнопок "Октябрь" и "11-ый тур" */
 }
 .cal-teams-filter::-webkit-scrollbar {
   display: none;
@@ -201,7 +210,12 @@ body::before {
   .day-head-text { font-size: 10px; letter-spacing: 1.2px; }
   .day-head { padding: 4px 2px 0; }
 }
-
+  .cal-teams-filter {
+    margin-left: 0;       /* Убираем отступ слева на телефоне */
+    flex: none;           /* Отключаем растягивание */
+    width: 100%;          /* На телефоне делаем на всю ширину */
+    margin-top: 8px;      /* Отступаем сверху, чтобы не липло к кнопкам */
+  }
 /* ============================================================
    КОНТЕЙНЕР И ТОПБАР
    ============================================================ */
