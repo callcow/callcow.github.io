@@ -1281,28 +1281,5 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .quality-btn:hover { background: rgba(0, 255, 213, 0.08) !important; color: var(--neon) !important; border-color: rgba(0, 255, 213, 0.25) !important; }
 }
 
-@media (min-width: 901px) {
-  .container {
-    animation: none;
-    transform: scale(1.25);
-    transform-origin: top center;
-    width: calc(100% / 1.25);
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .scroll-top {
-    right: calc(20px / 1.25);
-    bottom: calc(20px / 1.25);
-  }
-
-  /* Отключаем sticky на ПК — внутри scale() он ведёт себя непредсказуемо */
-  .main-layout-side {
-    position: static;
-    max-height: none;
-    overflow: visible;
-    padding-right: 0;
-  }
-}
 
        
