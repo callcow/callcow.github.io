@@ -1420,24 +1420,24 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .disclaimer-text { font-size: 14px; }
 }
 /* ============================================================
-   НАЗВАНИЕ КОМАНДЫ В ЗАГОЛОВКАХ (как основной текст)
+   НАЗВАНИЕ КОМАНДЫ В ЗАГОЛОВКАХ (ЖЕЛЕЗОБЕТОННО)
    ============================================================ */
-.section-head-title #currentHeaderTeam,
-.section-head-title #pastHeaderTeam {
-  font-size: 13px;               /* мобильная версия */
-  font-weight: 900;
-  color: var(--neon);
-  letter-spacing: 2.5px;         /* как у заголовка */
-  text-transform: uppercase;
-  margin-left: 10px;             /* отступ от основного текста */
-  display: inline-block;
+.section-head-title span#currentHeaderTeam,
+.section-head-title span#pastHeaderTeam {
+  font-size: 13px !important;      /* размер как у мобильного заголовка */
+  font-weight: 900 !important;
+  color: var(--neon) !important;
+  letter-spacing: 2.5px !important;
+  text-transform: uppercase !important;
+  margin-left: 10px !important;
+  display: inline-block !important;
 }
 
 @media (min-width: 901px) {
-  .section-head-title #currentHeaderTeam,
-  .section-head-title #pastHeaderTeam {
-    font-size: 16px;             /* размер как у ПК-заголовка */
-    letter-spacing: 3px;
-    margin-left: 14px;
+  .section-head-title span#currentHeaderTeam,
+  .section-head-title span#pastHeaderTeam {
+    font-size: 16px !important;    /* размер как у ПК-заголовка */
+    letter-spacing: 3px !important;
+    margin-left: 14px !important;
   }
 }
