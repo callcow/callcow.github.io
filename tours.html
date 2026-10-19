@@ -55,7 +55,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">19.10.2026 13:25 МСК</span><br>
+      Обновлено <span class="neon">19.10.2026 13:39 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -948,10 +948,8 @@
     })();
 
     (function() {
-      // ===== LIVE-МАТЧИ: ПЛАШКА LIVE / ПЕРЕРЫВ =====
-      // Важно: этот блок НЕ трогает .quality-row (кнопку «Смотреть») —
-      // её видимостью управляет отдельный таймер (updateTimer выше).
-      // И НЕ переставляет карточки — чтобы не сломать .day-head.
+      (function() {
+      // ===== LIVE-МАТЧИ: ПЛАШКА LIVE / ПЕРЕРЫВ С ПЕРЕНОСОМ ЗАГОЛОВКА ДНЯ =====
 
       const MATCH_DURATION_MS = 125 * 60 * 1000;
       const LIVE_DELAY_MS = 3 * 60 * 1000;
@@ -967,8 +965,6 @@
         if (!iso) return;
         const startMs = Date.parse(iso);
         if (isNaN(startMs)) return;
-        // Пропускаем только если есть реальная плашка "Завершён", 
-        // а не невидимая заглушка для выравнивания
         const statusEl = card.querySelector('.match-status:not(.match-status-placeholder)');
         if (statusEl) return;
         
@@ -992,17 +988,6 @@
         const container = document.getElementById('matchesContainer');
         if (!container) return;
 
-        // Собираем текущие live-карточки (по реальному времени)
-        const liveNow = [];
-        liveMatches.forEach(function(item) {
-          const realElapsed = now - item.startMs;
-          if (realElapsed >= LIVE_DELAY_MS && realElapsed <= MATCH_DURATION_MS) {
-            liveNow.push(item);
-          }
-        });
-
-        // Для каждой карточки: обновить плашку, класс is-live,
-        // и при необходимости переместить в начало или обратно в .day-group.
         liveMatches.forEach(function(item) {
           const realElapsed = now - item.startMs;
           const elapsed = realElapsed - LIVE_DELAY_MS;
@@ -1010,7 +995,6 @@
           const card = item.card;
 
           let badge = card.querySelector('.match-live-badge');
-
           const isLive = realElapsed >= LIVE_DELAY_MS && realElapsed <= endMs;
 
           if (!isLive) {
@@ -1018,11 +1002,17 @@
             if (card.classList.contains('is-live')) {
               card.classList.remove('is-live');
 
-              // Возвращаем карточку в её .day-group
+              // Возвращаем карточку и заголовок дня в родную группу .day-group
               const dayId = card.getAttribute('data-day-group');
               if (dayId) {
                 const homeGroup = document.getElementById(dayId);
-                if (homeGroup && homeGroup.parentElement === container) {
+                if (homeGroup) {
+                  // Возвращаем заголовок дня первым ребенком в родную группу
+                  if (card._dayHead) {
+                    homeGroup.insertBefore(card._dayHead, homeGroup.firstChild);
+                    card._dayHead = null;
+                  }
+                  // Возвращаем карточку в её родную группу
                   homeGroup.appendChild(card);
                 }
               }
@@ -1034,12 +1024,28 @@
           if (!card.classList.contains('is-live')) {
             card.classList.add('is-live');
 
-            // Поднимаем карточку наверх контейнера
-            container.insertBefore(card, container.firstChild);
+            const dayId = card.getAttribute('data-day-group');
+            if (dayId) {
+              const homeGroup = document.getElementById(dayId);
+              if (homeGroup) {
+                const dayHead = homeGroup.querySelector('.day-head');
+                // Переносим заголовок дня наверх контейнера перед live-карточкой
+                if (dayHead) {
+                  card._dayHead = dayHead;
+                  container.insertBefore(dayHead, container.firstChild);
+                }
+              }
+            }
+
+            // Поднимаем карточку наверх контейнера сразу под заголовок дня
+            if (card._dayHead) {
+              container.insertBefore(card, card._dayHead.nextSibling);
+            } else {
+              container.insertBefore(card, container.firstChild);
+            }
           }
 
           const m = getMatchMinute(elapsed);
-
 
           if (!badge) {
             badge = document.createElement('div');
@@ -1047,17 +1053,11 @@
 
             const formBlock = card.querySelector('.match-form');
             if (formBlock) {
-              const placeholder = formBlock.querySelector(
-                '.match-status-placeholder'
-              );
-
+              const placeholder = formBlock.querySelector('.match-status-placeholder');
               if (placeholder) {
                 placeholder.replaceWith(badge);
               } else {
-                formBlock.insertBefore(
-                  badge,
-                  formBlock.children[1] || null
-                );
+                formBlock.insertBefore(badge, formBlock.children[1] || null);
               }
             }
           }
@@ -1066,7 +1066,6 @@
             badge.innerHTML = 'ПЕРЕРЫВ';
             badge.classList.remove('match-status-live');
           } else {
-            // Возвращаем пульсирующий кружок
             badge.innerHTML = '<span class="live-dot"></span>LIVE';
             badge.classList.add('match-status-live');
           }
