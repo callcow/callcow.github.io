@@ -771,7 +771,7 @@ body.light .match-status {
 }
 .match-form-side { display: flex; align-items: center; min-width: 0; }
 .match-form-home { justify-content: flex-start; }
-.match-form-away { justify-content: flex-end; }
+.match-form-away { justify-content: flex-end; margin-left: auto; }
 
 .form-row { display: inline-flex; align-items: center; gap: 3px; }
 .form-sq {
