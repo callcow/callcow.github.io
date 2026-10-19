@@ -1422,20 +1422,22 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
 /* ============================================================
    НАЗВАНИЕ КОМАНДЫ В ЗАГОЛОВКАХ (как основной текст)
    ============================================================ */
-#currentHeaderTeam,
-#pastHeaderTeam {
-  font-size: 11px;               /* мобильная версия */
+.section-head-title #currentHeaderTeam,
+.section-head-title #pastHeaderTeam {
+  font-size: 13px;               /* мобильная версия */
   font-weight: 900;
   color: var(--neon);
-  letter-spacing: 1px;
+  letter-spacing: 2.5px;         /* как у заголовка */
   text-transform: uppercase;
+  margin-left: 10px;             /* отступ от основного текста */
+  display: inline-block;
 }
 
 @media (min-width: 901px) {
-  #currentHeaderTeam,
-  #pastHeaderTeam {
-    font-size: 15px;             /* размер как у заголовка на ПК (было 16px у .section-head-title) */
-    letter-spacing: 2px;
-    margin-left: 12px;
+  .section-head-title #currentHeaderTeam,
+  .section-head-title #pastHeaderTeam {
+    font-size: 16px;             /* размер как у ПК-заголовка */
+    letter-spacing: 3px;
+    margin-left: 14px;
   }
 }
