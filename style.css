@@ -1561,7 +1561,7 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .team-card-logo { width: 60px; height: 60px; }                   /* было 48px */
   .team-card-name { font-size: 18px; }                             /* было 14px */
   .team-card-stadium { font-size: 13px; }                          /* было 10px */
-       
+}
 /* ============================================================
    УЛУЧШЕНИЕ ФИЛЬТРА КОМАНД В КАЛЕНДАРЕ (ПК и общий вид)
    ============================================================ */
