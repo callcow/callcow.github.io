@@ -117,13 +117,9 @@ body::before {
   border: 1px solid var(--border);
   border-radius: 10px; 
   box-sizing: border-box; 
-  overflow-x: auto;
+  overflow-x: auto;       /* <--- Скролл внутри */
   scrollbar-width: none;
-  
-  /* НОВОЕ: Чтобы плашка растягивалась и прижималась вправо */
-  flex: 1;             /* Занимает всё свободное место в ряду */
-  min-width: 0;        /* Позволяет сжиматься, если места мало */
-  margin-left: 10px;   /* Отступ от кнопок "Октябрь" и "11-ый тур" */
+  width: 100%;            /* <--- Растягиваем */
 }
 .cal-teams-filter::-webkit-scrollbar {
   display: none;
@@ -873,7 +869,14 @@ body.light .form-l { background: #b91c1c; }
    КАЛЕНДАРЬ
    ============================================================ */
 .cal-month { margin-bottom: 24px; }
-.cal-month-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.cal-month-row { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  margin-bottom: 10px; 
+  flex-wrap: nowrap; /* <--- Строго в одну линию */
+  overflow: hidden;  /* <--- Обрезаем всё, что вылезет за пределы */
+}
 .cal-month-row > *,
 .cal-month-row .cal-teams-wrapper { height: 32px; display: inline-flex; align-items: center; }
 .cal-month-row .cal-month-title,
