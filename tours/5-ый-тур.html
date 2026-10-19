@@ -581,7 +581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">19.10.2026 22:15 МСК</span><br>
+      Обновлено <span class="neon">19.10.2026 22:20 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -793,13 +793,13 @@
         if (e.target.closest('.replay-select')) return;
         const card = e.target.closest('.match');
         if (!card) {
-          // Если кликнули вне карточки — снимаем подсветку с таблицы и карточек
+          // Если кликнули вне карточки — снимаем подсветку
           highlightMatchCard(null);
           highlightMatchTeams(null);
           return;
         }
         
-        // Если кликнули по ссылке или кнопке внутри — не мешаем стандартному переходу
+        // Если кликнули по ссылке или кнопке — не мешаем переходу
         if (e.target.closest('a')) return;
         if (e.target.closest('button')) return;
 
@@ -810,14 +810,11 @@
         const isRepeat = (now - lastCardClickTs) < 600 && card.classList.contains('match-focused');
         lastCardClickTs = now;
 
-        // Подсвечиваем саму карточку
         highlightMatchCard(cardId);
-
-        // Подсвечиваем команды из этого матча в турнирной таблице
         const dataTeams = card.getAttribute('data-teams') || '';
         highlightMatchTeams(dataTeams);
 
-        // Подсвечиваем сами названия команд внутри карточки (как при поиске)
+        // Подсветка команд внутри карточки
         document.querySelectorAll('.match').forEach(function(el) {
           el.querySelectorAll('.match-team').forEach(function(t) { t.classList.remove('match-team-hl'); });
         });
@@ -827,19 +824,17 @@
             const nameEl = t.querySelector('.team-name');
             if (!nameEl) return;
             const name = nameEl.textContent.trim().toLowerCase();
-            // Простая проверка: если имя команды есть в dataTeams
             if (teamsArray.some(w => name.includes(w))) {
               t.classList.add('match-team-hl');
             }
           });
         }
 
-        // Прокручиваем к карточке, если нужно
         if (!isRepeat) {
           scrollCardToCenter(cardId, true, 'smooth');
         }
 
-        // Обновляем хэш в адресной строке (без перехода)
+        // Обновляем хэш
         try {
           const newHash = '#' + cardId;
           if (window.location.hash !== newHash) {
