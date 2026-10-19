@@ -354,7 +354,7 @@
         </div>
 
         <div class="match-bottom">
-          <div class="quality-row" data-match-start="2026-10-19T19:30:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/1080p50fps/9fe0aa6d72b07eef2d1853e160716b55/4948072202.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1c6e4799ef37650dadd5fdd8e3bf31aa" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/720/9fe0aa6d72b07eef2d1853e160716b55/4948072202.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1c6e4799ef37650dadd5fdd8e3bf31aa" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/480/9fe0aa6d72b07eef2d1853e160716b55/4948072202.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1c6e4799ef37650dadd5fdd8e3bf31aa" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/360/9fe0aa6d72b07eef2d1853e160716b55/4948072202.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=1c6e4799ef37650dadd5fdd8e3bf31aa" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
+          <div class="quality-row" data-match-start="2026-10-19T19:30:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/1080p50fps/2c4d8c7e61e56b76f5d6127a172a5a27/4948073102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=d5d21e34c7c7930d086266d90864d71f" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/720/2c4d8c7e61e56b76f5d6127a172a5a27/4948073102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=d5d21e34c7c7930d086266d90864d71f" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/480/2c4d8c7e61e56b76f5d6127a172a5a27/4948073102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=d5d21e34c7c7930d086266d90864d71f" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/360/2c4d8c7e61e56b76f5d6127a172a5a27/4948073102.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=d5d21e34c7c7930d086266d90864d71f" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
           <div class="quality-timer" data-match-start="2026-10-19T19:30:00+03:00" ></div>
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Арена Химки</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Химки</span></div>
         </div>
@@ -3711,7 +3711,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">19.10.2026 11:38 МСК</span><br>
+      Обновлено <span class="neon">19.10.2026 11:58 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -3961,6 +3961,16 @@
       window.__highlightFromHash = highlightFromHash;
       window.__highlightMatchTeams = highlightMatchTeams;
 
+      // FIX 11.3/11.4: хелпер проверки видимости вместо хрупкого
+      // селектора [style*="display: none"].
+      function isVisible(el) {
+        return el.style.display !== 'none';
+      }
+      function countVisible(container, sel) {
+        if (!container) return 0;
+        return Array.from(container.querySelectorAll(sel)).filter(isVisible).length;
+      }
+
       function filter() {
         const q = input.value.trim().toLowerCase();
         clearBtn.style.display = q ? 'block' : 'none';
@@ -3988,7 +3998,6 @@
 
           if (effectivelyEmpty) {
             el.style.display = isPast ? 'none' : '';
-            // Возвращаем в контейнер будущих (в конец)
             if (isPast && el.parentElement !== pastContainer) {
               pastContainer.appendChild(el);
             }
@@ -3997,25 +4006,22 @@
             const match = words.every(function(w) { return teams.includes(w); });
             el.style.display = match ? '' : 'none';
 
-            // Если прошедший — вставляем в САМОЕ НАЧАЛО контейнера прошедших
             if (match && isPast && el.parentElement !== pastContainer) {
                pastContainer.insertBefore(el, pastContainer.firstChild);
             }
-            // Если будущий — оставляем в контейнере будущих (в конец)
             if (match && !isPast && el.parentElement !== currentContainer) {
                currentContainer.appendChild(el);
             }
           }
         });
 
-        // Скрываем целые группы дней, если в них не осталось видимых матчей
         document.querySelectorAll('.day-group').forEach(function(group) {
-          const visibleInGroup = group.querySelectorAll('.match:not([style*="display: none"])').length;
+          const visibleInGroup = countVisible(group, '.match');
           group.style.display = visibleInGroup > 0 ? '' : 'none';
         });
 
-        const visiblePast = document.querySelectorAll('#pastMatchesContainer .match:not([style*="display: none"])').length;
-        const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
+        const visiblePast = countVisible(document.getElementById('pastMatchesContainer'), '.match');
+        const visibleCurrent = countVisible(document.getElementById('matchesContainer'), '.match');
 
         const pastSection = document.getElementById('pastSection');
         const currentSection = document.getElementById('currentSection');
@@ -4068,14 +4074,14 @@
           if (headerDefault) headerDefault.style.display = 'none';
           if (headerSearch) headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
           if (pastSection) pastSection.style.display = visiblePast > 0 ? '' : 'none';
-          
+
           if (divider) {
             if (visibleCurrent > 0 && visiblePast > 0) {
               divider.style.display = '';
-              divider.style.margin = ''; // Возвращаем стандартные отступы из CSS
+              divider.style.margin = '';
             } else {
               divider.style.display = 'none';
-              divider.style.margin = '0'; // Убираем отступы, если разделитель не нужен
+              divider.style.margin = '0';
             }
           }
         }
@@ -4177,8 +4183,6 @@
 
         hideSuggestions();
 
-        // Своя анимация скролла на rAF — её не может отменить браузер
-        // при изменении высоты документа (в отличие от scrollTo smooth).
         const startY = window.scrollY;
         if (startY > 0) {
           const startTime = performance.now();
@@ -4192,8 +4196,6 @@
           requestAnimationFrame(step);
         }
 
-        // Параллельно применяем фильтр — он раздувает страницу, но наша
-        // анимация это игнорирует, потому что мы каждый кадр ставим scrollY сами.
         const inputEl = document.getElementById('searchInput');
         if (inputEl) {
           inputEl.value = team;
@@ -4202,8 +4204,6 @@
           window.__suppressSuggestions = false;
         }
 
-        // Скрываем выпадашку ПОСЛЕ обработки input — иначе input-хендлер
-        // снова её откроет (он вызывает showSuggestions).
         hideSuggestions();
 
         try { window.history.pushState(null, '', cleanUrl); } catch (err) { /* ignore */ }
@@ -4231,7 +4231,6 @@
           el.style.display = visible;
 
           if (badge) {
-             // Если прошедший 4K — вставляем в НАЧАЛО контейнера прошедших
              if (isPast && el.parentElement !== pastContainer) {
                 pastContainer.insertBefore(el, pastContainer.firstChild);
              } else if (!isPast && el.parentElement !== currentContainer) {
@@ -4240,14 +4239,13 @@
           }
         });
 
-        // Скрываем целые группы дней, если в них не осталось видимых матчей
         document.querySelectorAll('.day-group').forEach(function(group) {
-          const visibleInGroup = group.querySelectorAll('.match:not([style*="display: none"])').length;
+          const visibleInGroup = countVisible(group, '.match');
           group.style.display = visibleInGroup > 0 ? '' : 'none';
         });
 
-        const visiblePast = document.querySelectorAll('#pastMatchesContainer .match:not([style*="display: none"])').length;
-        const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
+        const visiblePast = countVisible(document.getElementById('pastMatchesContainer'), '.match');
+        const visibleCurrent = countVisible(document.getElementById('matchesContainer'), '.match');
         const pastSection = document.getElementById('pastSection');
         const currentSection = document.getElementById('currentSection');
         const headerDefault = document.getElementById('currentHeaderDefault');
@@ -4296,11 +4294,13 @@
           }
         });
         document.querySelectorAll('.cal-tour-group').forEach(function(group) {
-          const visible = group.querySelectorAll('.cal-match:not([style*="display: none"])').length;
+          const visible = Array.from(group.querySelectorAll('.cal-match'))
+            .filter(function(el) { return el.style.display !== 'none'; }).length;
           group.style.display = visible > 0 ? '' : 'none';
         });
         document.querySelectorAll('.cal-month').forEach(function(month) {
-          const visible = month.querySelectorAll('.cal-match:not([style*="display: none"])').length;
+          const visible = Array.from(month.querySelectorAll('.cal-match'))
+            .filter(function(el) { return el.style.display !== 'none'; }).length;
           month.style.display = visible > 0 ? '' : 'none';
         });
         if (resetBtn) resetBtn.style.display = activeTeam ? 'flex' : 'none';
@@ -4352,8 +4352,6 @@
 
       function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
-            // Возвращает массив пар [число, единица]: [[16,'ч'], [41,'м'], [15,'с']]
-      // Ноль часов/дней не показываем.
       function formatRemainParts(ms) {
         const total = Math.max(0, Math.floor(ms / 1000));
         const days = Math.floor(total / 86400);
@@ -4380,9 +4378,6 @@
         el.row.style.display = 'none';
         const remainMs = diff - STREAM_OPEN_BEFORE_MS;
 
-        // Строим структуру один раз: <span class="timer-icon">🔒</span><span class="timer-count">
-        //   <span class="timer-part"><span class="timer-num"></span><span class="timer-unit">ч</span></span>...
-        // </span>
         if (!el.timer._countEl) {
           el.timer.innerHTML = '<span class="timer-icon">🔒</span><span class="timer-count"></span>';
           el.timer._countEl = el.timer.querySelector('.timer-count');
@@ -4391,8 +4386,6 @@
 
         const parts = formatRemainParts(remainMs);
 
-        // Если количество частей изменилось (например, был день, стал час) —
-        // пересобираем структуру. Иначе просто обновляем числа.
         if (!el.timer._partNodes || el.timer._partNodes.length !== parts.length) {
           el.timer._countEl.innerHTML = parts.map(function(p) {
             return '<span class="timer-part">' +
@@ -4455,7 +4448,7 @@
       timers.forEach(function(el) { updateTimer(el, el.startMs); });
       startTimers();
     })();
-    
+
     (function() {
       function getDefaultLabel(select) {
         return select.hasAttribute('data-watch') ? 'Смотреть' : 'Повтор';
@@ -4605,10 +4598,6 @@
 
     (function() {
       // ===== LIVE-МАТЧИ: ПЛАШКА LIVE / ПЕРЕРЫВ =====
-      // Важно: этот блок НЕ трогает .quality-row (кнопку «Смотреть») —
-      // её видимостью управляет отдельный таймер (updateTimer выше).
-      // И НЕ переставляет карточки — чтобы не сломать .day-head.
-
       const MATCH_DURATION_MS = 125 * 60 * 1000;
       const LIVE_DELAY_MS = 3 * 60 * 1000;
       const FIRST_HALF_MS = 45 * 60 * 1000;
@@ -4644,17 +4633,6 @@
         const container = document.getElementById('matchesContainer');
         if (!container) return;
 
-        // Собираем текущие live-карточки (по реальному времени)
-        const liveNow = [];
-        liveMatches.forEach(function(item) {
-          const realElapsed = now - item.startMs;
-          if (realElapsed >= LIVE_DELAY_MS && realElapsed <= MATCH_DURATION_MS) {
-            liveNow.push(item);
-          }
-        });
-
-        // Для каждой карточки: обновить плашку, класс is-live,
-        // и при необходимости переместить в начало или обратно в .day-group.
         liveMatches.forEach(function(item) {
           const realElapsed = now - item.startMs;
           const elapsed = realElapsed - LIVE_DELAY_MS;
@@ -4670,23 +4648,28 @@
             if (card.classList.contains('is-live')) {
               card.classList.remove('is-live');
 
-              // Возвращаем карточку в её .day-group
+              // FIX 11.2: возвращаем карточку на её ИСХОДНОЕ место
+              // (по сохранённому nextSibling), а не в конец day-group.
               const dayId = card.getAttribute('data-day-group');
               if (dayId) {
                 const homeGroup = document.getElementById(dayId);
                 if (homeGroup && homeGroup.parentElement === container) {
-                  homeGroup.appendChild(card);
+                  if (card._returnTo && card._returnTo.parentNode === homeGroup) {
+                    homeGroup.insertBefore(card, card._returnTo);
+                  } else {
+                    homeGroup.appendChild(card);
+                  }
+                  card._returnTo = null;
                 }
               }
             }
             return;
           }
 
-          // --- Матч LIVE ---
           if (!card.classList.contains('is-live')) {
             card.classList.add('is-live');
-
-            // Поднимаем карточку наверх контейнера
+            // FIX 11.2: запоминаем, куда вернуть
+            card._returnTo = card.nextSibling;
             container.insertBefore(card, container.firstChild);
           }
 
@@ -4704,7 +4687,6 @@
             badge.innerHTML = 'ПЕРЕРЫВ';
             badge.classList.remove('match-status-live');
           } else {
-            // Возвращаем пульсирующий кружок
             badge.innerHTML = '<span class="live-dot"></span>LIVE';
             badge.classList.add('match-status-live');
           }
