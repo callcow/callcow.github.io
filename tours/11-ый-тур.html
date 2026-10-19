@@ -352,7 +352,7 @@
         </div>
 
         <div class="match-bottom">
-          <div class="quality-row" data-match-start="2026-10-19T19:30:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/1080p50fps/9f035ecbbfa9a9a499d6524964536231/4948079402.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=418b873d15d17a030a88e99f47bf5b52" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/720/9f035ecbbfa9a9a499d6524964536231/4948079402.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=418b873d15d17a030a88e99f47bf5b52" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/480/9f035ecbbfa9a9a499d6524964536231/4948079402.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=418b873d15d17a030a88e99f47bf5b52" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/360/9f035ecbbfa9a9a499d6524964536231/4948079402.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=418b873d15d17a030a88e99f47bf5b52" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
+          <div class="quality-row" data-match-start="2026-10-19T19:30:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/1080p50fps/298c12f6d3d42a9171b723e7537a4dab/4948080302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=b3e92fb95c40a118b1cb3d912b3c2259" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/720/298c12f6d3d42a9171b723e7537a4dab/4948080302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=b3e92fb95c40a118b1cb3d912b3c2259" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/480/298c12f6d3d42a9171b723e7537a4dab/4948080302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=b3e92fb95c40a118b1cb3d912b3c2259" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/360/298c12f6d3d42a9171b723e7537a4dab/4948080302.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=b3e92fb95c40a118b1cb3d912b3c2259" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
           <div class="quality-timer" data-match-start="2026-10-19T19:30:00+03:00" ></div>
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Арена Химки</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Химки</span></div>
         </div>
@@ -581,7 +581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">19.10.2026 13:39 МСК</span><br>
+      Обновлено <span class="neon">19.10.2026 13:48 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1474,8 +1474,10 @@
     })();
 
     (function() {
-      (function() {
-      // ===== LIVE-МАТЧИ: ПЛАШКА LIVE / ПЕРЕРЫВ С ПЕРЕНОСОМ ЗАГОЛОВКА ДНЯ =====
+      // ===== LIVE-МАТЧИ: ПЛАШКА LIVE / ПЕРЕРЫВ =====
+      // Важно: этот блок НЕ трогает .quality-row (кнопку «Смотреть») —
+      // её видимостью управляет отдельный таймер (updateTimer выше).
+      // И НЕ переставляет карточки — чтобы не сломать .day-head.
 
       const MATCH_DURATION_MS = 125 * 60 * 1000;
       const LIVE_DELAY_MS = 3 * 60 * 1000;
@@ -1483,19 +1485,43 @@
       const BREAK_MS = 15 * 60 * 1000;
       const SECOND_HALF_START_MS = FIRST_HALF_MS + BREAK_MS;
 
-      const liveMatches = [];
-      document.querySelectorAll('.match').forEach(function(card) {
-        const timerEl = card.querySelector('.quality-timer[data-match-start]');
-        if (!timerEl) return;
-        const iso = timerEl.getAttribute('data-match-start');
-        if (!iso) return;
-        const startMs = Date.parse(iso);
-        if (isNaN(startMs)) return;
-        const statusEl = card.querySelector('.match-status:not(.match-status-placeholder)');
-        if (statusEl) return;
-        
-        liveMatches.push({ card: card, startMs: startMs });
-      });
+const liveMatches = [];
+document.querySelectorAll('.match').forEach(function(card) {
+  const timerEl = card.querySelector('.quality-timer[data-match-start]');
+  if (!timerEl) return;
+  const iso = timerEl.getAttribute('data-match-start');
+  if (!iso) return;
+  const startMs = Date.parse(iso);
+  if (isNaN(startMs)) return;
+  const statusEl = card.querySelector('.match-status:not(.match-status-placeholder)');
+  if (statusEl) return;
+
+  // Запоминаем «домашнее» место карточки ДО любых перемещений:
+  // - сам элемент
+  // - его родителя (.day-group или #matchesContainer)
+  // - следующего соседа (чтобы insertBefore вернул на место точно)
+  const parent = card.parentElement;
+  const nextSibling = card.nextElementSibling;
+  const dayGroup = card.closest('.day-group');
+  const dayGroupParent = dayGroup ? dayGroup.parentElement : null;
+  const dayGroupNextSibling = dayGroup ? dayGroup.nextElementSibling : null;
+  const isOnlyInGroup = dayGroup
+    ? dayGroup.querySelectorAll('.match').length === 1
+    : false;
+
+  liveMatches.push({
+    card: card,
+    startMs: startMs,
+    homeParent: parent,
+    homeNextSibling: nextSibling,
+    dayGroup: dayGroup,
+    dayGroupParent: dayGroupParent,
+    dayGroupNextSibling: dayGroupNextSibling,
+    isOnlyInGroup: isOnlyInGroup,
+    isLifted: false,        // флаг: поднята ли карточка (или её группа)
+    isGroupLifted: false,   // флаг: поднята ли группа целиком
+  });
+});
 
       if (liveMatches.length === 0) return;
 
@@ -1523,54 +1549,56 @@
           let badge = card.querySelector('.match-live-badge');
           const isLive = realElapsed >= LIVE_DELAY_MS && realElapsed <= endMs;
 
+          // ---------- НЕ LIVE ----------
           if (!isLive) {
             if (badge) badge.remove();
-            if (card.classList.contains('is-live')) {
+
+            if (item.isLifted) {
               card.classList.remove('is-live');
 
-              // Возвращаем карточку и заголовок дня в родную группу .day-group
-              const dayId = card.getAttribute('data-day-group');
-              if (dayId) {
-                const homeGroup = document.getElementById(dayId);
-                if (homeGroup) {
-                  // Возвращаем заголовок дня первым ребенком в родную группу
-                  if (card._dayHead) {
-                    homeGroup.insertBefore(card._dayHead, homeGroup.firstChild);
-                    card._dayHead = null;
+              if (item.isGroupLifted && item.dayGroup) {
+                // Возвращаем ВСЮ группу на её исходное место
+                const dg = item.dayGroup;
+                if (item.dayGroupParent) {
+                  if (item.dayGroupNextSibling && item.dayGroupNextSibling.parentElement === item.dayGroupParent) {
+                    item.dayGroupParent.insertBefore(dg, item.dayGroupNextSibling);
+                  } else {
+                    item.dayGroupParent.appendChild(dg);
                   }
-                  // Возвращаем карточку в её родную группу
-                  homeGroup.appendChild(card);
+                }
+              } else {
+                // Возвращаем саму карточку в её .day-group
+                if (item.homeParent) {
+                  if (item.homeNextSibling && item.homeNextSibling.parentElement === item.homeParent) {
+                    item.homeParent.insertBefore(card, item.homeNextSibling);
+                  } else {
+                    item.homeParent.appendChild(card);
+                  }
                 }
               }
+
+              item.isLifted = false;
+              item.isGroupLifted = false;
             }
             return;
           }
 
-          // --- Матч LIVE ---
-          if (!card.classList.contains('is-live')) {
+          // ---------- LIVE ----------
+          if (!item.isLifted) {
             card.classList.add('is-live');
 
-            const dayId = card.getAttribute('data-day-group');
-            if (dayId) {
-              const homeGroup = document.getElementById(dayId);
-              if (homeGroup) {
-                const dayHead = homeGroup.querySelector('.day-head');
-                // Переносим заголовок дня наверх контейнера перед live-карточкой
-                if (dayHead) {
-                  card._dayHead = dayHead;
-                  container.insertBefore(dayHead, container.firstChild);
-                }
-              }
-            }
-
-            // Поднимаем карточку наверх контейнера сразу под заголовок дня
-            if (card._dayHead) {
-              container.insertBefore(card, card._dayHead.nextSibling);
+            if (item.isOnlyInGroup && item.dayGroup) {
+              // В блоке один матч — поднимаем весь блок дня целиком
+              container.insertBefore(item.dayGroup, container.firstChild);
+              item.isGroupLifted = true;
             } else {
+              // В блоке несколько матчей — поднимаем только карточку
               container.insertBefore(card, container.firstChild);
             }
+            item.isLifted = true;
           }
 
+          // ---------- Плашка LIVE / ПЕРЕРЫВ ----------
           const m = getMatchMinute(elapsed);
 
           if (!badge) {
@@ -1579,11 +1607,17 @@
 
             const formBlock = card.querySelector('.match-form');
             if (formBlock) {
-              const placeholder = formBlock.querySelector('.match-status-placeholder');
+              const placeholder = formBlock.querySelector(
+                '.match-status-placeholder'
+              );
+
               if (placeholder) {
                 placeholder.replaceWith(badge);
               } else {
-                formBlock.insertBefore(badge, formBlock.children[1] || null);
+                formBlock.insertBefore(
+                  badge,
+                  formBlock.children[1] || null
+                );
               }
             }
           }
@@ -1592,6 +1626,7 @@
             badge.innerHTML = 'ПЕРЕРЫВ';
             badge.classList.remove('match-status-live');
           } else {
+            // Возвращаем пульсирующий кружок
             badge.innerHTML = '<span class="live-dot"></span>LIVE';
             badge.classList.add('match-status-live');
           }
