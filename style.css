@@ -109,21 +109,21 @@ body::before {
 .cal-teams-filter {
   display: flex; 
   align-items: center; 
-  flex-wrap: nowrap;
-  justify-content: center;    
+  flex-wrap: nowrap;         /* Оставляем в одну строку */
+  justify-content: flex-start; /* Прижимаем иконки влево, убираем пустое место */
   gap: 6px; 
   height: 32px;               
   padding: 0 8px;             
   background: var(--match-bg);
   border: 1px solid var(--border);
   border-radius: 8px; 
-  width: max-content;         /* <--- Ширина по содержимому */
-  max-width: 100%;            /* <--- Но не больше экрана */
+  width: max-content;         /* Ширина строго по содержимому */
+  max-width: 100%;            
   box-sizing: border-box; 
   overflow-x: auto;           
   scrollbar-width: none;
-  flex: 1;                    /* <--- Занимает оставшееся место */
-  min-width: 0;               /* <--- Позволяет сжиматься */
+  flex: 0 1 auto;             /* Убираем flex: 1, теперь блок не растягивается */
+  min-width: 0;               
 }
 .cal-teams-filter::-webkit-scrollbar {
   display: none;
@@ -1400,29 +1400,30 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
      /* --- Фильтр команд --- */
   .cal-teams-filter {
     height: 40px !important;
-    padding: 0 8px;            /* Уменьшили горизонтальный отступ */
-    gap: 6px;                  /* Уменьшили расстояние между иконками */
+    padding: 0 10px;
+    gap: 6px;
     border-radius: 10px;
     flex-wrap: nowrap;
+    justify-content: flex-start; /* Прижимаем к левому краю */
     overflow-x: auto;
-    width: max-content;
+    width: max-content;          /* Ширина по содержимому */
     max-width: 100%;
-    flex: 1;
+    flex: 0 1 auto;              /* Блок не растягивается */
     min-width: 0;
   }
   .cal-team-filter {
-    width: 30px;               /* Уменьшили размер с 38px до 30px */
-    height: 30px;              /* Уменьшили размер с 38px до 30px */
-    padding: 3px;              /* Уменьшили внутренний отступ */
+    width: 32px;                 /* Вернул чуть больший размер для ПК (было 30) */
+    height: 32px;
+    padding: 3px;
     border-radius: 8px;
     flex-shrink: 0;
   }
   .cal-team-filter-reset {
-    width: 30px;               /* Кнопка сброса теперь того же размера */
-    height: 30px;
+    width: 32px;
+    height: 32px;
     font-size: 16px;
     flex-shrink: 0;
-    display: none;             /* Скрыта по умолчанию, JS включает её как flex */
+    display: none;               
   }
   /* --- Туры (архив) --- */
   .tours-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 13px; }
