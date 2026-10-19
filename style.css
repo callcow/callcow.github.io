@@ -845,26 +845,20 @@ body.light .form-l { background: #b91c1c; }
 /* ============================================================
    КОМАНДЫ
    ============================================================ */
-.teams-grid { 
-  display: grid; 
-  grid-template-columns: repeat(4, 1fr); /* Строго 4 колонки */
-  gap: 10px; 
-}
+.teams-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
 .team-card {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; /* Центрируем контент */
+  display: flex; flex-direction: column; align-items: center;
   gap: 8px; padding: 18px 14px;
   background: var(--tour-bg);
   border: 1px solid var(--border);
   border-radius: 8px;
   text-decoration: none; color: var(--text);
   transition: all 0.25s ease;
-  text-align: center;
-  height: 100%; /* Карточки одинаковой высоты */
 }
 .team-card:hover { border-color: var(--neon); background: rgba(0, 255, 213, 0.08); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); }
-.team-card-logo { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; padding: 4px; flex-shrink: 0; }
+.team-card-logo { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; padding: 4px; }
 .team-card-logo img { width: 100%; height: 100%; object-fit: contain; }
-.team-card-name { font-size: 14px; font-weight: 800; text-align: center; line-height: 1.2; margin-top: 4px; }
+.team-card-name { font-size: 14px; font-weight: 800; text-align: center; }
 .team-card-stadium { font-size: 10px; color: var(--text-dim); text-align: center; line-height: 1.3; font-weight: 600; }
 
 /* ============================================================
@@ -1245,12 +1239,12 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .tour-name-big { font-size: 15px; }
   .tour-dates { font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-   .teams-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .teams-grid { grid-template-columns: 1fr 1fr; }
   .team-card { padding: 14px 10px; }
   .team-card-logo { width: 40px; height: 40px; }
   .team-card-name { font-size: 12px; }
   .team-card-stadium { font-size: 9px; }
-   
+
   .cal-teams-wrapper { margin-left: 0; margin-top: 6px; flex-basis: 100%; width: 100%; }
   .cal-month-title,
   .cal-tour-title,
@@ -1445,13 +1439,13 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .tour-name-big { font-size: 20px; }
   .tour-dates { font-size: 14px; white-space: normal; line-height: 1.3; }
 
-   /* --- Команды --- */
-  .teams-grid { grid-template-columns: repeat(4, 1fr); gap: 15px; } /* 4 колонки */
+  /* --- Команды --- */
+  .teams-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 13px; }
   .team-card { padding: 22px 18px; }
   .team-card-logo { width: 60px; height: 60px; }
-  .team-card-name { font-size: 16px; }
-  .team-card-stadium { font-size: 12px; }
-   
+  .team-card-name { font-size: 18px; }
+  .team-card-stadium { font-size: 13px; }
+
   /* --- Кнопка «Наверх» --- */
   .scroll-top { width: 55px; height: 55px; right: 25px; bottom: 25px; border-radius: 13px; }
   .scroll-top svg { width: 28px; height: 28px; }
