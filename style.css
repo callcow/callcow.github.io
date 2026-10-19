@@ -1414,3 +1414,49 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .disclaimer-icon { font-size: 23px; }
   .disclaimer-text { font-size: 14px; }
 }
+/* ============================================================
+   ЖЁСТКОЕ УВЕЛИЧЕНИЕ ФИЛЬТРА КОМАНД (ПК)
+   ============================================================ */
+@media (min-width: 901px) {
+  .cal-teams-filter {
+    height: 54px !important;
+    padding: 0 14px !important;
+    gap: 10px !important;
+    border-radius: 14px !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    background: rgba(13, 15, 26, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  .cal-teams-filter::-webkit-scrollbar {
+    display: none !important;
+  }
+  
+  .cal-team-filter {
+    width: 44px !important;
+    height: 44px !important;
+    padding: 6px !important;
+    border-radius: 12px !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .cal-team-filter img {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 8px !important;
+    opacity: 0.8 !important;
+  }
+
+  .cal-team-filter:hover img {
+    opacity: 1 !important;
+  }
+
+  .cal-team-filter-reset {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 24px !important;
+    border-radius: 12px !important;
+    flex-shrink: 0 !important;
+  }
+}
