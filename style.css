@@ -1286,7 +1286,7 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
    ============================================================ */
 @media (min-width: 901px) {
   .container {
-    animation: none;            /* ← ключевая строка: гасим pageFadeIn */
+    animation: none;
     transform: scale(1.25);
     transform-origin: top center;
     width: calc(100% / 1.25);
@@ -1297,6 +1297,16 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .scroll-top {
     right: calc(20px / 1.25);
     bottom: calc(20px / 1.25);
+  }
+
+  /* === КРИТИЧНО: пересчёт sticky под scale(1.25) === */
+  /* При transform: scale(1.25) на .container sticky-элемент
+     внутри него «привязывается» к самому .container, а не к вьюпорту.
+     Поэтому top и max-height нужно делить на 1.25, чтобы sticky
+     вёл себя как обычно. */
+  .main-layout-side {
+    top: calc(12px / 1.25);
+    max-height: calc((100vh - 24px) / 1.25);
   }
 }
 
