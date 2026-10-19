@@ -110,16 +110,16 @@ body::before {
   display: flex; 
   align-items: center; 
   flex-wrap: nowrap;
-  justify-content: center;    /* <--- ЦЕНТРИРУЕМ ЛОГОТИПЫ */
+  justify-content: center;    
   gap: 6px; 
-  height: 40px; 
-  padding: 0 12px;
+  height: 32px;               /* <--- Сделали как у кнопок */
+  padding: 0 8px;             /* <--- Уменьшили отступы */
   background: var(--match-bg);
   border: 1px solid var(--border);
-  border-radius: 10px; 
-  width: 100%;                /* Плашка на всю ширину */
+  border-radius: 8px; 
+  width: 100%;                
   box-sizing: border-box; 
-  overflow-x: auto;           /* Скролл, если не влезут */
+  overflow-x: auto;           
   scrollbar-width: none;
 }
 .cal-teams-filter::-webkit-scrollbar {
@@ -153,7 +153,6 @@ body::before {
   align-items: center; 
   gap: 4px; 
   margin-left: 0;            
-  margin-top: 10px;          /* Отступ сверху от кнопок "Октябрь" */
   width: 100%; 
   max-width: 100%; 
 }
