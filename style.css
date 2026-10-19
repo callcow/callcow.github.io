@@ -107,11 +107,18 @@ body::before {
    ФИЛЬТР КОМАНД В КАЛЕНДАРЕ
    ============================================================ */
 .cal-teams-filter {
-  display: flex; align-items: center; flex-wrap: wrap;
-  gap: 4px; height: 32px; padding: 0 4px;
+  display: flex; align-items: center; flex-wrap: nowrap;
+  gap: 6px; height: 40px; padding: 0 12px;
   background: var(--match-bg);
   border: 1px solid var(--border);
-  border-radius: 8px; min-width: 0;
+  border-radius: 10px; 
+  width: 100%;               /* <--- Растягиваем на всю ширину */
+  box-sizing: border-box; 
+  overflow-x: auto;          /* Если логотипы не влезут — будет скролл */
+  scrollbar-width: none;
+}
+.cal-teams-filter::-webkit-scrollbar {
+  display: none;
 }
 
 .cal-team-filter {
@@ -137,7 +144,7 @@ body::before {
 }
 .cal-team-filter-reset:hover { background: rgba(255, 0, 128, 0.2); color: #fff; border-color: var(--neon-2); }
 
-.cal-teams-wrapper { display: flex; align-items: center; gap: 4px; margin-left: auto; max-width: 100%; }
+.cal-teams-wrapper { display: flex; align-items: center; gap: 4px; margin-top: 10px; width: 100%; max-width: 100%; }
 .cal-teams-arrow {
   display: none;
   width: 26px; height: 26px; padding: 0; border-radius: 6px;
