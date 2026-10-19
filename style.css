@@ -1460,4 +1460,3 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     flex-shrink: 0 !important;
   }
 } /* <--- Вот эта скобка закрывает @media (min-width: 901px) */
-}
