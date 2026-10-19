@@ -155,8 +155,8 @@ body::before {
   display: flex; 
   align-items: center; 
   gap: 4px; 
-  margin-left: 0;            
-  width: 100%; 
+  margin-left: auto;         /* <--- Прижимаем к правому краю */
+  width: max-content;        /* <--- Ширина по содержимому */
   max-width: 100%; 
 }
 .cal-teams-arrow {
@@ -1397,22 +1397,31 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .cal-score { min-width: 55px; padding: 8px 13px; font-size: 18px; }
   .cal-score.cal-score-upcoming { font-size: 15px; }
 
-     /* --- Фильтр команд --- */
+      /* --- Фильтр команд --- */
+  .cal-teams-wrapper {
+    margin-left: auto;         /* Прижимаем к правому краю */
+    width: max-content;
+    max-width: 100%;
+  }
   .cal-teams-filter {
-    height: 40px !important;
+    height: 40px !important;   /* Возвращаем высоту для ПК */
     padding: 0 10px;
     gap: 6px;
     border-radius: 10px;
     flex-wrap: nowrap;
-    justify-content: flex-start; /* Прижимаем к левому краю */
+    justify-content: flex-start;
     overflow-x: auto;
-    width: max-content;          /* Ширина по содержимому */
+    width: max-content;          
     max-width: 100%;
-    flex: 0 1 auto;              /* Блок не растягивается */
+    flex: 0 1 auto;              
     min-width: 0;
+    background: var(--match-bg);
+    border: 1px solid var(--border);
+    box-sizing: border-box; 
+    scrollbar-width: none;
   }
   .cal-team-filter {
-    width: 32px;                 /* Вернул чуть больший размер для ПК (было 30) */
+    width: 32px;                 
     height: 32px;
     padding: 3px;
     border-radius: 8px;
