@@ -55,7 +55,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">19.10.2026 13:53 МСК</span><br>
+      Обновлено <span class="neon">19.10.2026 21:57 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -277,9 +277,11 @@
         }
         if (e.target.closest('a')) return;
         if (e.target.closest('button')) return;
-        const inputEl = document.getElementById('searchInput');
-        const isSearchActive = inputEl && inputEl.value.trim() !== '';
-        if (isSearchActive) return;
+
+        // Мы убрали блокировку (isSearchActive) для кликов по карточке,
+        // чтобы при активном поиске можно было перейти на страницу тура.
+        // Но мы по-прежнему НЕ меняем фокус и не убираем фильтр.
+
         const cardId = card.getAttribute('id') || '';
         if (!cardId) return;
 
