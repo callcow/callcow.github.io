@@ -1279,3 +1279,10 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .form-sq:hover { transform: none !important; opacity: 0.75 !important; }
   .quality-btn:hover { background: rgba(0, 255, 213, 0.08) !important; color: var(--neon) !important; border-color: rgba(0, 255, 213, 0.25) !important; }
 }
+
+   /* ПК: увеличение всего интерфейса на 25% */
+@media (min-width: 901px) {
+  body {
+    zoom: 1.25;
+  }
+}
