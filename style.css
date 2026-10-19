@@ -432,7 +432,8 @@ body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb { backgro
 }
 
 /* Карточка, поднятая наверх (live), отделяется от блоков дней */
-.matches > .match.is-live {
+.matches > .match.is-live,
+.matches > .day-group.is-lifted {
   margin-bottom: 4px;
 }
 .match {
