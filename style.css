@@ -1419,32 +1419,5 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .disclaimer-icon { font-size: 23px; }
   .disclaimer-text { font-size: 14px; }
    /* Увеличение названия выбранной команды в фильтре календаря */
-.cal-team-filter-name,
-.cal-selected-team,
-.cal-team-selected {
-    font-size: 18px !important;
-    font-weight: 800 !important;
-}
-}
-/* ============================================================
-   НАЗВАНИЕ КОМАНДЫ В ЗАГОЛОВКАХ (ЖЕЛЕЗОБЕТОННО)
-   ============================================================ */
-.section-head-title span#currentHeaderTeam,
-.section-head-title span#pastHeaderTeam {
-  font-size: 13px !important;      /* размер как у мобильного заголовка */
-  font-weight: 900 !important;
-  color: var(--neon) !important;
-  letter-spacing: 2.5px !important;
-  text-transform: uppercase !important;
-  margin-left: 10px !important;
-  display: inline-block !important;
 }
 
-@media (min-width: 901px) {
-  .section-head-title span#currentHeaderTeam,
-  .section-head-title span#pastHeaderTeam {
-    font-size: 16px !important;    /* размер как у ПК-заголовка */
-    letter-spacing: 3px !important;
-    margin-left: 14px !important;
-  }
-}
