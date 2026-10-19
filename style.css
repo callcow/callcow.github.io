@@ -107,21 +107,24 @@ body::before {
    ФИЛЬТР КОМАНД В КАЛЕНДАРЕ
    ============================================================ */
 .cal-teams-filter {
-  display: flex; align-items: center; flex-wrap: nowrap;
-  justify-content: center;   /* <--- ВОТ ЭТО: центрируем логотипы */
-  gap: 6px; height: 40px; padding: 0 12px;
+  display: flex; 
+  align-items: center; 
+  flex-wrap: nowrap;
+  justify-content: center;    /* <--- ЦЕНТРИРУЕМ ЛОГОТИПЫ */
+  gap: 6px; 
+  height: 40px; 
+  padding: 0 12px;
   background: var(--match-bg);
   border: 1px solid var(--border);
   border-radius: 10px; 
-  width: 100%;               
+  width: 100%;                /* Плашка на всю ширину */
   box-sizing: border-box; 
-  overflow-x: auto;          
+  overflow-x: auto;           /* Скролл, если не влезут */
   scrollbar-width: none;
 }
 .cal-teams-filter::-webkit-scrollbar {
   display: none;
 }
-
 .cal-team-filter {
   width: 24px; height: 24px; padding: 2px; border-radius: 5px;
   background: transparent; border: 1px solid transparent;
@@ -149,8 +152,8 @@ body::before {
   display: flex; 
   align-items: center; 
   gap: 4px; 
-  margin-left: 0;            /* <--- Прижимаем влево */
-  margin-top: 10px; 
+  margin-left: 0;            
+  margin-top: 10px;          /* Отступ сверху от кнопок "Октябрь" */
   width: 100%; 
   max-width: 100%; 
 }
@@ -203,12 +206,6 @@ body::before {
   .day-head-text { font-size: 10px; letter-spacing: 1.2px; }
   .day-head { padding: 4px 2px 0; }
 }
-  .cal-teams-filter {
-    margin-left: 0;       /* Убираем отступ слева на телефоне */
-    flex: none;           /* Отключаем растягивание */
-    width: 100%;          /* На телефоне делаем на всю ширину */
-    margin-top: 8px;      /* Отступаем сверху, чтобы не липло к кнопкам */
-  }
 /* ============================================================
    КОНТЕЙНЕР И ТОПБАР
    ============================================================ */
