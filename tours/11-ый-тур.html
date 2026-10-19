@@ -352,7 +352,7 @@
         </div>
 
         <div class="match-bottom">
-          <div class="quality-row" data-match-start="2026-10-19T19:30:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/1080p50fps/19f986da1d51ee2fcf3cfe58db8a992d/4948077602.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=8d9ced1eac2916b16239a26be8d601c9" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/720/19f986da1d51ee2fcf3cfe58db8a992d/4948077602.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=8d9ced1eac2916b16239a26be8d601c9" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/480/19f986da1d51ee2fcf3cfe58db8a992d/4948077602.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=8d9ced1eac2916b16239a26be8d601c9" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/360/19f986da1d51ee2fcf3cfe58db8a992d/4948077602.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=8d9ced1eac2916b16239a26be8d601c9" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
+          <div class="quality-row" data-match-start="2026-10-19T19:30:00+03:00" style="display:none;"><div class="replay-select" data-replay data-watch><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Смотреть</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/1080p50fps/dfcf34941d44a905af1c731c49dc6042/4948078502.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6526651f1b728efcc6fcb797de7ffa0b" target="_blank" referrerpolicy="no-referrer">1080</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/720/dfcf34941d44a905af1c731c49dc6042/4948078502.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6526651f1b728efcc6fcb797de7ffa0b" target="_blank" referrerpolicy="no-referrer">720</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/480/dfcf34941d44a905af1c731c49dc6042/4948078502.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6526651f1b728efcc6fcb797de7ffa0b" target="_blank" referrerpolicy="no-referrer">480</a><a class="replay-item" href="https://bl.video.matchtv.ru/media/playlist/free_2a6c9f904b118055eb3f7c567cb28421/17_1037315/360/dfcf34941d44a905af1c731c49dc6042/4948078502.m3u8?type_id=6&sr=26&width=100%25&height=100%25&disable_share=1&live=15&ol=1&bookmaker=1&s=6526651f1b728efcc6fcb797de7ffa0b" target="_blank" referrerpolicy="no-referrer">360</a></div></div></div>
           <div class="quality-timer" data-match-start="2026-10-19T19:30:00+03:00" ></div>
           <div class="match-meta"><span class="meta-item" title="Стадион">🏟 Арена Химки</span><span class="meta-sep">·</span><span class="meta-item" title="Город">📍 Химки</span></div>
         </div>
@@ -581,7 +581,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">19.10.2026 13:13 МСК</span><br>
+      Обновлено <span class="neon">19.10.2026 13:25 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -1493,7 +1493,11 @@
         if (!iso) return;
         const startMs = Date.parse(iso);
         if (isNaN(startMs)) return;
-        if (card.querySelector('.match-status')) return;
+        // Пропускаем только если есть реальная плашка "Завершён", 
+        // а не невидимая заглушка для выравнивания
+        const statusEl = card.querySelector('.match-status:not(.match-status-placeholder)');
+        if (statusEl) return;
+        
         liveMatches.push({ card: card, startMs: startMs });
       });
 
@@ -1562,14 +1566,28 @@
 
           const m = getMatchMinute(elapsed);
 
+
           if (!badge) {
             badge = document.createElement('div');
             badge.className = 'match-status match-live-badge';
+
             const formBlock = card.querySelector('.match-form');
             if (formBlock) {
-              formBlock.insertBefore(badge, formBlock.children[1]);
+              const placeholder = formBlock.querySelector(
+                '.match-status-placeholder'
+              );
+
+              if (placeholder) {
+                placeholder.replaceWith(badge);
+              } else {
+                formBlock.insertBefore(
+                  badge,
+                  formBlock.children[1] || null
+                );
+              }
             }
           }
+
           if (m.half === 0) {
             badge.innerHTML = 'ПЕРЕРЫВ';
             badge.classList.remove('match-status-live');
