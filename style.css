@@ -109,20 +109,20 @@ body::before {
 .cal-teams-filter {
   display: flex; 
   align-items: center; 
-  flex-wrap: nowrap;         /* Оставляем в одну строку */
-  justify-content: flex-start; /* Прижимаем иконки влево, убираем пустое место */
+  flex-wrap: nowrap; 
+  justify-content: flex-start; 
   gap: 6px; 
   height: 32px;               
   padding: 0 8px;             
   background: var(--match-bg);
   border: 1px solid var(--border);
   border-radius: 8px; 
-  width: max-content;         /* Ширина строго по содержимому */
+  width: max-content;         
   max-width: 100%;            
   box-sizing: border-box; 
   overflow-x: auto;           
   scrollbar-width: none;
-  flex: 0 1 auto;             /* Убираем flex: 1, теперь блок не растягивается */
+  flex: 0 1 auto;             
   min-width: 0;               
 }
 .cal-teams-filter::-webkit-scrollbar {
@@ -155,8 +155,8 @@ body::before {
   display: flex; 
   align-items: center; 
   gap: 4px; 
-  margin-left: auto;         /* <--- Прижимаем к правому краю */
-  width: max-content;        /* <--- Ширина по содержимому */
+  margin-left: auto;  /* Прижимаем к правому краю, если есть место */
+  width: max-content;
   max-width: 100%; 
 }
 .cal-teams-arrow {
@@ -870,8 +870,7 @@ body.light .form-l { background: #b91c1c; }
   align-items: center; 
   gap: 10px; 
   margin-bottom: 10px; 
-  flex-wrap: nowrap; /* <--- Строго в одну линию */
-  overflow: hidden;  /* <--- Обрезаем всё, что вылезет за пределы */
+  flex-wrap: wrap; /* <--- РАЗРЕШАЕМ ПЕРЕНОС НА НОВУЮ СТРОКУ */
 }
 .cal-month-row > *,
 .cal-month-row .cal-teams-wrapper { height: 32px; display: inline-flex; align-items: center; }
@@ -1397,20 +1396,20 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .cal-score { min-width: 55px; padding: 8px 13px; font-size: 18px; }
   .cal-score.cal-score-upcoming { font-size: 15px; }
 
-      /* --- Фильтр команд --- */
+       /* --- Фильтр команд --- */
   .cal-teams-wrapper {
     margin-left: auto;         /* Прижимаем к правому краю */
     width: max-content;
     max-width: 100%;
   }
   .cal-teams-filter {
-    height: 40px !important;   /* Возвращаем высоту для ПК */
+    height: 40px !important;   
     padding: 0 10px;
     gap: 6px;
     border-radius: 10px;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap;         /* Иконки не переносятся внутри блока */
     justify-content: flex-start;
-    overflow-x: auto;
+    overflow-x: auto;          /* Если не влезают — скролл */
     width: max-content;          
     max-width: 100%;
     flex: 0 1 auto;              
