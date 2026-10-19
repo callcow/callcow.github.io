@@ -1281,5 +1281,259 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .quality-btn:hover { background: rgba(0, 255, 213, 0.08) !important; color: var(--neon) !important; border-color: rgba(0, 255, 213, 0.25) !important; }
 }
 
+/* ============================================================
+   ПК-ВЕРСИЯ: УВЕЛИЧЕНИЕ ИНТЕРФЕЙСА НА 25% (без transform)
+   ============================================================ */
+@media (min-width: 901px) {
+
+  /* --- Контейнер шире на 25% --- */
+  .container {
+    max-width: 1000px;          /* было 800px */
+    animation: none;            /* отключаем pageFadeIn, чтобы не дёргался */
+  }
+
+  /* --- Тело: отступы чуть больше --- */
+  body {
+    padding: 25px 20px;         /* было 20px 16px */
+  }
+
+  /* --- Топбар --- */
+  .topbar {
+    min-height: 55px;           /* было 44px */
+    padding: 6px 12px;          /* было 5px 10px */
+    gap: 15px;                  /* было 12px */
+    margin-bottom: 15px;        /* было 12px */
+  }
+  .nav-tab {
+    height: 40px;               /* было 32px */
+    padding: 0 15px;            /* было 0 12px */
+    font-size: 15px;            /* было 12px */
+  }
+  .topbar-search {
+    width: 275px;               /* было 220px */
+  }
+  .topbar-search input {
+    height: 40px;               /* было 32px */
+    font-size: 15px;            /* было 12px */
+    padding: 0 38px 0 40px;     /* было 0 30px 0 32px */
+    background-position: 12px center; /* было 10px */
+    background-size: 20px 20px; /* было 16px */
+  }
+  .search-toggle {
+    width: 40px;                /* было 32px */
+    height: 40px;               /* было 32px */
+  }
+  .theme-toggle {
+    width: 40px;                /* было 32px */
+    height: 40px;               /* было 32px */
+    font-size: 20px;            /* было 16px */
+  }
+
+  /* --- Заголовки секций --- */
+  .section-head {
+    margin-bottom: 15px;        /* было 12px */
+    gap: 18px;                  /* было 14px */
+  }
+  .section-head-title {
+    font-size: 16px;            /* было 13px */
+    letter-spacing: 3px;        /* было 2.5px */
+  }
+
+  /* --- Заголовок дня --- */
+  .day-head {
+    padding: 8px 5px 3px;       /* было 6px 4px 2px */
+    gap: 15px;                  /* было 12px */
+  }
+  .day-head-text {
+    font-size: 15px;            /* было 12px */
+    letter-spacing: 2.5px;      /* было 2px */
+  }
+
+  /* --- Карточка матча --- */
+  .match {
+    padding: 20px 25px;         /* было 16px 20px */
+    gap: 18px;                  /* было 14px */
+    border-radius: 13px;        /* было 10px */
+  }
+  .match-top {
+    font-size: 14px;            /* было 11px */
+    letter-spacing: 1.5px;      /* было 1.2px */
+  }
+  .match-day { font-size: 18px; }      /* было 14px */
+  .match-tags { gap: 8px; }            /* было 6px */
+  .tag {
+    padding: 4px 10px;                 /* было 3px 8px */
+    font-size: 11px;                   /* было 9px */
+    letter-spacing: 1.25px;            /* было 1px */
+  }
+
+  /* --- Команды и счёт в карточке --- */
+  .match-main { gap: 18px; }           /* было 14px */
+  .match-team {
+    font-size: 20px;                   /* было 16px */
+    gap: 13px;                         /* было 10px */
+  }
+  .team-logo {
+    width: 38px; height: 38px;         /* было 30px */
+    padding: 4px;                      /* было 3px */
+    border-radius: 6px;                /* было 5px */
+  }
+  .match-score {
+    min-width: 95px;                   /* было 76px */
+    height: 50px;                      /* было 40px */
+    padding: 0 18px;                   /* было 0 14px */
+    font-size: 28px;                   /* было 22px */
+    border-radius: 8px;                /* было 6px */
+  }
+  .match-score.match-score-upcoming {
+    font-size: 19px;                   /* было 15px */
+  }
+  .match-score-block { min-width: 95px; }  /* было 76px */
+  .match-status {
+    font-size: 11px;                   /* было 9px */
+    padding: 3px 8px;                  /* было 2px 6px */
+    border-radius: 4px;                /* было 3px */
+  }
+
+  /* --- Форма команд --- */
+  .match-form { gap: 13px; }           /* было 10px */
+  .form-sq {
+    width: 16px; height: 16px;         /* было 13px */
+    font-size: 9px;                    /* было 7px */
+    border-radius: 3px;                /* было 2px */
+  }
+  .form-row { gap: 4px; }              /* было 3px */
+
+  /* --- Нижняя часть карточки (Повтор / Смотреть / стадион) --- */
+  .match-bottom {
+    padding-top: 15px;                 /* было 12px */
+    gap: 13px;                         /* было 10px */
+  }
+  .quality-row { gap: 8px; }           /* было 6px */
+  .quality-btn {
+    padding: 4px 13px;                 /* было 3px 10px */
+    font-size: 13px;                   /* было 10px */
+    border-radius: 5px;                /* было 4px */
+  }
+  .replay-toggle,
+  .review-toggle {
+    height: 33px;                      /* было 26px */
+    padding: 0 13px;                   /* было 0 10px */
+    font-size: 14px;                   /* было 11px */
+    border-radius: 8px;                /* было 6px */
+    gap: 5px;                          /* было 4px */
+  }
+  .replay-item {
+    padding: 10px 15px;                /* было 8px 12px */
+    font-size: 14px;                   /* было 11px */
+  }
+  .replay-caret { font-size: 13px; }   /* было 10px */
+  .quality-timer {
+    padding: 4px 13px;                 /* было 3px 10px */
+    font-size: 13px;                   /* было 10px */
+    gap: 8px;                          /* было 6px */
+  }
+  .quality-timer .timer-icon { font-size: 13px; }  /* было 10px */
+  .quality-timer .timer-unit { font-size: 10px; }  /* было 8px */
+  .match-meta {
+    font-size: 14px;                   /* было 11px */
+    gap: 8px;                          /* было 6px */
+  }
+
+  /* --- Правая колонка (sticky) --- */
+  .main-layout {
+    grid-template-columns: minmax(0, 1fr) 425px;  /* было 340px */
+    gap: 25px;                                    /* было 20px */
+  }
+  .main-layout-side {
+    top: 15px;                                    /* было 12px */
+    max-height: calc(100vh - 30px);               /* было 24px */
+  }
+  .main-layout .match { padding: 18px 20px; gap: 15px; }  /* было 14px 16px, 12px */
+  .main-layout .match-team { font-size: 18px; gap: 10px; } /* было 14px, 8px */
+  .main-layout .team-logo { width: 35px; height: 35px; padding: 4px; } /* было 28px, 3px */
+  .main-layout .match-score { min-width: 78px; height: 45px; font-size: 22px; padding: 0 13px; } /* было 62px, 36px, 18px, 0 10px */
+  .main-layout .match-score.match-score-upcoming { font-size: 16px; } /* было 13px */
+  .main-layout .match-meta { font-size: 13px; }  /* было 10px */
+  .main-layout .quality-btn { padding: 3px 10px; font-size: 11px; } /* было 2px 8px, 9px */
+
+  /* --- Турнирная таблица --- */
+  .table-header,
+  .table-row {
+    grid-template-columns: 33px 1fr 30px 30px 30px 30px 38px;  /* было 26px 1fr 24px×4 30px */
+    gap: 5px;                                                    /* было 4px */
+    padding: 9px 15px;                                           /* было 7px 12px (у row), 10px 12px (у header) */
+  }
+  .table-header {
+    padding: 13px 15px;                                          /* было 10px 12px */
+    font-size: 11px;                                             /* было 9px */
+    letter-spacing: 1.25px;                                      /* было 1px */
+  }
+  .table-row {
+    font-size: 15px;                                             /* было 12px */
+  }
+  .table-pos {
+    width: 25px; height: 25px;                                   /* было 20px */
+    font-size: 13px;                                             /* было 10px */
+    border-radius: 5px;                                          /* было 4px */
+  }
+  .table-club { gap: 8px; }                                      /* было 6px */
+  .table-club-logo { width: 23px; height: 23px; }                /* было 18px */
+  .table-club-name { font-size: 15px; }                          /* было 12px */
+  .table-stat { font-size: 13px; }                               /* было 10px */
+  .table-pts { font-size: 16px; }                                /* было 13px */
+  .table-legend {
+    gap: 15px;                                                   /* было 12px */
+    padding: 10px 15px;                                          /* было 8px 12px */
+    font-size: 11px;                                             /* было 9px */
+  }
+  .table-legend i { width: 10px; height: 10px; }                 /* было 8px */
+
+  /* --- Календарь --- */
+  .cal-month-row { gap: 13px; margin-bottom: 13px; }             /* было 10px */
+  .cal-month-row > *,
+  .cal-month-row .cal-teams-wrapper { height: 40px; }            /* было 32px */
+  .cal-tour-group { margin-bottom: 23px; }                       /* было 18px */
+  .cal-tour-title,
+  .cal-month-title {
+    height: 40px;                                                /* было 32px */
+    padding: 0 15px;                                             /* было 0 12px */
+    font-size: 15px;                                             /* было 12px */
+    letter-spacing: 1.9px;                                       /* было 1.5px */
+  }
+  .cal-match {
+    grid-template-columns: 70px 1fr auto;                        /* было 56px */
+    gap: 15px;                                                   /* было 12px */
+    padding: 15px 20px;                                          /* было 12px 16px */
+    margin-bottom: 8px;                                          /* было 6px */
+    font-size: 18px;                                             /* было 14px */
+  }
+  .cal-day { font-size: 28px; }                                  /* было 22px */
+  .cal-month-short { font-size: 11px; }                          /* было 9px */
+  .cal-time-inline { font-size: 14px; }                          /* было 11px */
+  .cal-team { gap: 10px; }                                       /* было 8px */
+  .cal-team .team-logo { width: 30px; height: 30px; }            /* было 24px */
+  .cal-team-name { font-size: 18px; }                            /* было 14px */
+  .cal-score {
+    min-width: 55px;                                             /* было 44px */
+    padding: 8px 13px;                                           /* было 6px 10px */
+    font-size: 18px;                                             /* было 14px */
+  }
+  .cal-score.cal-score-upcoming { font-size: 15px; }             /* было 12px */
+
+  /* --- Кнопка «Наверх» --- */
+  .scroll-top {
+    width: 55px; height: 55px;                                   /* было 44px */
+    right: 25px; bottom: 25px;                                   /* было 20px */
+    border-radius: 13px;                                         /* было 10px */
+  }
+  .scroll-top svg { width: 28px; height: 28px; }                 /* было 22px */
+
+  /* --- Футер и дисклеймер --- */
+  .footer { font-size: 15px; margin-top: 60px; padding-top: 30px; }  /* было 12px, 48px, 24px */
+  .disclaimer { padding: 15px 25px; gap: 15px; margin-top: 40px; }   /* было 12px 20px, 12px, 32px */
+  .disclaimer-icon { font-size: 23px; }                              /* было 18px */
+  .disclaimer-text { font-size: 14px; }                              /* было 11px */
+}
 
        
