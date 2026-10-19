@@ -44,7 +44,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">19.10.2026 22:24 МСК</span><br>
+      Обновлено <span class="neon">19.10.2026 22:36 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -251,30 +251,31 @@
         applyMatchFocus(id, mode);
       }
 
-      let lastCardClickTs = 0;
+            let lastCardClickTs = 0;
       document.addEventListener('click', function(e) {
         if (e.target.closest('.replay-select')) return;
         const card = e.target.closest('.match');
         if (!card) {
           const inputEl = document.getElementById('searchInput');
           const isSearchActive = inputEl && inputEl.value.trim() !== '';
-          if (!isSearchActive) {
+          const is4kFilter = window.location.search.includes('filter=4k');
+          if (!isSearchActive && !is4kFilter) {
             highlightMatchCard(null);
             highlightMatchTeams(null);
           }
           return;
         }
         
-        // Если кликнули по конкретной ссылке внутри (логотип, тег тура) — 
-        // даем браузеру выполнить стандартный переход по ней.
+        // Если кликнули по ссылке или кнопке внутри — не мешаем переходу
         if (e.target.closest('a')) return;
         if (e.target.closest('button')) return;
 
-        const inputEl = document.getElementById('searchInput');
-        const isSearchActive = inputEl && inputEl.value.trim() !== '';
-
         const cardId = card.getAttribute('id') || '';
         if (!cardId) return;
+
+        const inputEl = document.getElementById('searchInput');
+        const isSearchActive = inputEl && inputEl.value.trim() !== '';
+        const is4kFilter = window.location.search.includes('filter=4k');
 
         const now = Date.now();
         const isRepeat = (now - lastCardClickTs) < 600 && card.classList.contains('match-focused');
@@ -288,17 +289,20 @@
           scrollCardToCenter(cardId, true, 'smooth');
         }
 
-        // ЕСЛИ АКТИВЕН ФИЛЬТР (ПОИСК):
+        // ЕСЛИ АКТИВЕН ФИЛЬТР (ПОИСК ИЛИ 4K):
         // клик по карточке переносит на страницу тура и выделяет этот матч.
-        if (isSearchActive) {
+        if (isSearchActive || is4kFilter) {
           const tourLink = card.querySelector('.tag-tour');
           if (tourLink) {
-            window.location.href = tourLink.href + '#' + cardId;
-            return;
+            const href = tourLink.getAttribute('href') || '';
+            if (href && href.indexOf('undefined') === -1) {
+              window.location.href = href + '#' + cardId;
+              return;
+            }
           }
         }
 
-        // ЕСЛИ ПОИСК НЕ АКТИВЕН (обычный просмотр):
+        // ЕСЛИ ФИЛЬТР НЕ АКТИВЕН (обычный просмотр):
         // просто обновляем хэш в адресной строке, никуда не переходя.
         try {
           const newHash = '#' + cardId;
