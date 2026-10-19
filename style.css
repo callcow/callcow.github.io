@@ -769,6 +769,14 @@ body.light .match-status {
   margin-top: -4px;
   position: relative;
 }
+/* Невидимая заглушка для будущих матчей, чтобы форма не съезжала */
+.match-status-placeholder {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 .match-form-side { display: flex; align-items: center; min-width: 0; }
 .match-form-home { justify-content: flex-start; }
 .match-form-away { justify-content: flex-end; margin-left: auto; }
