@@ -1562,3 +1562,88 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .team-card-name { font-size: 18px; }                             /* было 14px */
   .team-card-stadium { font-size: 13px; }                          /* было 10px */
        
+/* ============================================================
+   УЛУЧШЕНИЕ ФИЛЬТРА КОМАНД В КАЛЕНДАРЕ (ПК и общий вид)
+   ============================================================ */
+
+/* 1. Общий контейнер фильтра: делаем чуть выше и объемнее */
+.cal-teams-filter {
+  height: 40px;                /* было 32px */
+  padding: 0 8px;              /* больше воздуха по бокам */
+  gap: 6px;                    /* было 4px */
+  background: rgba(13, 15, 26, 0.6); /* чуть прозрачнее фон для контраста */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+/* 2. Кнопки с логотипами: делаем крупнее и добавляем эффект */
+.cal-team-filter {
+  width: 30px;                 /* было 24px */
+  height: 30px;                /* было 24px */
+  padding: 4px;                /* больше отступ внутри кнопки */
+  border-radius: 8px;          /* более скругленные */
+}
+
+/* 3. Логотипы внутри: добавляем мягкий фильтр для неактивных */
+.cal-team-filter img {
+  border-radius: 6px;
+  opacity: 0.7;                /* неактивные чуть приглушены */
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+/* 4. Ховер: при наведении логотип становится ярким и увеличивается */
+@media (hover: hover) and (pointer: fine) {
+  .cal-team-filter:hover {
+    background: rgba(0, 255, 213, 0.12);
+    border-color: rgba(0, 255, 213, 0.4);
+    transform: translateY(-2px); /* легкий подъем */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  .cal-team-filter:hover img {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* 5. Активная команда: яркая неоновая подсветка */
+.cal-team-filter.active {
+  background: linear-gradient(135deg, rgba(0, 255, 213, 0.25), rgba(168, 85, 247, 0.25));
+  border-color: var(--neon);
+  box-shadow: 0 0 15px rgba(0, 255, 213, 0.4);
+}
+.cal-team-filter.active img {
+  opacity: 1;                  /* активный логотип всегда яркий */
+}
+
+/* 6. Кнопка сброса (крестик) */
+.cal-team-filter-reset {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* 7. Адаптация под ПК (увеличение на 25%) */
+@media (min-width: 901px) {
+  /* Контейнер фильтра */
+  .cal-teams-filter {
+    height: 50px;              /* пропорционально увеличиваем */
+    padding: 0 10px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+  
+  /* Кнопки */
+  .cal-team-filter {
+    width: 38px;               /* было 30px, теперь * 1.25 */
+    height: 38px;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  
+  .cal-team-filter-reset {
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+  }
+}
