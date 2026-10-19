@@ -112,7 +112,6 @@ body::before {
   background: var(--match-bg);
   border: 1px solid var(--border);
   border-radius: 10px; 
-  width: 100%;               /* <--- Растягиваем на всю ширину */
   box-sizing: border-box; 
   overflow-x: auto;          /* Если логотипы не влезут — будет скролл */
   scrollbar-width: none;
@@ -144,7 +143,15 @@ body::before {
 }
 .cal-team-filter-reset:hover { background: rgba(255, 0, 128, 0.2); color: #fff; border-color: var(--neon-2); }
 
-.cal-teams-wrapper { display: flex; align-items: center; gap: 4px; margin-top: 10px; width: 100%; max-width: 100%; }
+.cal-teams-wrapper { 
+  display: flex; 
+  align-items: center; 
+  gap: 4px; 
+  margin-left: 0;            /* <--- Прижимаем влево */
+  margin-top: 10px; 
+  width: 100%; 
+  max-width: 100%; 
+}
 .cal-teams-arrow {
   display: none;
   width: 26px; height: 26px; padding: 0; border-radius: 6px;
