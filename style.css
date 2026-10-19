@@ -1420,4 +1420,27 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .disclaimer-text { font-size: 14px; }
    /* Увеличение названия выбранной команды в фильтре календаря */
 }
-
+/* ============================================================
+   ВОЗВРАТ КОМПАКТНЫХ КАРТОЧЕК НА МОБИЛЬНЫХ
+   ============================================================ */
+@media (max-width: 900px) {
+  .tours-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+  .tour-card-large {
+    padding: 16px 18px !important;
+    min-height: auto !important;
+  }
+  .tour-name-big { font-size: 15px !important; }
+  .tour-dates { font-size: 10px !important; white-space: nowrap !important; }
+  
+  .teams-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+  .team-card { padding: 14px 10px !important; }
+  .team-card-logo { width: 40px !important; height: 40px !important; }
+  .team-card-name { font-size: 12px !important; }
+  .team-card-stadium { font-size: 9px !important; }
+}
