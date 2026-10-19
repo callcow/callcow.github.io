@@ -1398,32 +1398,32 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .cal-score.cal-score-upcoming { font-size: 15px; }
 
     /* --- Фильтр команд --- */
-   .cal-teams-filter {
+  .cal-teams-filter {
     height: 40px !important;
-    padding: 0 10px;
-    gap: 8px;
+    padding: 0 8px;            /* Уменьшили горизонтальный отступ */
+    gap: 6px;                  /* Уменьшили расстояние между иконками */
     border-radius: 10px;
     flex-wrap: nowrap;
     overflow-x: auto;
-    width: max-content;       /* <--- Ширина по содержимому */
+    width: max-content;
     max-width: 100%;
     flex: 1;
     min-width: 0;
   }
   .cal-team-filter {
-    width: 38px;
-    height: 38px;                      /* большие кнопки */
-    padding: 5px;
-    border-radius: 10px;
-    flex-shrink: 0;                    /* запрещаем сжиматься */
-  }
-  .cal-team-filter-reset {
-    width: 38px;
-    height: 38px;
-    font-size: 20px;
+    width: 30px;               /* Уменьшили размер с 38px до 30px */
+    height: 30px;              /* Уменьшили размер с 38px до 30px */
+    padding: 3px;              /* Уменьшили внутренний отступ */
+    border-radius: 8px;
     flex-shrink: 0;
   }
-
+  .cal-team-filter-reset {
+    width: 30px;               /* Кнопка сброса теперь того же размера */
+    height: 30px;
+    font-size: 16px;
+    flex-shrink: 0;
+    display: none;             /* Скрыта по умолчанию, JS включает её как flex */
+  }
   /* --- Туры (архив) --- */
   .tours-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 13px; }
   .tour-card-large { padding: 20px 22px; gap: 15px; min-height: 88px; }
