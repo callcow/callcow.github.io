@@ -1459,4 +1459,16 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
     border-radius: 12px !important;
     flex-shrink: 0 !important;
   }
-} /* <--- Вот эта скобка закрывает @media (min-width: 901px) */
+     /* --- Исправление высоты обертки фильтра --- */
+  .cal-month-row .cal-teams-wrapper,
+  .cal-month-row > * {
+    height: auto !important; /* Снимаем принудительные 32px */
+  }
+  .cal-teams-wrapper {
+    height: 54px !important; /* Задаем высоту, как у плашки */
+  }
+  .cal-teams-filter {
+    height: 54px !important; 
+    /* ... остальные ваши стили для плашки ... */
+  }
+}
