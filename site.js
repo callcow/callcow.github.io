@@ -1,4 +1,82 @@
 (function() {
+  // Рендерим прошедшие матчи из JSON только 1 раз при загрузке
+  const pastContainer = document.getElementById('pastMatchesContainer');
+  if (!pastContainer) return;
+
+  fetch('past.json')
+    .then(r => r.json())
+    .then(pastMatches => renderPast(pastMatches))
+    .catch(e => console.warn('past.json не загружен:', e));
+
+  function renderPast(pastMatches) {
+    let html = '';
+
+    for (const m of pastMatches) {
+      let badge = m.is_4k ? '<a class="tag tag-4k" href="index.html?filter=4k">4K UHD</a>' : '';
+      
+      let qualitiesHtml = '';
+      if (m.qualities && m.qualities.length > 0) {
+        const items = m.qualities.map(q => `<a class="replay-item" href="${q.url}" target="_blank" referrerpolicy="no-referrer">${q.label}</a>`).join('');
+        qualitiesHtml = `<div class="replay-select" data-replay><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Повтор</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list>${items}</div></div>`;
+      }
+
+      let reviewHtml = m.review_url ? `<a class="replay-toggle review-toggle" href="${m.review_url}" target="_blank" rel="noopener noreferrer"><span>Обзор</span></a>` : '';
+      
+      let metaHtml = `<span class="meta-item" title="Стадион">🏟 ${m.home_stadium}</span>`;
+      if (m.home_city) {
+        metaHtml += `<span class="meta-sep">·</span><span class="meta-item" title="Город">📍 ${m.home_city}</span>`;
+      }
+
+      html += `
+      <div class="match past-match" id="${m.id}" data-teams="${m.data_teams}" style="display:none;">
+          <div class="match-top">
+              <div class="match-when">
+                  <span class="match-day">${m.day}</span>
+                  <span class="match-month">${m.month}</span>
+                  <span class="match-dot">·</span>
+                  <span class="match-time">${m.time}</span>
+              </div>
+              <div class="match-tags">
+                  ${badge}
+                  <a class="tag tag-tour" href="${m.tour_url}">${m.tour_show}</a>
+              </div>
+          </div>
+          <div class="match-main">
+              <a class="match-team home" href="index.html?team=${encodeURIComponent(m.home)}">
+                  <span class="team-logo">${m.home_img}</span>
+                  <span class="team-name">${m.home}</span>
+              </a>
+              <div class="match-score-block">
+                  <div class="match-score ${m.score_class}">${m.score}</div>
+              </div>
+              <a class="match-team away" href="index.html?team=${encodeURIComponent(m.away)}">
+                  <span class="team-name">${m.away}</span>
+                  <span class="team-logo">${m.away_img}</span>
+              </a>
+          </div>
+          <div class="match-form">
+              <div class="match-form-side match-form-home">${m.form_home}</div>
+              <div class="match-status">Завершён</div>
+              <div class="match-form-side match-form-away">${m.form_away}</div>
+          </div>
+          <div class="match-bottom">
+              <div class="quality-row">${qualitiesHtml}${reviewHtml}</div>
+              <div class="match-meta">${metaHtml}</div>
+          </div>
+      </div>`;
+    }
+
+    pastContainer.innerHTML = html;
+
+    // Перезапускаем поиск, чтобы он "увидел" новые элементы
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  }
+})();
+
+(function() {
   const toggle = document.getElementById('themeToggle');
   if (!toggle) return;
   const savedTheme = localStorage.getItem('theme');
@@ -565,6 +643,10 @@
   let activeTeam = null;
 
   function applyFilter() {
+    const teamsWrapper = document.querySelector('.cal-teams-wrapper');
+    const primaryMonth = document.querySelector('.cal-month-primary');
+
+    // 1. Показываем/скрываем сами матчи
     const allCal = document.querySelectorAll('.cal-tour-group .cal-match');
     allCal.forEach(function(el) {
       if (!activeTeam) {
@@ -576,14 +658,67 @@
         el.style.display = names.includes(activeTeam) ? '' : 'none';
       }
     });
-    document.querySelectorAll('.cal-tour-group').forEach(function(group) {
-      const visible = group.querySelectorAll('.cal-match:not([style*="display: none"])').length;
-      group.style.display = visible > 0 ? '' : 'none';
-    });
+
+    // 2. Обрабатываем каждый месяц
     document.querySelectorAll('.cal-month').forEach(function(month) {
-      const visible = month.querySelectorAll('.cal-match:not([style*="display: none"])').length;
-      month.style.display = visible > 0 ? '' : 'none';
+      let monthHasMatches = false;
+      let isFirstVisibleRowInMonth = true;
+      
+      const rows = month.querySelectorAll('.cal-month-row');
+      const groups = month.querySelectorAll('.cal-tour-group');
+      
+      for (let i = 0; i < groups.length; i++) {
+        const visible = groups[i].querySelectorAll('.cal-match:not([style*="display: none"])').length;
+        const row = rows[i];
+        
+        if (visible > 0) {
+          monthHasMatches = true;
+          groups[i].style.display = '';
+          if (row) {
+            row.style.display = '';
+            
+            // Показываем плашку месяца ТОЛЬКО в первом видимом ряду
+            const monthTitles = row.querySelectorAll('.cal-month-title');
+            monthTitles.forEach(function(title) {
+              title.style.display = isFirstVisibleRowInMonth ? '' : 'none';
+            });
+            isFirstVisibleRowInMonth = false; // Следующие ряды уже не первые
+          }
+        } else {
+          groups[i].style.display = 'none';
+          if (row) row.style.display = 'none'; // Скрываем весь ряд
+        }
+      }
+      
+      // Скрываем весь месяц, если нет матчей
+      month.style.display = monthHasMatches ? '' : 'none';
     });
+
+    // 3. Перенос фильтра
+    if (teamsWrapper && primaryMonth) {
+      if (primaryMonth.style.display === 'none') {
+        // Если Ноябрь скрыт, ищем первый видимый ряд и вставляем туда
+        const firstVisibleRow = document.querySelector('.cal-month-row:not([style*="display: none"])');
+        if (firstVisibleRow) {
+          firstVisibleRow.appendChild(teamsWrapper);
+          firstVisibleRow.style.display = 'flex';
+          firstVisibleRow.style.flexWrap = 'wrap';
+          firstVisibleRow.style.alignItems = 'center';
+          firstVisibleRow.style.gap = '10px';
+        }
+      } else {
+        // Если Ноябрь виден, возвращаем фильтр в его первый ряд
+        const primaryRow = primaryMonth.querySelector('.cal-month-row');
+        if (primaryRow && teamsWrapper.parentElement !== primaryRow) {
+          primaryRow.appendChild(teamsWrapper);
+          primaryRow.style.display = 'flex';
+          primaryRow.style.flexWrap = 'wrap';
+          primaryRow.style.alignItems = 'center';
+          primaryRow.style.gap = '10px';
+        }
+      }
+    }
+
     if (resetBtn) resetBtn.style.display = activeTeam ? 'flex' : 'none';
   }
 
