@@ -155,9 +155,10 @@ body::before {
   display: flex; 
   align-items: center; 
   gap: 4px; 
-  margin-left: auto;  /* Прижимаем к правому краю, если есть место */
+  margin-left: auto;  /* Прижимаем к правому краю */
   width: max-content;
   max-width: 100%; 
+  flex-shrink: 0; /* Запрещаем сжиматься */
 }
 .cal-teams-arrow {
   display: none;
@@ -359,24 +360,24 @@ body.light .topbar-search .search-suggestions {
 body.light .topbar-search .search-suggestions::-webkit-scrollbar-thumb { background: linear-gradient(180deg, rgba(0, 168, 150, 0.6), rgba(140, 60, 220, 0.6)); }
 
 .topbar-search .search-suggestion {
-  display: flex; align-items: center; gap: 8px;
-  padding: 8px 12px;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px;
   cursor: pointer; color: var(--text);
-  font-size: 12px; font-weight: 700;
+  font-size: 14px; font-weight: 700;
   text-decoration: none; position: relative;
   transition: background 0.15s, color 0.15s;
 }
 .topbar-search .search-suggestion:not(:last-child)::after {
   content: '';
-  position: absolute; left: 12px; right: 12px; bottom: 0;
+  position: absolute; left: 14px; right: 14px; bottom: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 213, 0.25) 20%, rgba(168, 85, 247, 0.25) 80%, transparent 100%);
 }
 .topbar-search .search-suggestion:hover { background: rgba(0, 255, 213, 0.15); color: var(--neon); }
-.topbar-search .search-suggestion-logo { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.topbar-search .search-suggestion-logo { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .topbar-search .search-suggestion-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; transition: transform 0.15s; }
 .topbar-search .search-suggestion:hover .search-suggestion-logo img { transform: scale(1.1); }
-.topbar-search .search-suggestion-name { font-size: 12px; font-weight: 700; }
+.topbar-search .search-suggestion-name { font-size: 14px; font-weight: 700; }
 
 /* ============================================================
    ЗАГОЛОВОК СЕКЦИИ
@@ -865,12 +866,22 @@ body.light .form-l { background: #b91c1c; }
    КАЛЕНДАРЬ
    ============================================================ */
 .cal-month { margin-bottom: 24px; }
-.cal-month-row { 
-  display: flex; 
-  align-items: center; 
-  gap: 10px; 
-  margin-bottom: 10px; 
-  flex-wrap: wrap; /* <--- РАЗРЕШАЕМ ПЕРЕНОС НА НОВУЮ СТРОКУ */
+.cal-month-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.cal-month-title[style*="display: none"],
+.cal-tour-title[style*="display: none"] {
+  display: none !important;
+}
+
+/* Стили для заголовка тура, который теперь лежит в отдельном cal-month-row */
+.cal-month-row > .cal-tour-title {
+  margin-bottom: 0;
 }
 .cal-month-row > *,
 .cal-month-row .cal-teams-wrapper { height: 32px; display: inline-flex; align-items: center; }
@@ -1245,7 +1256,27 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .team-card-name { font-size: 12px; }
   .team-card-stadium { font-size: 9px; }
 
-  .cal-teams-wrapper { margin-left: 0; margin-top: 6px; flex-basis: 100%; width: 100%; }
+  /* Плашка фильтра на мобильных: под месяцем/туром, по левому краю */
+  .cal-month-row {
+    flex-wrap: wrap; /* разрешаем перенос */
+  }
+  .cal-teams-wrapper {
+    margin-left: 0 !important;   /* убираем прижатие вправо */
+    margin-top: 6px;
+    flex-basis: 100%;            /* занимает всю ширину строки */
+    width: 100%;
+    justify-content: flex-start; /* содержимое плашки по левому краю */
+    max-width: 100%;
+  }
+  .cal-teams-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1 1 auto;              /* растягивается на всю доступную ширину */
+    min-width: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cal-teams-filter::-webkit-scrollbar { display: none; }
   .cal-month-title,
   .cal-tour-title,
   .cal-teams-filter,
@@ -1253,8 +1284,6 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .cal-month-row .cal-teams-wrapper { height: 34px; }
   .cal-month-title,
   .cal-tour-title { padding: 0 10px; font-size: 11px; }
-  .cal-teams-filter { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0; -webkit-overflow-scrolling: touch; }
-  .cal-teams-filter::-webkit-scrollbar { display: none; }
   .cal-team-filter { width: 22px; height: 22px; padding: 2px; flex-shrink: 0; }
   .cal-teams-arrow { display: flex; }
   .cal-match { grid-template-columns: 50px 1fr auto; gap: 10px; padding: 12px 14px; }
@@ -1307,6 +1336,32 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
 
   .form-sq:hover { transform: none !important; opacity: 0.75 !important; }
   .quality-btn:hover { background: rgba(0, 255, 213, 0.08) !important; color: var(--neon) !important; border-color: rgba(0, 255, 213, 0.25) !important; }
+}
+
+/* ============================================================
+   ПРОМЕЖУТОЧНЫЙ ДИАПАЗОН: 901–950px
+   Плашка фильтра календаря — слева, под месяцем и туром
+   ============================================================ */
+@media (min-width: 901px) and (max-width: 950px) {
+  .cal-month-row {
+    flex-wrap: wrap;
+  }
+  .cal-teams-wrapper {
+    margin-left: 0 !important;
+    margin-top: 6px;
+    flex-basis: 100%;
+    width: 100%;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .cal-teams-filter {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+  }
+  .cal-teams-filter::-webkit-scrollbar { display: none; }
 }
 
 /* ============================================================
@@ -1486,3 +1541,13 @@ body.light .table-row-match { background: linear-gradient(90deg, rgba(140, 60, 2
   .team-card-name { font-size: 12px !important; }
   .team-card-stadium { font-size: 9px !important; }
 }
+@media (min-width: 601px) and (max-width: 900px) {
+  .cal-teams-wrapper {
+    margin-left: 0 !important;
+    margin-top: 6px;
+    flex-basis: 100%;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
