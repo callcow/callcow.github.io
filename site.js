@@ -1225,3 +1225,136 @@
   updateLive();
   setInterval(updateLive, 30000);
 })();
+
+(function() {
+  // Определяем, находимся ли мы на странице тура (URL содержит /tours/)
+  if (!window.location.pathname.includes('/tours/')) return;
+
+  const container = document.getElementById('matchesContainer');
+  if (!container) return;
+
+  // Имя текущего HTML файла (например, "12.html")
+  const htmlName = window.location.pathname.split('/').pop();
+  const jsonName = htmlName.replace('.html', '.json');
+
+  // Загружаем streams.txt для ссылок (если они есть)
+  Promise.all([
+    fetch(jsonName).then(r => r.json()).catch(e => { console.warn(jsonName + ' не загружен', e); return []; }),
+    fetch('../../streams.txt').then(r => r.text()).catch(e => { return ''; }) // streams.txt лежит в корне
+  ]).then(([matches, streamsText]) => {
+    
+    let streamsData = {};
+    if (streamsText) {
+      try {
+        const decodedJson = atob(streamsText.trim());
+        streamsData = JSON.parse(decodedJson);
+      } catch (e) { console.warn('streams.txt parse error', e); }
+    }
+
+    renderTourMatches(matches, streamsData, container);
+  });
+
+  function replaceQuality(url, newCode) {
+    const PATTERNS = [
+      /\/2160\//, /\/1080p50fps\//, /\/1080\//,
+      /\/720p50fps\//, /\/720\//, /\/480p50fps\//, /\/480\//,
+      /\/360p50fps\//, /\/360\//
+    ];
+    for (const pat of PATTERNS) {
+      if (pat.test(url)) return url.replace(pat, '/' + newCode + '/');
+    }
+    return url.replace(/(\/\d+_\d+\/)([a-f0-9]{32}\/)/, `$1${newCode}/$2`);
+  }
+
+  function renderTourMatches(matches, streamsData, container) {
+    let html = '';
+    // Группируем по дням
+    let prevDayKey = null;
+    
+    // Сортируем по времени (примитивно)
+    const sorted = [...matches].sort((a, b) => {
+      const tA = a.time.split(':').map(Number);
+      const tB = b.time.split(':').map(Number);
+      return (tA[0]*60 + tA[1]) - (tB[0]*60 + tB[1]);
+    });
+
+    for (const m of sorted) {
+      const dayKey = `${m.month}-${m.day}`;
+      
+      if (dayKey !== prevDayKey) {
+        if (prevDayKey !== null) html += `</div>`;
+        // Примерно как на главной
+        html += `<div class="day-group"><div class="day-head"><span class="day-head-text"><span>${m.day} ${m.month}</span></span></div>`;
+        prevDayKey = dayKey;
+      }
+
+      let badge = m.is_4k ? '<a class="tag tag-4k" href="../index.html?filter=4k">4K UHD</a>' : '';
+      const tourBadge = m.tour_show ? `<span class="tag tag-tour">${m.tour_show}</span>` : '';
+
+      // Ищем ссылку в стримах
+      const streamKey = `${m.day}|${m.month}|${m.time}|${m.data_teams.split(' ')[0]}|${m.data_teams.split(' ')[1]}`;
+      const streamInfo = streamsData[streamKey];
+      
+      let qualitiesHtml = '';
+      if (streamInfo && streamInfo.stream) {
+        const base = streamInfo.stream;
+        const is4k = streamInfo.is_4k || base.includes('/2160/');
+        const codes = is4k 
+          ? [['2160','2160'], ['1080','1080'], ['720','720'], ['480','480'], ['360','360']]
+          : [['1080','1080p50fps'], ['720','720'], ['480','480'], ['360','360']];
+
+        const items = codes.map(([label, code]) => {
+          const url = replaceQuality(base, code);
+          return `<a class="replay-item" href="${url}" target="_blank" referrerpolicy="no-referrer">${label}</a>`;
+        }).join('');
+
+        qualitiesHtml = `<div class="replay-select" data-replay><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Повтор</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list>${items}</div></div>`;
+      }
+
+      let reviewHtml = m.review_url ? `<a class="replay-toggle review-toggle" href="${m.review_url}" target="_blank" rel="noopener noreferrer"><span>Обзор</span></a>` : '';
+      let metaHtml = `<span class="meta-item" title="Стадион">🏟 ${m.home_stadium}</span>`;
+      if (m.home_city) metaHtml += `<span class="meta-sep">·</span><span class="meta-item" title="Город">📍 ${m.home_city}</span>`;
+
+      const hideUntilStart = !m.score ? 'style="display:none;"' : '';
+      const timerStyle = !m.score ? '' : 'style="display:none;"';
+
+      html += `
+      <div class="match${m.score !== '- : -' ? ' past-match' : ''}" id="${m.id}" data-teams="${m.data_teams}">
+        <div class="match-top">
+          <div class="match-when">
+            <span class="match-day">${m.day}</span>
+            <span class="match-month">${m.month}</span>
+            <span class="match-dot">·</span>
+            <span class="match-time">${m.time}</span>
+          </div>
+          <div class="match-tags">${badge}${tourBadge}</div>
+        </div>
+        <div class="match-main">
+          <a class="match-team home" href="../index.html?team=${encodeURIComponent(m.home)}">
+            <span class="team-logo">${m.home_img}</span>
+            <span class="team-name">${m.home}</span>
+          </a>
+          <div class="match-score-block">
+            <div class="match-score ${m.score_class}">${m.score}</div>
+          </div>
+          <a class="match-team away" href="../index.html?team=${encodeURIComponent(m.away)}">
+            <span class="team-name">${m.away}</span>
+            <span class="team-logo">${m.away_img}</span>
+          </a>
+        </div>
+        <div class="match-form">
+          <div class="match-form-side match-form-home">${m.form_home}</div>
+          ${m.score !== '- : -' ? '<div class="match-status">Завершён</div>' : '<div class="match-status-placeholder"></div>'}
+          <div class="match-form-side match-form-away">${m.form_away}</div>
+        </div>
+        <div class="match-bottom">
+          <div class="quality-row" data-match-start="${m.match_start}" ${hideUntilStart}>${qualitiesHtml}${reviewHtml}</div>
+          <div class="quality-timer" data-match-start="${m.match_start}" ${timerStyle}></div>
+          <div class="match-meta">${metaHtml}</div>
+        </div>
+      </div>`;
+    }
+    if (prevDayKey !== null) html += `</div>`;
+    container.innerHTML = html;
+  }
+})();
