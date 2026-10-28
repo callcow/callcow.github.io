@@ -1,123 +1,4 @@
-(function() {
-  const pastContainer = document.getElementById('pastMatchesContainer');
-  if (!pastContainer) return;
-
-  // Вспомогательная функция для замены качества в ссылке (копия логики из Python)
-  function replaceQuality(url, newCode) {
-    const PATTERNS = [
-      /\/2160\//, /\/1080p50fps\//, /\/1080\//,
-      /\/720p50fps\//, /\/720\//,
-      /\/480p50fps\//, /\/480\//,
-      /\/360p50fps\//, /\/360\//
-    ];
-    for (const pat of PATTERNS) {
-      if (pat.test(url)) return url.replace(pat, '/' + newCode + '/');
-    }
-    return url.replace(/(\/\d+_\d+\/)([a-f0-9]{32}\/)/, `$1${newCode}/$2`);
-  }
-
-  // 1. Загружаем оба файла параллельно
-  Promise.all([
-    fetch('past.json').then(r => r.json()).catch(e => { console.warn('past.json не загружен', e); return []; }),
-    fetch('streams.txt').then(r => r.text()).catch(e => { console.warn('streams.txt не загружен', e); return ''; })
-  ]).then(([pastMatches, streamsText]) => {
-    
-    // 2. Расшифровываем base64 стримы
-    let streamsData = {};
-    if (streamsText) {
-      try {
-        const decodedJson = atob(streamsText.trim());
-        streamsData = JSON.parse(decodedJson);
-      } catch (e) {
-        console.warn('Ошибка парсинга streams.txt', e);
-      }
-    }
-
-    // 3. Рендерим
-    renderPast(pastMatches, streamsData);
-  });
-
-  function renderPast(pastMatches, streamsData) {
-    let html = '';
-
-    for (const m of pastMatches) {
-      let badge = m.is_4k ? '<a class="tag tag-4k" href="index.html?filter=4k">4K UHD</a>' : '';
-      
-      // Ищем ссылку в streamsData по ключу
-      const streamKey = `${m.day}|${m.month}|${m.time}|${m.data_teams.split(' ')[0]}|${m.data_teams.split(' ')[1]}`;
-      // Если вдруг ключ не совпал (из-за пробелов в названиях), делаем fallback по ID
-      const streamInfo = streamsData[streamKey] || streamsData[Object.keys(streamsData).find(k => k.includes(m.id.replace('match-', '')))];
-
-      let qualitiesHtml = '';
-      if (streamInfo && streamInfo.stream) {
-        const base = streamInfo.stream;
-        const is4k = streamInfo.is_4k || base.includes('/2160/');
-        const codes = is4k 
-          ? [['2160','2160'], ['1080','1080'], ['720','720'], ['480','480'], ['360','360']]
-          : [['1080','1080p50fps'], ['720','720'], ['480','480'], ['360','360']];
-
-        const items = codes.map(([label, code]) => {
-          const url = replaceQuality(base, code);
-          return `<a class="replay-item" href="${url}" target="_blank" referrerpolicy="no-referrer">${label}</a>`;
-        }).join('');
-
-        qualitiesHtml = `<div class="replay-select" data-replay><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Повтор</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list>${items}</div></div>`;
-      }
-
-      let reviewHtml = m.review_url ? `<a class="replay-toggle review-toggle" href="${m.review_url}" target="_blank" rel="noopener noreferrer"><span>Обзор</span></a>` : '';
-      
-      let metaHtml = `<span class="meta-item" title="Стадион">🏟 ${m.home_stadium}</span>`;
-      if (m.home_city) {
-        metaHtml += `<span class="meta-sep">·</span><span class="meta-item" title="Город">📍 ${m.home_city}</span>`;
-      }
-
-      html += `
-      <div class="match past-match" id="${m.id}" data-teams="${m.data_teams}" style="display:none;">
-          <div class="match-top">
-              <div class="match-when">
-                  <span class="match-day">${m.day}</span>
-                  <span class="match-month">${m.month}</span>
-                  <span class="match-dot">·</span>
-                  <span class="match-time">${m.time}</span>
-              </div>
-              <div class="match-tags">
-                  ${badge}
-                  <a class="tag tag-tour" href="${m.tour_url}">${m.tour_show}</a>
-              </div>
-          </div>
-          <div class="match-main">
-              <a class="match-team home" href="index.html?team=${encodeURIComponent(m.home)}">
-                  <span class="team-logo">${m.home_img}</span>
-                  <span class="team-name">${m.home}</span>
-              </a>
-              <div class="match-score-block">
-                  <div class="match-score ${m.score_class}">${m.score}</div>
-              </div>
-              <a class="match-team away" href="index.html?team=${encodeURIComponent(m.away)}">
-                  <span class="team-name">${m.away}</span>
-                  <span class="team-logo">${m.away_img}</span>
-              </a>
-          </div>
-          <div class="match-form">
-              <div class="match-form-side match-form-home">${m.form_home}</div>
-              <div class="match-status">Завершён</div>
-              <div class="match-form-side match-form-away">${m.form_away}</div>
-          </div>
-          <div class="match-bottom">
-              <div class="quality-row">${qualitiesHtml}${reviewHtml}</div>
-              <div class="match-meta">${metaHtml}</div>
-          </div>
-      </div>`;
-    }
-
-    pastContainer.innerHTML = html;
-
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-      searchInput.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-  }
-})();
+// (Этот блок удален, так как HTML теперь генерируется на Python)
 
 (function() {
   const toggle = document.getElementById('themeToggle');
@@ -873,20 +754,31 @@
   }
 
   const timers = [];
-  document.querySelectorAll('.quality-timer').forEach(function(timerEl) {
-    const iso = timerEl.getAttribute('data-match-start');
-    if (!iso) return;
-    const startMs = Date.parse(iso);
-    if (isNaN(startMs)) return;
-    const row = timerEl.parentElement.querySelector('.quality-row');
-    if (!row) return;
-    const el = { timer: timerEl, row: row, startMs: startMs };
-    if (!updateTimer(el, startMs)) timers.push(el);
-  });
-
-  if (timers.length === 0) return;
-
   let interval = null;
+
+  function collectTimers() {
+    document.querySelectorAll('.quality-timer').forEach(function(timerEl) {
+      if (timerEl._rplBound) return;
+      const iso = timerEl.getAttribute('data-match-start');
+      if (!iso) return;
+      const startMs = Date.parse(iso);
+      if (isNaN(startMs)) return;
+      const row = timerEl.parentElement.querySelector('.quality-row');
+      if (!row) return;
+      timerEl._rplBound = true;
+      const el = { timer: timerEl, row: row, startMs: startMs };
+      if (!updateTimer(el, startMs)) timers.push(el);
+    });
+  }
+  collectTimers();
+
+  if (timers.length === 0) {
+    document.addEventListener('rpl:matches-rendered', function () {
+      collectTimers();
+      if (timers.length > 0) startTimers();
+    });
+    return;
+  }
 
   function startTimers() {
     if (interval || timers.length === 0) return;
@@ -1074,45 +966,53 @@
   const BREAK_MS = 15 * 60 * 1000;
   const SECOND_HALF_START_MS = FIRST_HALF_MS + BREAK_MS;
 
-  const liveMatches = [];
-  document.querySelectorAll('.match').forEach(function(card) {
-    const timerEl = card.querySelector('.quality-timer[data-match-start]');
-    if (!timerEl) return;
-    const iso = timerEl.getAttribute('data-match-start');
-    if (!iso) return;
-    const startMs = Date.parse(iso);
-    if (isNaN(startMs)) return;
-    const statusEl = card.querySelector('.match-status:not(.match-status-placeholder)');
-    if (statusEl) return;
+    const liveMatches = [];
 
-    // Запоминаем «домашнее» место карточки ДО любых перемещений:
-    // - сам элемент
-    // - его родителя (.day-group или #matchesContainer)
-    // - следующего соседа (чтобы insertBefore вернул на место точно)
-    const parent = card.parentElement;
-    const nextSibling = card.nextElementSibling;
-    const dayGroup = card.closest('.day-group');
-    const dayGroupParent = dayGroup ? dayGroup.parentElement : null;
-    const dayGroupNextSibling = dayGroup ? dayGroup.nextElementSibling : null;
-    const isOnlyInGroup = dayGroup
-      ? dayGroup.querySelectorAll('.match').length === 1
-      : false;
+  function collectLiveMatches() {
+    document.querySelectorAll('.match').forEach(function(card) {
+      if (card._rplLiveBound) return;
+      const timerEl = card.querySelector('.quality-timer[data-match-start]');
+      if (!timerEl) return;
+      const iso = timerEl.getAttribute('data-match-start');
+      if (!iso) return;
+      const startMs = Date.parse(iso);
+      if (isNaN(startMs)) return;
+      const statusEl = card.querySelector('.match-status:not(.match-status-placeholder)');
+      if (statusEl) return;
 
-    liveMatches.push({
-      card: card,
-      startMs: startMs,
-      homeParent: parent,
-      homeNextSibling: nextSibling,
-      dayGroup: dayGroup,
-      dayGroupParent: dayGroupParent,
-      dayGroupNextSibling: dayGroupNextSibling,
-      isOnlyInGroup: isOnlyInGroup,
-      isLifted: false,        // флаг: поднята ли карточка (или её группа)
-      isGroupLifted: false,   // флаг: поднята ли группа целиком
+      const parent = card.parentElement;
+      const nextSibling = card.nextElementSibling;
+      const dayGroup = card.closest('.day-group');
+      const dayGroupParent = dayGroup ? dayGroup.parentElement : null;
+      const dayGroupNextSibling = dayGroup ? dayGroup.nextElementSibling : null;
+      const isOnlyInGroup = dayGroup
+        ? dayGroup.querySelectorAll('.match').length === 1
+        : false;
+
+      card._rplLiveBound = true;
+      liveMatches.push({
+        card: card,
+        startMs: startMs,
+        homeParent: parent,
+        homeNextSibling: nextSibling,
+        dayGroup: dayGroup,
+        dayGroupParent: dayGroupParent,
+        dayGroupNextSibling: dayGroupNextSibling,
+        isOnlyInGroup: isOnlyInGroup,
+        isLifted: false,
+        isGroupLifted: false,
+      });
     });
-  });
+  }
+  collectLiveMatches();
 
-  if (liveMatches.length === 0) return;
+  if (liveMatches.length === 0) {
+    document.addEventListener('rpl:matches-rendered', function () {
+      collectLiveMatches();
+      if (liveMatches.length > 0) updateLive();
+    });
+    return;
+  }
 
   function getMatchMinute(elapsed) {
     if (elapsed < FIRST_HALF_MS) {
@@ -1224,36 +1124,13 @@
 
   updateLive();
   setInterval(updateLive, 30000);
+  document.addEventListener('rpl:matches-rendered', function () {
+    collectLiveMatches();
+    updateLive();
+  });
 })();
 
 (function() {
-  // Определяем, находимся ли мы на странице тура (URL содержит /tours/)
-  if (!window.location.pathname.includes('/tours/')) return;
-
-  const container = document.getElementById('matchesContainer');
-  if (!container) return;
-
-  // Имя текущего HTML файла (например, "12.html")
-  const htmlName = window.location.pathname.split('/').pop();
-  const jsonName = htmlName.replace('.html', '.json');
-
-  // Загружаем streams.txt для ссылок (если они есть)
-  Promise.all([
-    fetch(jsonName).then(r => r.json()).catch(e => { console.warn(jsonName + ' не загружен', e); return []; }),
-    fetch('../../streams.txt').then(r => r.text()).catch(e => { return ''; }) // streams.txt лежит в корне
-  ]).then(([matches, streamsText]) => {
-    
-    let streamsData = {};
-    if (streamsText) {
-      try {
-        const decodedJson = atob(streamsText.trim());
-        streamsData = JSON.parse(decodedJson);
-      } catch (e) { console.warn('streams.txt parse error', e); }
-    }
-
-    renderTourMatches(matches, streamsData, container);
-  });
-
   function replaceQuality(url, newCode) {
     const PATTERNS = [
       /\/2160\//, /\/1080p50fps\//, /\/1080\//,
@@ -1266,95 +1143,206 @@
     return url.replace(/(\/\d+_\d+\/)([a-f0-9]{32}\/)/, `$1${newCode}/$2`);
   }
 
-  function renderTourMatches(matches, streamsData, container) {
-    let html = '';
-    // Группируем по дням
-    let prevDayKey = null;
+    function fillButtons() {
+    const containers = document.querySelectorAll('[data-stream-key]:not([data-stream-filled])');
+    if (containers.length === 0) return;
+
+    const prefix = window.location.pathname.includes('/tours/') ? '../../' : '';
     
-    // Сортируем по времени (примитивно)
-    const sorted = [...matches].sort((a, b) => {
-      const tA = a.time.split(':').map(Number);
-      const tB = b.time.split(':').map(Number);
-      return (tA[0]*60 + tA[1]) - (tB[0]*60 + tB[1]);
-    });
+    fetch(prefix + 'streams.txt')
+      .then(r => r.text())
+      .then(text => {
+        if (!text) return;
+        let streamsData = {};
+        try {
+          streamsData = JSON.parse(atob(text.trim()));
+        } catch (e) { console.warn('Ошибка streams.txt', e); return; }
 
-    for (const m of sorted) {
-      const dayKey = `${m.month}-${m.day}`;
-      
-      if (dayKey !== prevDayKey) {
-        if (prevDayKey !== null) html += `</div>`;
-        // Примерно как на главной
-        html += `<div class="day-group"><div class="day-head"><span class="day-head-text"><span>${m.day} ${m.month}</span></span></div>`;
-        prevDayKey = dayKey;
-      }
+        containers.forEach(el => {
+          const key = el.getAttribute('data-stream-key');
+          const info = streamsData[key];
+          if (info && info.stream) {
+            const base = info.stream;
+            const is4k = info.is_4k || base.includes('/2160/');
+            const codes = is4k 
+              ? [['2160','2160'], ['1080','1080'], ['720','720'], ['480','480'], ['360','360']]
+              : [['1080','1080p50fps'], ['720','720'], ['480','480'], ['360','360']];
 
-      let badge = m.is_4k ? '<a class="tag tag-4k" href="../index.html?filter=4k">4K UHD</a>' : '';
-      const tourBadge = m.tour_show ? `<span class="tag tag-tour">${m.tour_show}</span>` : '';
+            const items = codes.map(([label, code]) => {
+              const url = replaceQuality(base, code);
+              return `<a class="replay-item" href="${url}" target="_blank" referrerpolicy="no-referrer">${label}</a>`;
+            }).join('');
 
-      // Ищем ссылку в стримах
-      const streamKey = `${m.day}|${m.month}|${m.time}|${m.data_teams.split(' ')[0]}|${m.data_teams.split(' ')[1]}`;
-      const streamInfo = streamsData[streamKey];
-      
-      let qualitiesHtml = '';
-      if (streamInfo && streamInfo.stream) {
-        const base = streamInfo.stream;
-        const is4k = streamInfo.is_4k || base.includes('/2160/');
-        const codes = is4k 
-          ? [['2160','2160'], ['1080','1080'], ['720','720'], ['480','480'], ['360','360']]
-          : [['1080','1080p50fps'], ['720','720'], ['480','480'], ['360','360']];
+            const isWatch = el.hasAttribute('data-watch');
+            const labelText = isWatch ? 'Смотреть' : 'Повтор';
 
-        const items = codes.map(([label, code]) => {
-          const url = replaceQuality(base, code);
-          return `<a class="replay-item" href="${url}" target="_blank" referrerpolicy="no-referrer">${label}</a>`;
-        }).join('');
-
-        qualitiesHtml = `<div class="replay-select" data-replay><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Повтор</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list>${items}</div></div>`;
-      }
-
-      let reviewHtml = m.review_url ? `<a class="replay-toggle review-toggle" href="${m.review_url}" target="_blank" rel="noopener noreferrer"><span>Обзор</span></a>` : '';
-      let metaHtml = `<span class="meta-item" title="Стадион">🏟 ${m.home_stadium}</span>`;
-      if (m.home_city) metaHtml += `<span class="meta-sep">·</span><span class="meta-item" title="Город">📍 ${m.home_city}</span>`;
-
-      const hideUntilStart = !m.score ? 'style="display:none;"' : '';
-      const timerStyle = !m.score ? '' : 'style="display:none;"';
-
-      html += `
-      <div class="match${m.score !== '- : -' ? ' past-match' : ''}" id="${m.id}" data-teams="${m.data_teams}">
-        <div class="match-top">
-          <div class="match-when">
-            <span class="match-day">${m.day}</span>
-            <span class="match-month">${m.month}</span>
-            <span class="match-dot">·</span>
-            <span class="match-time">${m.time}</span>
-          </div>
-          <div class="match-tags">${badge}${tourBadge}</div>
-        </div>
-        <div class="match-main">
-          <a class="match-team home" href="../index.html?team=${encodeURIComponent(m.home)}">
-            <span class="team-logo">${m.home_img}</span>
-            <span class="team-name">${m.home}</span>
-          </a>
-          <div class="match-score-block">
-            <div class="match-score ${m.score_class}">${m.score}</div>
-          </div>
-          <a class="match-team away" href="../index.html?team=${encodeURIComponent(m.away)}">
-            <span class="team-name">${m.away}</span>
-            <span class="team-logo">${m.away_img}</span>
-          </a>
-        </div>
-        <div class="match-form">
-          <div class="match-form-side match-form-home">${m.form_home}</div>
-          ${m.score !== '- : -' ? '<div class="match-status">Завершён</div>' : '<div class="match-status-placeholder"></div>'}
-          <div class="match-form-side match-form-away">${m.form_away}</div>
-        </div>
-        <div class="match-bottom">
-          <div class="quality-row" data-match-start="${m.match_start}" ${hideUntilStart}>${qualitiesHtml}${reviewHtml}</div>
-          <div class="quality-timer" data-match-start="${m.match_start}" ${timerStyle}></div>
-          <div class="match-meta">${metaHtml}</div>
-        </div>
-      </div>`;
-    }
-    if (prevDayKey !== null) html += `</div>`;
-    container.innerHTML = html;
+            el.innerHTML = `
+              <div class="replay-select" data-replay ${isWatch ? 'data-watch' : ''}>
+                <button type="button" class="replay-toggle" data-replay-toggle>
+                  <span data-replay-label>${labelText}</span>
+                  <span class="replay-caret">▾</span>
+                </button>
+                <div class="replay-list" data-replay-list>${items}</div>
+              </div>`;
+            el.setAttribute('data-stream-filled', '1');
+          }
+        });
+      })
+      .catch(e => console.warn('streams.txt не загружен', e));
   }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fillButtons);
+  } else {
+    fillButtons();
+  }
+  document.addEventListener('rpl:matches-rendered', fillButtons);
+})();
+
+
+(function () {
+  const container = document.getElementById('matchesContainer');
+  if (!container) return;
+  const jsonUrl = container.getAttribute('data-matches-json');
+  if (!jsonUrl) return;
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function renderMatchCard(m) {
+    const prefix = window.__PREFIX__ || '';
+    const badge = m.is_4k
+      ? '<a class="tag tag-4k" href="' + prefix + 'index.html?filter=4k">4K UHD</a>'
+      : '';
+    const tourBadge = m.tour_show
+      ? '<span class="tag tag-tour">' + escapeHtml(m.tour_show) + '</span>'
+      : '';
+    const reviewBtn = m.review_url
+      ? '<a class="replay-toggle review-toggle" href="' + escapeHtml(m.review_url) +
+        '" target="_blank" rel="noopener noreferrer"><span>Обзор</span></a>'
+      : '';
+    const pastClass = m.score_class === 'match-score-final' ? ' past-match' : '';
+    const statusHtml = (m.score_class === 'match-score-final')
+      ? '<div class="match-status">Завершён</div>'
+      : '<div class="match-status-placeholder"></div>';
+
+    const metaParts = [];
+    if (m.home_stadium) metaParts.push('<span class="meta-item" title="Стадион">🏟 ' + escapeHtml(m.home_stadium) + '</span>');
+    if (m.home_city) metaParts.push('<span class="meta-sep">·</span><span class="meta-item" title="Город">📍 ' + escapeHtml(m.home_city) + '</span>');
+    const metaHtml = metaParts.join('');
+
+    const homeUrl = prefix + 'index.html?team=' + encodeURIComponent(m.home);
+    const awayUrl = prefix + 'index.html?team=' + encodeURIComponent(m.away);
+
+    const matchIso = m.match_start || '';
+    const hideUntilStart = (m.score_class !== 'match-score-final');
+    const qualitiesStyle = hideUntilStart ? ' style="display:none;"' : '';
+    const timerStyle = hideUntilStart ? '' : ' style="display:none;"';
+
+    const dayId = 'day-' + (m.month || '') + '-' + (m.day || '');
+    const streamKey = [
+      m.day || '', m.month || '', m.time || '',
+      (m.home || '').toLowerCase(), (m.away || '').toLowerCase()
+    ].join('|');
+    const watchAttr = m.score_class === 'match-score-final' ? '' : ' data-watch';
+
+    return '' +
+      '<div class="match' + pastClass + '" id="' + escapeHtml(m.id) + '"' +
+        ' data-day-group="' + escapeHtml(dayId) + '"' +
+        ' data-teams="' + escapeHtml((m.home + ' ' + m.away).toLowerCase()) + '">' +
+        '<div class="match-top">' +
+          '<div class="match-when">' +
+            '<span class="match-day">' + escapeHtml(m.day) + '</span>' +
+            '<span class="match-month">' + escapeHtml(m.month) + '</span>' +
+            '<span class="match-dot">·</span>' +
+            '<span class="match-time">' + escapeHtml(m.time) + '</span>' +
+          '</div>' +
+          '<div class="match-tags">' + badge + tourBadge + '</div>' +
+        '</div>' +
+        '<div class="match-main">' +
+          '<a class="match-team home" href="' + homeUrl + '">' +
+            '<span class="team-logo">' + m.home_img + '</span>' +
+            '<span class="team-name">' + escapeHtml(m.home) + '</span>' +
+          '</a>' +
+          '<div class="match-score-block">' +
+            '<div class="match-score ' + m.score_class + '">' + escapeHtml(m.score) + '</div>' +
+          '</div>' +
+          '<a class="match-team away" href="' + awayUrl + '">' +
+            '<span class="team-name">' + escapeHtml(m.away) + '</span>' +
+            '<span class="team-logo">' + m.away_img + '</span>' +
+          '</a>' +
+        '</div>' +
+        '<div class="match-form">' +
+          '<div class="match-form-side match-form-home">' + (m.form_home || '') + '</div>' +
+          statusHtml +
+          '<div class="match-form-side match-form-away">' + (m.form_away || '') + '</div>' +
+        '</div>' +
+        '<div class="match-bottom">' +
+          '<div class="quality-row" data-match-start="' + matchIso + '"' + qualitiesStyle + '>' +
+            '<div data-stream-key="' + escapeHtml(streamKey) + '"' + watchAttr + '></div>' +
+            reviewBtn +
+          '</div>' +
+          '<div class="quality-timer" data-match-start="' + matchIso + '"' + timerStyle + '></div>' +
+          '<div class="match-meta">' + metaHtml + '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function groupByDay(list) {
+    // Возвращает [{ dayKey, label, items }]
+    const groups = [];
+    const seen = {};
+    list.forEach(function (m) {
+      const key = (m.month || '') + '|' + (m.day || '');
+      if (!seen[key]) {
+        seen[key] = { dayKey: key, label: (m.day || '') + ' ' + (m.month || ''), items: [] };
+        groups.push(seen[key]);
+      }
+      seen[key].items.push(m);
+    });
+    return groups;
+  }
+
+  function buildHtml(list) {
+    if (!list || list.length === 0) {
+      return '<div class="matches-empty">Матчей пока нет</div>';
+    }
+    const groups = groupByDay(list);
+    let html = '';
+    groups.forEach(function (g) {
+      const dayId = 'day-' + g.dayKey.replace('|', '-');
+      html += '<div class="day-group" id="' + escapeHtml(dayId) + '">';
+      html += '<div class="day-head"><span class="day-head-text">' + escapeHtml(g.label) + '</span></div>';
+      g.items.forEach(function (m) { html += renderMatchCard(m); });
+      html += '</div>';
+    });
+    return html;
+  }
+
+  function reinitAfterRender() {
+    // 1) Подсветка hash
+    if (typeof window.__highlightFromHash === 'function') {
+      window.__highlightFromHash('always');
+    }
+    // 2) Таймеры «Смотреть» и live-плашки — они уже висят на интервалах,
+    //    но новые элементы надо подхватить. Простейший путь — перезапустить
+    //    блоки, вызвав их повторно (они идемпотентны, т.к. вешают обработчики
+    //    на элементы по селектору). В текущем site.js это не вынесено в
+    //    функции, поэтому просто эмулируем событие «DOM готов заново»:
+    document.dispatchEvent(new CustomEvent('rpl:matches-rendered'));
+  }
+
+  fetch(jsonUrl, { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (list) {
+      container.innerHTML = buildHtml(list);
+      reinitAfterRender();
+    })
+    .catch(function (e) {
+      console.warn('matches.json не загружен:', e);
+      container.innerHTML = '<div class="matches-empty">Не удалось загрузить матчи</div>';
+    });
 })();
