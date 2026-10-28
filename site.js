@@ -1,22 +1,66 @@
 (function() {
-  // Рендерим прошедшие матчи из JSON только 1 раз при загрузке
   const pastContainer = document.getElementById('pastMatchesContainer');
   if (!pastContainer) return;
 
-  fetch('past.json')
-    .then(r => r.json())
-    .then(pastMatches => renderPast(pastMatches))
-    .catch(e => console.warn('past.json не загружен:', e));
+  // Вспомогательная функция для замены качества в ссылке (копия логики из Python)
+  function replaceQuality(url, newCode) {
+    const PATTERNS = [
+      /\/2160\//, /\/1080p50fps\//, /\/1080\//,
+      /\/720p50fps\//, /\/720\//,
+      /\/480p50fps\//, /\/480\//,
+      /\/360p50fps\//, /\/360\//
+    ];
+    for (const pat of PATTERNS) {
+      if (pat.test(url)) return url.replace(pat, '/' + newCode + '/');
+    }
+    return url.replace(/(\/\d+_\d+\/)([a-f0-9]{32}\/)/, `$1${newCode}/$2`);
+  }
 
-  function renderPast(pastMatches) {
+  // 1. Загружаем оба файла параллельно
+  Promise.all([
+    fetch('past.json').then(r => r.json()).catch(e => { console.warn('past.json не загружен', e); return []; }),
+    fetch('streams.txt').then(r => r.text()).catch(e => { console.warn('streams.txt не загружен', e); return ''; })
+  ]).then(([pastMatches, streamsText]) => {
+    
+    // 2. Расшифровываем base64 стримы
+    let streamsData = {};
+    if (streamsText) {
+      try {
+        const decodedJson = atob(streamsText.trim());
+        streamsData = JSON.parse(decodedJson);
+      } catch (e) {
+        console.warn('Ошибка парсинга streams.txt', e);
+      }
+    }
+
+    // 3. Рендерим
+    renderPast(pastMatches, streamsData);
+  });
+
+  function renderPast(pastMatches, streamsData) {
     let html = '';
 
     for (const m of pastMatches) {
       let badge = m.is_4k ? '<a class="tag tag-4k" href="index.html?filter=4k">4K UHD</a>' : '';
       
+      // Ищем ссылку в streamsData по ключу
+      const streamKey = `${m.day}|${m.month}|${m.time}|${m.data_teams.split(' ')[0]}|${m.data_teams.split(' ')[1]}`;
+      // Если вдруг ключ не совпал (из-за пробелов в названиях), делаем fallback по ID
+      const streamInfo = streamsData[streamKey] || streamsData[Object.keys(streamsData).find(k => k.includes(m.id.replace('match-', '')))];
+
       let qualitiesHtml = '';
-      if (m.qualities && m.qualities.length > 0) {
-        const items = m.qualities.map(q => `<a class="replay-item" href="${q.url}" target="_blank" referrerpolicy="no-referrer">${q.label}</a>`).join('');
+      if (streamInfo && streamInfo.stream) {
+        const base = streamInfo.stream;
+        const is4k = streamInfo.is_4k || base.includes('/2160/');
+        const codes = is4k 
+          ? [['2160','2160'], ['1080','1080'], ['720','720'], ['480','480'], ['360','360']]
+          : [['1080','1080p50fps'], ['720','720'], ['480','480'], ['360','360']];
+
+        const items = codes.map(([label, code]) => {
+          const url = replaceQuality(base, code);
+          return `<a class="replay-item" href="${url}" target="_blank" referrerpolicy="no-referrer">${label}</a>`;
+        }).join('');
+
         qualitiesHtml = `<div class="replay-select" data-replay><button type="button" class="replay-toggle" data-replay-toggle><span data-replay-label>Повтор</span><span class="replay-caret">▾</span></button><div class="replay-list" data-replay-list>${items}</div></div>`;
       }
 
@@ -68,7 +112,6 @@
 
     pastContainer.innerHTML = html;
 
-    // Перезапускаем поиск, чтобы он "увидел" новые элементы
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
       searchInput.dispatchEvent(new Event('input', { bubbles: true }));
