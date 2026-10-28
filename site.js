@@ -760,9 +760,16 @@
     if (!list.dataset.loaded) {
       const key = select.getAttribute('data-key') || '';
       list.innerHTML = '<div class="replay-item" style="opacity:.5;">Загрузка...</div>';
-      fetch(prefix + 'streams.json')
-        .then(res => res.json())
-        .then(data => {
+      fetch(prefix + 'streams.txt')
+        .then(res => res.text())
+        .then(b64 => {
+          const binary = atob(b64.trim());
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+          }
+          const jsonStr = new TextDecoder('utf-8').decode(bytes);
+          const data = JSON.parse(jsonStr);
           const item = data[key];
           if (!item || !item.stream) {
             list.innerHTML = '<div class="replay-item">Нет ссылок</div>';
