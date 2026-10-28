@@ -78,7 +78,7 @@
     </div>
 
     <div class="footer">
-      Обновлено <span class="neon">28.10.2026 00:08 МСК</span><br>
+      Обновлено <span class="neon">28.10.2026 11:53 МСК</span><br>
       Данные обновляются автоматически из открытых источников
     </div>
 
@@ -160,17 +160,6 @@
   const suggestBox = document.getElementById('searchSuggestions');
   const allTeams = [{"name": "Акрон", "logo": "logo/akron.svg"}, {"name": "Ахмат", "logo": "logo/akhmat.svg"}, {"name": "Балтика", "logo": "logo/baltika.svg"}, {"name": "Динамо Махачкала", "logo": "logo/dynamomaxachkala.svg"}, {"name": "Динамо Москва", "logo": "logo/dynamomoscov.svg"}, {"name": "Зенит", "logo": "logo/zenit.svg"}, {"name": "Краснодар", "logo": "logo/krasnodar.svg"}, {"name": "Крылья Советов", "logo": "logo/krylyasovetov.svg"}, {"name": "Локомотив", "logo": "logo/lokomotiv.svg"}, {"name": "Оренбург", "logo": "logo/orenburg.svg"}, {"name": "Родина", "logo": "logo/rodina.svg"}, {"name": "Ростов", "logo": "logo/rostov.svg"}, {"name": "Рубин", "logo": "logo/rubin.svg"}, {"name": "Спартак", "logo": "logo/spartak.svg"}, {"name": "Факел", "logo": "logo/fakel.svg"}, {"name": "ЦСКА", "logo": "logo/cska.svg"}];
 
-  let allMatchesData = []; // Сюда загрузим JSON
-
-  // Загружаем data.json при старте
-  fetch('data.json')
-    .then(res => res.json())
-    .then(data => {
-      allMatchesData = data;
-      console.log("База матчей загружена:", allMatchesData.length);
-    })
-    .catch(err => console.error("Ошибка загрузки data.json", err));
-
   function setSearchLogo(teamName) {
     if (!searchBox || !searchBoxLogo) return;
     const team = allTeams.find(function(t) {
@@ -214,126 +203,243 @@
     });
   }
 
+  function highlightMatchCard(cardId) {
+    const allCards = document.querySelectorAll('.match');
+    allCards.forEach(function(c) { c.classList.remove('match-focused'); });
+    if (!cardId) return;
+    const el = document.getElementById(cardId);
+    if (el) el.classList.add('match-focused');
+  }
+
+  function scrollCardToCenter(cardId, scrollIfNeeded, behavior) {
+    if (!cardId) return;
+    const el = document.getElementById(cardId);
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    if (scrollIfNeeded) {
+      const topOk = rect.top >= vh * 0.10;
+      const bottomOk = rect.bottom <= vh * 0.90;
+      if (topOk && bottomOk) return;
+    }
+    const targetY = rect.top + window.pageYOffset - (vh / 2) + (rect.height / 2);
+    const finalY = Math.max(0, targetY);
+    if (behavior === 'smooth') {
+      const startY = window.scrollY;
+      const startTime = performance.now();
+      const DURATION = 400;
+      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+      function step(now) {
+        const t = Math.min(1, (now - startTime) / DURATION);
+        window.scrollTo(0, startY + (finalY - startY) * easeOutCubic(t));
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    } else {
+      window.scrollTo(0, finalY);
+    }
+  }
+  function applyMatchFocus(cardId, scrollMode) {
+    const inputEl = document.getElementById('searchInput');
+    const isSearchActive = inputEl && inputEl.value.trim() !== '';
+    if (isSearchActive) {
+      highlightMatchCard(null);
+      highlightMatchTeams(null);
+      return;
+    }
+    if (!cardId) {
+      highlightMatchCard(null);
+      highlightMatchTeams(null);
+      return;
+    }
+    const el = document.getElementById(cardId);
+    if (!el) {
+      highlightMatchCard(null);
+      highlightMatchTeams(null);
+      return;
+    }
+    highlightMatchCard(cardId);
+    const dataTeams = el.getAttribute('data-teams') || '';
+    highlightMatchTeams(dataTeams);
+    if (scrollMode === 'always') {
+      scrollCardToCenter(cardId, false, 'auto');
+    } else if (scrollMode === 'smart') {
+      scrollCardToCenter(cardId, true, 'smooth');
+    }
+  }
+
+  function highlightFromHash(scrollMode) {
+    const mode = scrollMode || 'always';
+    const hash = window.location.hash;
+    if (!hash || hash.indexOf('#match-') !== 0) {
+      const inputEl = document.getElementById('searchInput');
+      const isSearchActive = inputEl && inputEl.value.trim() !== '';
+      if (!isSearchActive) {
+        highlightMatchCard(null);
+        highlightMatchTeams(null);
+      }
+      return;
+    }
+    const id = decodeURIComponent(hash.slice(1));
+    applyMatchFocus(id, mode);
+  }
+
+  let lastCardClickTs = 0;
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.replay-select')) return;
+    const card = e.target.closest('.match');
+    if (!card) {
+      const inputEl = document.getElementById('searchInput');
+      const isSearchActive = inputEl && inputEl.value.trim() !== '';
+      const is4kFilter = window.location.search.includes('filter=4k');
+      if (!isSearchActive && !is4kFilter) {
+        highlightMatchCard(null);
+        highlightMatchTeams(null);
+      }
+      return;
+    }
+    
+    if (e.target.closest('a')) return;
+    if (e.target.closest('button')) return;
+
+    const cardId = card.getAttribute('id') || '';
+    if (!cardId) return;
+
+    const inputEl = document.getElementById('searchInput');
+    const isSearchActive = inputEl && inputEl.value.trim() !== '';
+    const is4kFilter = window.location.search.includes('filter=4k');
+
+    const now = Date.now();
+    const isRepeat = (now - lastCardClickTs) < 600 && card.classList.contains('match-focused');
+    lastCardClickTs = now;
+
+    highlightMatchCard(cardId);
+    const dataTeams = card.getAttribute('data-teams') || '';
+    highlightMatchTeams(dataTeams);
+
+    if (!isRepeat) {
+      scrollCardToCenter(cardId, true, 'smooth');
+    }
+
+    if (isSearchActive || is4kFilter) {
+      const tourLink = card.querySelector('.tag-tour');
+      if (tourLink) {
+        const href = tourLink.getAttribute('href') || '';
+        if (href && href.indexOf('undefined') === -1) {
+          window.location.href = href + '#' + cardId;
+          return;
+        }
+      }
+    }
+
+    try {
+      const newHash = '#' + cardId;
+      if (window.location.hash !== newHash) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
+      }
+    } catch (err) { /* ignore */ }
+  });
+  window.__highlightFromHash = highlightFromHash;
+  window.__highlightMatchTeams = highlightMatchTeams;
+
   function filter() {
     const q = input.value.trim().toLowerCase();
     clearBtn.style.display = q ? 'block' : 'none';
     setSearchLogo(input.value.trim());
 
     const words = q === '' ? [] : q.split(/\s+/).filter(Boolean);
-    const pastContainer = document.getElementById('pastMatchesContainer');
-    
-    // Очищаем контейнер при каждом поиске
-    pastContainer.innerHTML = '';
-    
-    // Фильтруем текущие (будущие) матчи на странице
-    const currentMatches = document.querySelectorAll('#matchesContainer .match');
-    let visibleCurrent = 0;
-    
-    currentMatches.forEach(function(el) {
-      const teams = el.getAttribute('data-teams') || '';
-      if (words.length === 0) {
-        el.style.display = '';
-        visibleCurrent++;
-      } else {
-        const match = words.every(function(w) { return teams.includes(w); });
-        el.style.display = match ? '' : 'none';
-        if (match) visibleCurrent++;
-      }
-    });
+    const allMatches = document.querySelectorAll('.match');
+    let anyFound = false;
 
-    // Если есть поисковый запрос, ищем в JSON
-    let visiblePast = 0;
     if (words.length > 0) {
-      const foundMatches = allMatchesData.filter(function(m) {
-        const teams = (m.home + " " + m.away).toLowerCase();
-        return words.every(function(w) { return teams.includes(w); });
-      });
-
-      visiblePast = foundMatches.length;
-
-      // Рендерим найденные матчи в HTML
-      foundMatches.forEach(function(m) {
-        const badge4k = m.is_4k ? '<a class="tag tag-4k" href="index.html?filter=4k">4K UHD</a>' : '';
-        const reviewBtn = m.review_url ? `<a class="replay-toggle review-toggle" href="${m.review_url}" target="_blank"><span>Обзор</span></a>` : '';
-        
-        let qualityHtml = '';
-        if (m.qualities && m.qualities.length > 0) {
-          const qItems = m.qualities.map(q => `<a class="replay-item" href="${q.url}" target="_blank">${q.label}</a>`).join('');
-          qualityHtml = `
-            <div class="replay-select" data-replay>
-              <button type="button" class="replay-toggle" data-replay-toggle>
-                <span data-replay-label>Повтор</span>
-                <span class="replay-caret">▾</span>
-              </button>
-              <div class="replay-list" data-replay-list>${qItems}</div>
-            </div>`;
-        }
-
-        const html = `
-          <div class="match past-match">
-            <div class="match-top">
-              <div class="match-when">
-                <span class="match-day">${m.day}</span>
-                <span class="match-month">${m.month}</span>
-                <span class="match-dot">·</span>
-                <span class="match-time">${m.time}</span>
-              </div>
-              <div class="match-tags">
-                ${badge4k}
-                <a class="tag tag-tour" href="${m.url}">${m.tour_label}</a>
-              </div>
-            </div>
-            <div class="match-main">
-              <a class="match-team home" href="index.html?team=${encodeURIComponent(m.home)}">
-                <span class="team-logo">${getTeamLogo(m.home)}</span>
-                <span class="team-name">${m.home}</span>
-              </a>
-              <div class="match-score-block">
-                <div class="match-score match-score-final">${m.score}</div>
-              </div>
-              <a class="match-team away" href="index.html?team=${encodeURIComponent(m.away)}">
-                <span class="team-name">${m.away}</span>
-                <span class="team-logo">${getTeamLogo(m.away)}</span>
-              </a>
-            </div>
-            <div class="match-form">
-              <div class="match-form-side match-form-home"></div>
-              <div class="match-status">Завершён</div>
-              <div class="match-form-side match-form-away"></div>
-            </div>
-            <div class="match-bottom">
-              <div class="quality-row">${qualityHtml}${reviewBtn}</div>
-              <div class="match-meta"><span class="meta-item" title="Стадион">🏟 ${m.stadium}</span></div>
-            </div>
-          </div>`;
-        pastContainer.insertAdjacentHTML('beforeend', html);
+      allMatches.forEach(function(el) {
+        const teams = el.getAttribute('data-teams') || '';
+        const match = words.every(function(w) { return teams.includes(w); });
+        if (match) anyFound = true;
       });
     }
 
-    // Управление видимостью секций
+    const effectivelyEmpty = (words.length === 0) || !anyFound;
+
+    const pastContainer = document.getElementById('pastMatchesContainer');
+    const currentContainer = document.getElementById('matchesContainer');
+
+    allMatches.forEach(function(el) {
+      const isPast = el.classList.contains('past-match');
+
+      if (effectivelyEmpty) {
+        el.style.display = isPast ? 'none' : '';
+        if (isPast && el.parentElement !== pastContainer) {
+          pastContainer.appendChild(el);
+        }
+      } else {
+        const teams = el.getAttribute('data-teams') || '';
+        const match = words.every(function(w) { return teams.includes(w); });
+        el.style.display = match ? '' : 'none';
+
+        if (match && isPast && el.parentElement !== pastContainer) {
+           pastContainer.insertBefore(el, pastContainer.firstChild);
+        }
+        if (match && !isPast && el.parentElement !== currentContainer) {
+           currentContainer.appendChild(el);
+        }
+      }
+    });
+
+    document.querySelectorAll('.day-group').forEach(function(group) {
+      const visibleInGroup = group.querySelectorAll('.match:not([style*="display: none"])').length;
+      group.style.display = visibleInGroup > 0 ? '' : 'none';
+    });
+
+    const visiblePast = document.querySelectorAll('#pastMatchesContainer .match:not([style*="display: none"])').length;
+    const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
+
     const pastSection = document.getElementById('pastSection');
     const currentSection = document.getElementById('currentSection');
     const headerDefault = document.getElementById('currentHeaderDefault');
     const headerSearch = document.getElementById('currentHeaderSearch');
-    const divider = document.getElementById('sectionsDivider');
+
+    const currentHeaderTeam = document.getElementById('currentHeaderTeam');
+    const pastHeaderTeam = document.getElementById('pastHeaderTeam');
 
     const typed = input.value.trim();
     const matchedTeam = allTeams.find(function(t) { return t.name.toLowerCase() === typed.toLowerCase(); });
     const teamLabel = (q === '' || !matchedTeam) ? '' : ' · ' + matchedTeam.name;
-    
-    const currentHeaderTeam = document.getElementById('currentHeaderTeam');
-    const pastHeaderTeam = document.getElementById('pastHeaderTeam');
     if (currentHeaderTeam) currentHeaderTeam.textContent = teamLabel;
     if (pastHeaderTeam) pastHeaderTeam.textContent = teamLabel;
 
     highlightTableRow(matchedTeam ? matchedTeam.name : null);
 
-    if (q === '') {
+    document.querySelectorAll('.match').forEach(function(el) {
+      el.querySelectorAll('.match-team').forEach(function(t) {
+        t.classList.remove('match-team-hl');
+      });
+      if (!matchedTeam) return;
+      const names = el.querySelectorAll('.match-team .team-name');
+      names.forEach(function(n) {
+        if (n.textContent.trim().toLowerCase() === matchedTeam.name.toLowerCase()) {
+          n.closest('.match-team').classList.add('match-team-hl');
+        }
+      });
+    });
+
+    if (matchedTeam) {
+      if (typeof window.__highlightMatchTeams === 'function') window.__highlightMatchTeams(null);
+      document.querySelectorAll('.match-focused').forEach(function(el) { el.classList.remove('match-focused'); });
+    } else {
+      if (typeof window.__highlightFromHash === 'function') window.__highlightFromHash('never');
+    }
+
+    const divider = document.getElementById('sectionsDivider');
+    if (q === '' || !anyFound) {
       if (pastSection) pastSection.style.display = 'none';
       if (currentSection) currentSection.style.display = '';
       if (headerDefault) headerDefault.style.display = '';
       if (headerSearch) headerSearch.style.display = 'none';
-      if (divider) { divider.style.display = 'none'; divider.style.margin = '0'; }
+      if (divider) {
+        divider.style.display = 'none';
+        divider.style.margin = '0';
+      }
     } else {
       if (currentSection) currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
       if (headerDefault) headerDefault.style.display = 'none';
@@ -352,51 +458,17 @@
     }
   }
 
-  // Вспомогательная функция для логотипов (так как JSON отдает только имя)
-  function getTeamLogo(teamName) {
-    const t = allTeams.find(x => x.name.toLowerCase() === teamName.toLowerCase());
-    return t ? `<img src="${t.logo}" alt="${teamName}">` : teamName.charAt(0);
-  }
-
-  // Обработчики событий
-  input.addEventListener('input', function() {
-    if (!window.__suppressSuggestions) showSuggestions(input.value.trim());
-    filter();
-  });
-
-  input.addEventListener('keydown', function(e) {
-    if (e.key !== 'Enter') return;
-    e.preventDefault();
-    const typed = input.value.trim();
-    if (!typed) return;
-    const team = allTeams.find(t => t.name.toLowerCase() === typed.toLowerCase()) 
-              || allTeams.find(t => t.name.toLowerCase().includes(typed.toLowerCase()));
-    if (team) input.value = team.name;
-    hideSuggestions();
-    filter();
-  });
-
-  clearBtn.addEventListener('click', function() {
-    input.value = '';
-    hideSuggestions();
-    setSearchLogo('');
-    highlightTableRow(null);
-    filter();
-    input.focus();
-  });
-
-  // --- Функции автодополнения ---
   function showSuggestions(query) {
     if (!query) { hideSuggestions(); return; }
     const q = query.toLowerCase();
-    const matches = allTeams.filter(t => t.name.toLowerCase().includes(q)).slice(0, 8);
+    const matches = allTeams.filter(function(t) { return t.name.toLowerCase().includes(q); }).slice(0, 8);
     if (matches.length === 0) { hideSuggestions(); return; }
-    suggestBox.innerHTML = matches.map(t => 
-      `<a class="search-suggestion" href="index.html?team=${encodeURIComponent(t.name)}" data-team="${t.name}">
-        <span class="search-suggestion-logo"><img src="${t.logo}" alt=""></span>
-        <span class="search-suggestion-name">${t.name}</span>
-      </a>`
-    ).join('');
+    suggestBox.innerHTML = matches.map(function(t) {
+      return '<a class="search-suggestion" href="index.html?team=' + encodeURIComponent(t.name) + '" data-team="' + t.name + '">' +
+        '<span class="search-suggestion-logo"><img src="' + t.logo + '" alt=""></span>' +
+        '<span class="search-suggestion-name">' + t.name + '</span>' +
+      '</a>';
+    }).join('');
     showSuggestionsPanel();
   }
 
@@ -435,18 +507,142 @@
     };
   }
 
+  input.addEventListener('input', function() {
+    if (!window.__suppressSuggestions) {
+      showSuggestions(input.value.trim());
+    }
+    filter();
+  });
+  input.addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    const typed = input.value.trim();
+    if (!typed) return;
+    const team = allTeams.find(function(t) { return t.name.toLowerCase() === typed.toLowerCase(); })
+              || allTeams.find(function(t) { return t.name.toLowerCase().includes(typed.toLowerCase()); });
+    if (team) input.value = team.name;
+    hideSuggestions();
+    filter();
+  });
+
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.topbar-search')) hideSuggestions();
   });
 
-  // Инициализация из URL (если перешли по ссылке index.html?team=...)
+  clearBtn.addEventListener('click', function() {
+    input.value = '';
+    hideSuggestions();
+    setSearchLogo('');
+    highlightTableRow(null);
+    filter();
+    if (typeof window.__highlightFromHash === 'function') window.__highlightFromHash('never');
+    input.focus();
+  });
+
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href*="index.html?team="]');
+    if (!link) return;
+    const path = window.location.pathname;
+    const isIndexPage = path === '/' || path.endsWith('/index.html') || path.endsWith('/rpl-playlist/');
+    if (!isIndexPage) return;
+    const url = new URL(link.href, window.location.origin);
+    const team = url.searchParams.get('team');
+    if (!team) return;
+    e.preventDefault();
+
+    const cleanUrl = url.pathname + url.search;
+
+    hideSuggestions();
+
+    const startY = window.scrollY;
+    if (startY > 0) {
+      const startTime = performance.now();
+      const DURATION = 500;
+      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+      function step(now) {
+        const t = Math.min(1, (now - startTime) / DURATION);
+        window.scrollTo(0, startY * (1 - easeOutCubic(t)));
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    const inputEl = document.getElementById('searchInput');
+    if (inputEl) {
+      inputEl.value = team;
+      window.__suppressSuggestions = true;
+      inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+      window.__suppressSuggestions = false;
+    }
+
+    hideSuggestions();
+
+    try { window.history.pushState(null, '', cleanUrl); } catch (err) { /* ignore */ }
+  });
+
   const params = new URLSearchParams(window.location.search);
   const teamParam = params.get('team');
+  const filterParam = params.get('filter');
+
   if (teamParam) {
     input.value = teamParam;
     setSearchLogo(teamParam);
-    // Небольшая задержка, чтобы fetch успел загрузить базу
-    setTimeout(filter, 500); 
+    filter();
+  }
+
+  if (filterParam === '4k') {
+    const allMatches = document.querySelectorAll('.match');
+    const pastContainer = document.getElementById('pastMatchesContainer');
+    const currentContainer = document.getElementById('matchesContainer');
+
+    allMatches.forEach(function(el) {
+      const badge = el.querySelector('.tag-4k');
+      const isPast = el.classList.contains('past-match');
+      const visible = badge ? '' : 'none';
+      el.style.display = visible;
+
+      if (badge) {
+         if (isPast && el.parentElement !== pastContainer) {
+            pastContainer.insertBefore(el, pastContainer.firstChild);
+         } else if (!isPast && el.parentElement !== currentContainer) {
+            currentContainer.appendChild(el);
+         }
+      }
+    });
+
+    document.querySelectorAll('.day-group').forEach(function(group) {
+      const visibleInGroup = group.querySelectorAll('.match:not([style*="display: none"])').length;
+      group.style.display = visibleInGroup > 0 ? '' : 'none';
+    });
+
+    const visiblePast = document.querySelectorAll('#pastMatchesContainer .match:not([style*="display: none"])').length;
+    const visibleCurrent = document.querySelectorAll('#matchesContainer .match:not([style*="display: none"])').length;
+    const pastSection = document.getElementById('pastSection');
+    const currentSection = document.getElementById('currentSection');
+    const headerDefault = document.getElementById('currentHeaderDefault');
+    const headerSearch = document.getElementById('currentHeaderSearch');
+    if (currentSection) currentSection.style.display = visibleCurrent > 0 ? '' : 'none';
+    if (headerDefault) headerDefault.style.display = 'none';
+    if (headerSearch) {
+      headerSearch.style.display = visibleCurrent > 0 ? '' : 'none';
+      const currentHeaderTeam = document.getElementById('currentHeaderTeam');
+      if (currentHeaderTeam) currentHeaderTeam.textContent = ' · 4K UHD';
+    }
+    if (pastSection) {
+      pastSection.style.display = visiblePast > 0 ? '' : 'none';
+      const pastHeaderTeam = document.getElementById('pastHeaderTeam');
+      if (pastHeaderTeam) pastHeaderTeam.textContent = ' · 4K UHD';
+    }
+    const divider = document.getElementById('sectionsDivider');
+    if (divider) {
+      if (visibleCurrent > 0 && visiblePast > 0) {
+        divider.style.display = '';
+        divider.style.margin = '';
+      } else {
+        divider.style.display = 'none';
+        divider.style.margin = '0';
+      }
+    }
   }
 })();
 
