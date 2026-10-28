@@ -771,6 +771,7 @@
           const jsonStr = new TextDecoder('utf-8').decode(bytes);
           const data = JSON.parse(jsonStr);
           const item = data[key];
+          console.log('[streams] key=', key, 'found=', !!item);
           if (!item || !item.stream) {
             list.innerHTML = '<div class="replay-item">Нет ссылок</div>';
           } else {
